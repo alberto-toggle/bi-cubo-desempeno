@@ -54,17 +54,6 @@ export function ViewSkeleton({
           <Bone className="h-4 w-3/4 max-w-xl" />
         </header>
       )}
-      {kind === "overview" && !bodyOnly && (
-        <div className="surface flex min-h-72 items-center justify-between gap-8 p-8">
-          <div className="w-2/3 space-y-5">
-            <Bone className="h-6 w-28" />
-            <Bone className="h-16 w-full" />
-            <Bone className="h-4 w-full" />
-            <Bone className="h-4 w-40" />
-          </div>
-          <Bone className="hidden h-44 w-44 rounded-3xl md:block" />
-        </div>
-      )}
       {kind === "appearance" ? (
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -123,7 +112,7 @@ export function ViewSkeleton({
             <div
               className={
                 "grid gap-5 " +
-                (kind === "overview" ? "xl:grid-cols-[1.6fr_1fr]" : "")
+                (kind === "overview" ? "xl:grid-cols-[1.65fr_1fr]" : "")
               }
             >
               <div className="surface p-6">
@@ -143,6 +132,12 @@ export function ViewSkeleton({
                   ))}
                 </div>
               )}
+            </div>
+          )}
+          {kind === "overview" && (
+            <div className="grid gap-4 xl:grid-cols-[1.65fr_1fr]">
+              <Bone className="h-44" />
+              <Bone className="h-44" />
             </div>
           )}
           <div className="surface space-y-6 p-5">

@@ -1,19 +1,12 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Download, RefreshCw, Search } from "lucide-react";
+import { Download, RefreshCw, Search } from "lucide-react";
 import { DemoHelp } from "@/features/demo/demo-controls";
-import { OrbitalArtwork } from "@/features/overview/orbital-artwork";
-import { presentIdentity } from "@/features/demo/identity-policy";
+import { OperationalBento } from "./operational-bento";
 import { useAppSelector } from "@/store/hooks";
 import { usePortfolio } from "./use-portfolio";
-import { initialFilters, unitTotals } from "./model";
-import {
-  Metrics,
-  TrendChart,
-  UnitsTable,
-  PortfolioState,
-} from "./presentation";
+import { initialFilters } from "./model";
+import { Metrics, UnitsTable, PortfolioState } from "./presentation";
 import { PortfolioFilters } from "./filters";
 import { filterUnits, buildCsv } from "./queries";
 export function PortfolioScreen({
@@ -66,35 +59,6 @@ export function PortfolioScreen({
           <Download size={15} /> Exportar CSV
         </button>
       </header>
-      {!directory && (
-        <section className="welcome-panel">
-          <div className="max-w-xl">
-            <span className="pill border-hero-control-border bg-hero-control-fill text-hero-foreground">
-              {role === "admin" ? "Acceso administrador" : "Acceso staff"}
-            </span>
-            <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-tight">
-              Consulta y comparación de resultados
-              <br />
-              <span className="opacity-65">
-                por periodo, segmento y establecimiento.
-              </span>
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed opacity-80">
-              {role === "admin"
-                ? "Filtra ingresos y costos, revisa centros de costo y exporta resultados. Puedes consultar nombres y ubicaciones, catálogos y apariencia."
-                : "Filtra ingresos y costos y exporta resultados. Los nombres y ubicaciones permanecen protegidos con alias o datos ofuscados."}
-            </p>
-            <Link
-              href="/establishments"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium"
-            >
-              Explorar establecimientos
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-          <OrbitalArtwork />
-        </section>
-      )}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <PortfolioFilters
           value={filters}
@@ -131,60 +95,15 @@ export function PortfolioScreen({
         />
       ) : (
         <>
-          <Metrics units={units} period={filters.period} />
-          {!directory && (
-            <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
-              <TrendChart units={units} period={filters.period} />
-              <section className="surface p-6">
-                <h2 className="font-semibold">Contribución por unidad</h2>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Participación en la muestra filtrada
-                </p>
-                <ul className="mt-6 space-y-5">
-                  {[...units]
-                    .sort(
-                      (a, b) =>
-                        unitTotals(b, filters.period).contribution -
-                        unitTotals(a, filters.period).contribution,
-                    )
-                    .map((u) => {
-                      const value = unitTotals(u, filters.period).contribution,
-                        max = Math.max(
-                          ...units.map(
-                            (v) => unitTotals(v, filters.period).contribution,
-                          ),
-                          1,
-                        );
-                      return (
-                        <li key={u.id}>
-                          <div className="mb-2 flex justify-between gap-3 text-xs">
-                            <Link
-                              className="hover:text-primary"
-                              href={"/establishments/" + u.id}
-                            >
-                              {presentIdentity(u, mode).name}
-                            </Link>
-                            <span className="text-muted-foreground">
-                              {(value / 1000).toFixed(1)}k
-                            </span>
-                          </div>
-                          <div className="h-1.5 rounded-full bg-muted">
-                            <div
-                              className="h-full rounded-full bg-primary"
-                              style={{ width: (value / max) * 100 + "%" }}
-                            />
-                          </div>
-                        </li>
-                      );
-                    })}
-                </ul>
-                {!units.length && (
-                  <p className="mt-8 text-sm text-muted-foreground">
-                    Sin resultados para esta selección.
-                  </p>
-                )}
-              </section>
-            </div>
+          {directory ? (
+            <Metrics units={units} period={filters.period} />
+          ) : (
+            <OperationalBento
+              units={units}
+              period={filters.period}
+              mode={mode}
+              role={role}
+            />
           )}
           <section className="surface overflow-hidden">
             <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-5">
