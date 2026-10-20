@@ -1,0 +1,145 @@
+/* Raw theme values. Each palette implements the same contract. */
+:root,
+[data-theme="ocean"] {
+  color-scheme: light;
+  --palette-background: #f5f7fb;
+  --palette-foreground: #172033;
+  --palette-card: #fff;
+  --palette-card-foreground: #171717;
+  --palette-primary: #2563eb;
+  --palette-primary-foreground: #fff;
+  --palette-secondary: #ededed;
+  --palette-secondary-foreground: #202020;
+  --palette-muted: #edf1f7;
+  --palette-muted-foreground: #68758a;
+  --palette-accent: #e7effe;
+  --palette-accent-foreground: #172033;
+  --palette-popover: #fff;
+  --palette-popover-foreground: #171717;
+  --palette-border: #e3e8ef;
+  --palette-input: #d8d8d8;
+  --palette-ring: #2563eb;
+  --palette-destructive: #c43030;
+  --palette-chart-1: #3b82f6;
+  --palette-chart-2: #8b5cf6;
+  --palette-chart-3: #06b6d4;
+  --palette-chart-4: #f59e0b;
+  --palette-chart-5: #f472b6;
+  --palette-hero: #1743a5;
+  --palette-sidebar: #101d33;
+  --palette-sidebar-foreground: #dce5f4;
+  --palette-sidebar-muted: #aab9d0;
+  --palette-sidebar-accent: #93c5fd;
+  --palette-sidebar-track: #334155;
+  --palette-hero-foreground: #fff;
+  --palette-warning: #b45309;
+  --palette-overlay: #00000080;
+}
+
+[data-theme="violet"] {
+  color-scheme: light;
+  --palette-background: #f7f5fb;
+  --palette-foreground: #172033;
+  --palette-card: #fff;
+  --palette-card-foreground: #171717;
+  --palette-primary: #7c3aed;
+  --palette-primary-foreground: #fff;
+  --palette-secondary: #ededed;
+  --palette-secondary-foreground: #202020;
+  --palette-muted: #edf1f7;
+  --palette-muted-foreground: #68758a;
+  --palette-accent: #f0e9ff;
+  --palette-accent-foreground: #172033;
+  --palette-popover: #fff;
+  --palette-popover-foreground: #171717;
+  --palette-border: #e3e8ef;
+  --palette-input: #d8d8d8;
+  --palette-ring: #7c3aed;
+  --palette-destructive: #c43030;
+  --palette-chart-1: #8b5cf6;
+  --palette-chart-2: #06b6d4;
+  --palette-chart-3: #06b6d4;
+  --palette-chart-4: #f59e0b;
+  --palette-chart-5: #f472b6;
+  --palette-hero: #5326a0;
+  --palette-sidebar: #211833;
+  --palette-sidebar-foreground: #dce5f4;
+  --palette-sidebar-muted: #aab9d0;
+  --palette-sidebar-accent: #c4b5fd;
+  --palette-sidebar-track: #49375e;
+  --palette-hero-foreground: #fff;
+  --palette-warning: #b45309;
+  --palette-overlay: #00000080;
+}
+
+[data-theme="copper"] {
+  color-scheme: light;
+  --palette-background: #faf7f3;
+  --palette-foreground: #172033;
+  --palette-card: #fff;
+  --palette-card-foreground: #171717;
+  --palette-primary: #a94f16;
+  --palette-primary-foreground: #fff;
+  --palette-secondary: #ededed;
+  --palette-secondary-foreground: #202020;
+  --palette-muted: #edf1f7;
+  --palette-muted-foreground: #68758a;
+  --palette-accent: #f6e8dc;
+  --palette-accent-foreground: #172033;
+  --palette-popover: #fff;
+  --palette-popover-foreground: #171717;
+  --palette-border: #e3e8ef;
+  --palette-input: #d8d8d8;
+  --palette-ring: #a94f16;
+  --palette-destructive: #c43030;
+  --palette-chart-1: #c66b32;
+  --palette-chart-2: #4d829b;
+  --palette-chart-3: #06b6d4;
+  --palette-chart-4: #f59e0b;
+  --palette-chart-5: #f472b6;
+  --palette-hero: #793c24;
+  --palette-sidebar: #2b201b;
+  --palette-sidebar-foreground: #dce5f4;
+  --palette-sidebar-muted: #aab9d0;
+  --palette-sidebar-accent: #f0b48c;
+  --palette-sidebar-track: #554238;
+  --palette-hero-foreground: #fff;
+  --palette-warning: #b45309;
+  --palette-overlay: #00000080;
+}
+
+[data-theme="night"] {
+  color-scheme: dark;
+  --palette-background: #0d1422;
+  --palette-foreground: #e6edf7;
+  --palette-card: #151f30;
+  --palette-card-foreground: #e6edf7;
+  --palette-primary: #60a5fa;
+  --palette-primary-foreground: #0d1422;
+  --palette-secondary: #233046;
+  --palette-secondary-foreground: #e6edf7;
+  --palette-muted: #1d293c;
+  --palette-muted-foreground: #9fadc2;
+  --palette-accent: #233046;
+  --palette-accent-foreground: #e6edf7;
+  --palette-popover: #151f30;
+  --palette-popover-foreground: #e6edf7;
+  --palette-border: #2a374b;
+  --palette-input: #2a374b;
+  --palette-ring: #60a5fa;
+  --palette-destructive: #c43030;
+  --palette-chart-1: #3b82f6;
+  --palette-chart-2: #8b5cf6;
+  --palette-chart-3: #06b6d4;
+  --palette-chart-4: #f59e0b;
+  --palette-chart-5: #f472b6;
+  --palette-hero: #183468;
+  --palette-sidebar: #101d33;
+  --palette-sidebar-foreground: #dce5f4;
+  --palette-sidebar-muted: #aab9d0;
+  --palette-sidebar-accent: #93c5fd;
+  --palette-sidebar-track: #334155;
+  --palette-hero-foreground: #fff;
+  --palette-warning: #fbbf24;
+  --palette-overlay: #00000080;
+}

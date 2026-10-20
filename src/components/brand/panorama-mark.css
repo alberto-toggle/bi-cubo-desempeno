@@ -1,0 +1,7 @@
+@import "../../theme/brand.css";
+
+.panorama-mark {
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}

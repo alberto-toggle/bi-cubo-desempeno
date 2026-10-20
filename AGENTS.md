@@ -1,0 +1,12 @@
+# GTyG Platform
+- Next App Router, TypeScript estricto, Tailwind 4 y Base UI.
+- Panorama GTyG es la marca de demo; gtyg-platform es la plataforma técnica.
+- No iniciar servidores. Consultar puerto del usuario para validar UI.
+- Separar features, dominio, datos, servicios, estado y componentes.
+- Playground y bloques de proveedores no son dependencias del producto.
+- Toda simulación debe indicar su procedencia. No incluir cuentas bancarias reales.
+- Apariencia mediante tokens; temas y fuentes intercambiables sin modificar componentes.
+- Redux Toolkit para estado compartido y cargas asíncronas; estado local para interacciones.
+- Preservar atribuciones. Primitivas Base UI compartidas; adaptaciones de proveedores aisladas.
+- Ejecutar npm run typecheck, npm run lint, npm test y npm run build.
+- Leer node_modules/next/dist/docs antes de modificar patrones del framework.

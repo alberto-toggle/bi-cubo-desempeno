@@ -1,0 +1,117 @@
+# GTyG Platform · Panorama
+
+Base independiente para explorar la plataforma de inteligencia operativa y financiera de GTyG. La marca de interfaz es Panorama; el repositorio no queda limitado a un módulo BI.
+
+## Desarrollo
+
+```sh
+npm ci
+npm run dev -- --port 3000
+```
+
+El servidor lo inicia el desarrollador. Node 22.13+ recomendado. Fuentes locales: no dependen de Google Fonts en ejecución.
+
+- `/`: panorama inicial con indicadores y gráficas de datos sintéticos.
+- `/playground`: 46 bloques agrupados, buscador y navegación colapsable.
+- `/settings/appearance`: cuatro paletas y tres tipografías con vista previa y persistencia local.
+
+## Arquitectura
+
+- `src/features`: módulos de producto, apariencia, shell y playground.
+- `src/store`: Redux Toolkit, proveedor por instancia, hooks tipados e inyección de repositorios.
+- `src/services`: contrato de carga; el adaptador demo lee `public/demo/overview.json`.
+- `src/features/overview`: validación del contrato, cálculos derivados, thunk con cancelación y protección contra respuestas obsoletas, estados de carga/error/reintento.
+- `src/components/ui`: primitivas compartidas basadas en Base UI.
+- `src/components/blocks/21st-dev` y `src/components/blocks/paceui`: adaptaciones aisladas de proveedores; no dependen del dominio.
+- `src/lib/playground-catalog.json`: inventario y procedencia de cada bloque.
+- `vendor-sources`: respuestas originales de los registros descargados.
+
+Para conectar un backend, implementar `OverviewRepository` e inyectarlo en `makeStore`. Los componentes no conocen el origen de los datos. No se requiere Postman ni un servidor de mocks para esta carga de JSON local.
+
+La apariencia usa tokens CSS y preferencias validadas. Se conserva en este navegador y se sincroniza entre pestañas; no representa todavía una política global de administrador ni autenticación/permisos. Los bloques de terceros conservan algunos colores propios para mostrar fielmente sus diseños originales.
+
+## Procedencia del playground
+
+30 bloques de 21st.dev y 16 de PaceUI. Se volvieron a descargar 45 fuentes originales; se reutilizaron las adaptaciones existentes compatibles con React 19, Recharts 3 y Base UI para ejecutarlas sin duplicar primitivas por bloque. Cada vista enlaza su fuente.
+
+Excepción: `reaviz/area-chart-1` no pudo descargarse nuevamente (registro sin disponibilidad y URL 403). Se conservó la versión previamente descargada en Boletera, con su atribución. No se sustituyó por Area Chart 2.
+
+## Alcance y datos
+
+Todo valor del panorama es sintético; no es un reporte oficial. Las cifras se derivan de un único fixture para mantener consistencia. La contribución mostrada es ingresos menos costos del fixture, no utilidad neta contable.
+
+Los documentos iniciales tienen diferencias de conteos y clasificaciones; todavía no se fijan como catálogos definitivos. Esta entrega prepara arquitectura, identidad configurable y laboratorio visual; los flujos funcionales del BI se definirán con el equipo.
+
+## Verificación
+
+```sh
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
+
+Las pruebas cubren preferencias inválidas, consistencia de cálculos, validación de datos, error/reintento, cancelación y concurrencia de solicitudes.
+
+## Demo e interno
+
+`src/app/(demo)` contiene las pantallas presentables; `src/app/(internal)/playground` tiene su layout de laboratorio. La URL `/playground` sigue disponible directamente, sin enlaces desde la demo. Un route group organiza layouts y dependencias: **no es un control de acceso**. Si se requiere excluirlo del despliegue de cliente, hay que implementar una restricción de servidor o separarlo en otro despliegue.
+
+El widget Demo permite alternar nombres completos ficticios, alias estables y datos ocultos en la perspectiva de establecimientos. El modo inicial es alias; no se persiste ni representa roles reales. `features/demo/identity-policy.ts` proyecta únicamente campos visibles, sin valores sensibles en títulos o etiquetas del DOM. Los fixtures siguen siendo públicos y sintéticos: la futura API deberá autorizar y proyectar los campos antes de enviarlos al navegador.
+
+El hero usa planos de vidrio animados propios, con tokens de material, fallback sin backdrop-filter y respeto por movimiento reducido. Se revisaron Liquid Glass de UI Layouts en toggle-landing y los materiales de Boletera como referencia, sin importar dependencias de aquellos productos.
+
+## Recorrido de demo (perfiles provisionales)
+
+- `/login`: login inspirado en Modern & Stunning Sign In, con accesos para autollenar y contraseña visible en las ayudas.
+- `/`: panorama financiero con filtro de periodo y segmento, contribución por unidad y exportación CSV.
+- `/establishments`: directorio con búsqueda por identidad visible y detalle por unidad.
+- `/establishments/demo-03`: división y segmentos de centros de negocio, incluyendo cafetería en unidad deportiva.
+- `/catalogs`: consulta del modelo de dimensiones documental (solo administrador).
+- `/settings/appearance`: personalización (solo administrador).
+
+Credenciales exclusivamente ficticias:
+
+| Perfil | Correo | Contraseña |
+| --- | --- | --- |
+| Administrador | admin@panorama.demo | Panorama2026! |
+| Staff | staff@panorama.demo | Panorama2026! |
+
+Supuesto provisional: administrador puede ver nombres completos y administrar apariencia; staff consulta con alias u ocultación. El widget no permite elevar staff al modo completo. Búsqueda, exportación, detalles y etiquetas usan la misma política de presentación. Los permisos concretos aún deben confirmarse con el cliente.
+
+Sesión simulada por pestaña en sessionStorage, duración ocho horas, con expiración, restauración y salida. No se guarda la contraseña. NO es un mecanismo de seguridad real: fixtures públicos y lógica cliente se usan solo para la demostración. En producción deben reemplazarse por autenticación y autorización en servidor, entregando únicamente campos permitidos.
+
+`public/demo/portfolio.json` contiene seis unidades completamente ficticias; no son el padrón oficial. Todas las nuevas vistas derivan sus cifras de ese fixture a través de un repositorio y thunk. Los documentos fundamentan la separación división/segmento, las dimensiones maestras y centros de negocio/costo; los nombres, cifras, estados, permisos y diseño de pantallas son supuestos demo. No se importaron números de cuentas bancarias ni nombres reales.
+
+## Cargas y verificación en dos pasos
+
+El login incluye un widget Demo con autollenado y una preferencia opcional de verificación en dos pasos. Se guarda validada en `gtyg.demo-preferences.v1` de localStorage; tema y fuente siguen en `gtyg.appearance.v1`. Las contraseñas y el desafío pendiente no se guardan. La sesión permanece en sessionStorage.
+
+Código ficticio `123456`, vigencia dos minutos y máximo cinco intentos por desafío. Reenviar renueva la vigencia sin reiniciar el contador; volver al acceso cancela el desafío. Solo se crea la sesión después del código correcto cuando está activada esta opción. No se envían correos ni existe un segundo factor de producción.
+
+Las rutas de demo tienen skeletons por tipo de vista y transiciones de entrada. Se simula una preparación de 350 ms al navegar y 450 ms al abrir el login, además de los estados de carga reales del repositorio. La validación demo tarda 600 ms. El movimiento respeta prefers-reduced-motion y los temporizadores de presentación se limpian al desmontar.
+
+El login no describe el negocio y usa metadatos genéricos. El widget azul comparte la opción «Mostrar controles y ayudas» entre login y vistas internas (`showHelp` en las preferencias demo). Ocultarlas no desactiva dos pasos ni cambia permisos. Durante el desafío, «Dejar 10 segundos para expirar» acorta la vigencia sin extender desafíos expirados; la cuenta regresiva muestra la expiración y la validación rechaza ese código hasta reenviarlo.
+
+El modo «Datos ofuscados» reemplaza nombres y ubicaciones por una máscara fija, también en búsqueda y exportación; no aplica blur sobre texto original. Staff solo dispone de alias u ofuscación; admin también tiene la vista completa ficticia.
+
+Playground / Autenticación: Sign In de jahed (`/playground/21st-dev/sign-in-jahed`), descargado desde 21st mediante MCP (registro directo respondió 403). Original en `vendor-sources/21st-sign-in-jahed.json`; adaptación aislada con ancho del contenedor, labels accesibles, animaciones CSS locales y movimiento reducido. Los callbacks son simulados y no registran contraseñas. No sustituye el acceso del producto.
+
+El acceso de la app utiliza una adaptación del diseño Sign In de jahed: `features/auth/access-layout.tsx` y `login.css`. Conserva la lógica propia de acceso, dos pasos y ayudas demo, sin depender del playground. La card se centra sobre un fondo y la composición SVG de `access-artwork.tsx` usa tokens del tema; en móvil se omite la columna decorativa. El bloque original sigue disponible en playground.
+
+React Bits / Navegación: Branched Menu e Infinite Menu están en `/playground/react-bits/branched-menu` y `/playground/react-bits/infinite-menu`. Fuentes originales del registro oficial guardadas en `vendor-sources/react-bits-*.json`. Adaptaciones: refs sincronizadas después del render, demos locales y gráficos SVG propios para la esfera WebGL. Branched Menu incluye sus dependencias Hugeicons.
+
+El sidebar de producto adapta la geometría de ramas a un componente TypeScript reutilizable (`components/navigation/branched-navigation.tsx`), con enlaces Next y disclosures Base UI. Conserva navegación reducida a iconos, panel móvil y filtro por rol; Infinite Menu permanece exclusivo del playground.
+
+### Arquitectura de apariencia
+
+`src/theme/` es la capa visual reutilizable, sin dependencias de features ni Redux:
+
+- `config.ts`: catálogo de temas y fuentes, valores iniciales y validación.
+- `palettes.css`: valores de color. Cada tema declara el contrato completo para permitir vistas previas anidadas sin heredar colores de otro tema.
+- `tokens.css`: contrato semántico (`--background`, `--primary`, `--sidebar`, estados y gráficas). Los componentes consumen estos tokens, nunca nombres de temas.
+- `typography.css`: familias de fuente; `tailwind.css`: adaptación a utilidades Tailwind.
+- `materials.css`: vidrio y elevación compartidos, independientes de los controles demo.
+- `browser.ts`: aplicación al DOM y restauración antes de la primera pintura desde el mismo catálogo.
+
+La feature `appearance` administra selección y Redux; el provider persiste la preferencia y sincroniza pestañas. El azul de `features/demo/demo-materials.css` es independiente por diseño. Los bloques originales del playground conservan sus estilos de proveedor y no forman parte del contrato visual de producto. Para agregar un tema, registrarlo en `config.ts` e implementar todos los valores en `palettes.css`; las pruebas verifican la integridad del contrato y la paridad entre arranque y cambios de tema.

@@ -1,0 +1,54 @@
+{
+  "period": "Enero – junio 2026",
+  "source": "Escenario sintético de diseño. No representa cifras oficiales ni el padrón definitivo.",
+  "monthly": [
+    {
+      "month": "Ene",
+      "revenue": 310000,
+      "cost": 198400
+    },
+    {
+      "month": "Feb",
+      "revenue": 354000,
+      "cost": 226560
+    },
+    {
+      "month": "Mar",
+      "revenue": 338000,
+      "cost": 216320
+    },
+    {
+      "month": "Abr",
+      "revenue": 420000,
+      "cost": 268800
+    },
+    {
+      "month": "May",
+      "revenue": 458000,
+      "cost": 293120
+    },
+    {
+      "month": "Jun",
+      "revenue": 512000,
+      "cost": 327680
+    }
+  ],
+  "activities": [
+    {
+      "name": "Comercio",
+      "value": 42
+    },
+    {
+      "name": "Alimentos y bebidas",
+      "value": 28
+    },
+    {
+      "name": "Deporte y bienestar",
+      "value": 18
+    },
+    {
+      "name": "Hospedaje",
+      "value": 12
+    }
+  ]
+}

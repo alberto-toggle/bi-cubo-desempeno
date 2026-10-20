@@ -1,0 +1,7 @@
+/* Brand identity is independent of the administrator's interface palette.
+   Override these tokens on an instance to create an alternate treatment. */
+:root {
+  --brand-mark-highlight: #ffffff;
+  --brand-mark-magenta: #fa00f5;
+  --brand-mark-cyan: #00eced;
+}

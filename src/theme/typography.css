@@ -1,0 +1,10 @@
+:root,
+[data-font="inter"] {
+  --app-font: "Inter Variable", sans-serif;
+}
+[data-font="manrope"] {
+  --app-font: "Manrope Variable", sans-serif;
+}
+[data-font="plex"] {
+  --app-font: "IBM Plex Sans Variable", sans-serif;
+}

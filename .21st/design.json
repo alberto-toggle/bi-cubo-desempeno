@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "project": {
+    "name": "gtyg-platform",
+    "productType": "Inteligencia operativa y financiera",
+    "stack": [
+      "nextjs",
+      "react",
+      "shadcn",
+      "tailwind-v4",
+      "base-ui"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [
+      "src/components/ui"
+    ],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light-and-dark",
+    "colors": {
+      "--background": {
+        "value": "#ffffff0c",
+        "source": "src/app/globals.css"
+      },
+      "--foreground": {
+        "value": "#dce5f4",
+        "source": "src/app/globals.css"
+      },
+      "--card-foreground": {
+        "value": "#e6edf7",
+        "source": "src/app/globals.css"
+      },
+      "--primary": {
+        "value": "#60a5fa",
+        "source": "src/app/globals.css"
+      },
+      "--primary-foreground": {
+        "value": "#0d1422",
+        "source": "src/app/globals.css"
+      },
+      "--secondary": {
+        "value": "#233046",
+        "source": "src/app/globals.css"
+      },
+      "--secondary-foreground": {
+        "value": "#e6edf7",
+        "source": "src/app/globals.css"
+      },
+      "--muted": {
+        "value": "#ffffff0d",
+        "source": "src/app/globals.css"
+      },
+      "--muted-foreground": {
+        "value": "#aab9d0",
+        "source": "src/app/globals.css"
+      },
+      "--accent": {
+        "value": "#233046",
+        "source": "src/app/globals.css"
+      },
+      "--accent-foreground": {
+        "value": "#e6edf7",
+        "source": "src/app/globals.css"
+      },
+      "--popover-foreground": {
+        "value": "#e6edf7",
+        "source": "src/app/globals.css"
+      },
+      "--border": {
+        "value": "#ffffff18",
+        "source": "src/app/globals.css"
+      },
+      "--ring": {
+        "value": "#60a5fa",
+        "source": "src/app/globals.css"
+      },
+      "--destructive": {
+        "value": "#c43030",
+        "source": "src/app/globals.css"
+      },
+      "--color-background": {
+        "value": "var(--background)",
+        "source": "src/app/globals.css"
+      },
+      "--color-foreground": {
+        "value": "var(--foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-card": {
+        "value": "var(--card)",
+        "source": "src/app/globals.css"
+      },
+      "--color-card-foreground": {
+        "value": "var(--card-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-primary": {
+        "value": "var(--primary)",
+        "source": "src/app/globals.css"
+      },
+      "--color-primary-foreground": {
+        "value": "var(--primary-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-secondary": {
+        "value": "var(--secondary)",
+        "source": "src/app/globals.css"
+      },
+      "--color-secondary-foreground": {
+        "value": "var(--secondary-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-muted": {
+        "value": "var(--muted)",
+        "source": "src/app/globals.css"
+      },
+      "--color-muted-foreground": {
+        "value": "var(--muted-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-accent": {
+        "value": "var(--accent)",
+        "source": "src/app/globals.css"
+      },
+      "--color-accent-foreground": {
+        "value": "var(--accent-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-popover": {
+        "value": "var(--popover)",
+        "source": "src/app/globals.css"
+      },
+      "--color-popover-foreground": {
+        "value": "var(--popover-foreground)",
+        "source": "src/app/globals.css"
+      },
+      "--color-border": {
+        "value": "var(--border)",
+        "source": "src/app/globals.css"
+      },
+      "--color-input": {
+        "value": "var(--input)",
+        "source": "src/app/globals.css"
+      },
+      "--color-ring": {
+        "value": "var(--ring)",
+        "source": "src/app/globals.css"
+      },
+      "--color-destructive": {
+        "value": "var(--destructive)",
+        "source": "src/app/globals.css"
+      },
+      "--color-chart-1": {
+        "value": "var(--chart-1)",
+        "source": "src/app/globals.css"
+      },
+      "--color-chart-2": {
+        "value": "var(--chart-2)",
+        "source": "src/app/globals.css"
+      },
+      "--color-chart-3": {
+        "value": "var(--chart-3)",
+        "source": "src/app/globals.css"
+      },
+      "--color-chart-4": {
+        "value": "var(--chart-4)",
+        "source": "src/app/globals.css"
+      },
+      "--color-chart-5": {
+        "value": "var(--chart-5)",
+        "source": "src/app/globals.css"
+      },
+      "--chart-1": {
+        "value": "#c66b32",
+        "source": "src/app/globals.css"
+      },
+      "--chart-2": {
+        "value": "#4d829b",
+        "source": "src/app/globals.css"
+      },
+      "--chart-3": {
+        "value": "#06b6d4",
+        "source": "src/app/globals.css"
+      },
+      "--chart-4": {
+        "value": "#f59e0b",
+        "source": "src/app/globals.css"
+      },
+      "--chart-5": {
+        "value": "#f472b6",
+        "source": "src/app/globals.css"
+      }
+    },
+    "typography": {
+      "--font-sans": {
+        "value": "var(--app-font)",
+        "source": "src/app/globals.css"
+      },
+      "--app-font": {
+        "value": "\"IBM Plex Sans Variable\",sans-serif",
+        "source": "src/app/globals.css"
+      }
+    },
+    "spacing": {},
+    "radius": {
+      "--radius": {
+        "value": "0.625rem",
+        "source": "src/app/globals.css"
+      },
+      "--radius-sm": {
+        "value": "calc(var(--radius) - 4px)",
+        "source": "src/app/globals.css"
+      },
+      "--radius-md": {
+        "value": "calc(var(--radius) - 2px)",
+        "source": "src/app/globals.css"
+      },
+      "--radius-lg": {
+        "value": "var(--radius)",
+        "source": "src/app/globals.css"
+      },
+      "--radius-xl": {
+        "value": "calc(var(--radius) + 4px)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [
+      "badge",
+      "button",
+      "card",
+      "chart",
+      "dropdown-menu",
+      "progress",
+      "select",
+      "separator",
+      "tooltip"
+    ],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [],
+    "avoid": []
+  },
+  "decisions": [
+    "Sidebar navy y contenido compacto; identidad independiente de Boletera.",
+    "Tokens de cuatro temas: ocean, violet, copper, night. Tres fuentes locales: Inter, Manrope, IBM Plex Sans.",
+    "Primitivas Base UI compartidas. Bloques de playground aislados del producto.",
+    "Playground aislado en (internal), sin enlaces desde (demo).",
+    "Vidrio selectivo en planos orbitales del hero y controles de demo; datos legibles sobre superficies sólidas.",
+    "Identidad demo con alias por defecto, modo completo ficticio y oculto; no equivale a autorización real.",
+    "Acceso inspirado visualmente en Modern & Stunning Sign In; implementación propia con credenciales demo visibles.",
+    "Perfiles provisionales admin/staff: configuración y catálogos reservados a admin, staff con alias u ocultación.",
+    "Panorama, directorio y detalle comparten portafolio ficticio y proyección de identidad, incluida exportación.",
+    "Lenguaje operativo y descriptivo; evitar eslóganes comerciales de SaaS.",
+    "Acceso demo con verificación en dos pasos opcional; preferencia local separada de la sesión.",
+    "Skeletons por composición de vista y transiciones breves respetando movimiento reducido.",
+    "Login neutro: sin marca GTyG, descripción del negocio ni funciones; metadatos genéricos de acceso.",
+    "Ayudas y controles demo azules, con visibilidad persistente compartida; ocultarlos no cambia permisos ni verificación.",
+    "Restaurada la ilustración de tres tarjetas de vidrio animadas en el hero; rediseño del logo pospuesto.",
+    "Login adaptado de Sign In de jahed: card centrada, formulario izquierdo y visual SVG tokenizado a la derecha, campos redondeados y animaciones suaves. Sin información del negocio, testimonios ni acceso social. Lógica de sesión y dos pasos separada del layout.",
+    "Sidebar con ramas inspirado en React Bits BranchedMenu, primitivas Base UI y enlaces reales; grupos Consulta/Administración filtrados por rol.",
+    "BranchedMenu e InfiniteMenu originales JS/CSS aislados en playground; sidebar de producto sin importaciones del playground.",
+    "Marca: SVG geométrico reconstruido de la referencia del usuario, transparente, degradado blanco-magenta-cian y variante monocroma. Componente PanoramaMark en sidebar; colores independientes del tema mediante src/theme/brand.css."
+  ],
+  "evidence": [
+    {
+      "fact": "components.installed",
+      "source": "src/components/ui"
+    },
+    {
+      "fact": "design.colorMode:light-and-dark",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:shadcn",
+      "source": "components.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-20T20:50:21.555Z"
+}

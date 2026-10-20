@@ -1,0 +1,114 @@
+.orbital-artwork {
+  position: relative;
+  flex-shrink: 0;
+  width: 280px;
+  height: 250px;
+  perspective: 800px;
+}
+.orbital-halo {
+  position: absolute;
+  inset: 20px;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--sidebar-accent) 44%, transparent),
+    transparent 68%
+  );
+  filter: blur(14px);
+  animation: halo-breathe 6s ease-in-out infinite alternate;
+}
+.orbital-plane {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 170px;
+  height: 170px;
+  left: 55px;
+  top: 40px;
+  border: 1px solid color-mix(in srgb, var(--hero-foreground) 44%, transparent);
+  border-radius: 36px;
+  color: color-mix(in srgb, var(--hero-foreground) 87%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--hero-foreground) 25%, transparent),
+    var(--orbital-tint) 45%,
+    color-mix(in srgb, var(--hero-foreground) 2%, transparent)
+  );
+  box-shadow:
+    inset 0 1px 1px color-mix(in srgb, var(--hero-foreground) 63%, transparent),
+    inset 0 -1px 1px color-mix(in srgb, var(--hero-foreground) 13%, transparent),
+    0 20px 35px color-mix(in srgb, var(--hero) 19%, transparent);
+  backdrop-filter: blur(3px);
+  animation: orbital-float 9s ease-in-out infinite;
+}
+.plane-back {
+  --orbit-angle: -32deg;
+  --orbit-x: 42px;
+  --orbit-y: -24px;
+  opacity: 0.6;
+  animation-delay: -6s;
+}
+.plane-middle {
+  --orbit-angle: 18deg;
+  --orbit-x: -35px;
+  --orbit-y: 10px;
+  opacity: 0.8;
+  animation-delay: -3s;
+}
+.plane-front {
+  --orbit-angle: -8deg;
+  --orbit-x: 10px;
+  --orbit-y: 35px;
+}
+.orbital-spark {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hero-foreground);
+  box-shadow: 0 0 18px 5px
+    color-mix(in srgb, var(--hero-foreground) 44%, transparent);
+}
+@keyframes orbital-float {
+  0%,
+  100% {
+    transform: translate(var(--orbit-x), var(--orbit-y)) rotateX(18deg)
+      rotateY(-18deg) rotateZ(var(--orbit-angle));
+  }
+  50% {
+    transform: translate(
+        calc(var(--orbit-x) + 12px),
+        calc(var(--orbit-y) - 18px)
+      )
+      rotateX(-8deg) rotateY(20deg) rotateZ(calc(var(--orbit-angle) + 14deg));
+  }
+}
+@keyframes halo-breathe {
+  to {
+    opacity: 0.45;
+    transform: scale(1.2);
+  }
+}
+@media (max-width: 767px) {
+  .welcome-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .orbital-artwork {
+    align-self: center;
+    height: 210px;
+    transform: scale(0.85);
+    margin-top: -10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbital-plane,
+  .orbital-halo {
+    animation: none;
+  }
+  .orbital-plane {
+    transform: translate(var(--orbit-x), var(--orbit-y))
+      rotate(var(--orbit-angle));
+  }
+}

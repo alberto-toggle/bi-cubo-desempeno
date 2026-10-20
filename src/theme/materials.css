@@ -1,0 +1,22 @@
+/* Shared material tokens: translucent chrome, opaque readable content. */
+:root,
+[data-theme] {
+  --glass-fill: color-mix(in srgb, var(--card) 86%, transparent);
+  --glass-edge: color-mix(in srgb, var(--foreground) 12%, transparent);
+  --glass-blur: 22px;
+  --glass-shadow:
+    0 16px 45px color-mix(in srgb, var(--foreground) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--hero-foreground) 31%, transparent);
+  --orbital-tint: color-mix(in srgb, var(--hero-foreground) 7%, transparent);
+}
+.glass-material {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  box-shadow: var(--glass-shadow);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-material {
+    background: var(--card);
+  }
+}

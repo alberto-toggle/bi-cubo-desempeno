@@ -1,0 +1,329 @@
+{
+  "updatedAt": "30 jun 2026 · corte ilustrativo",
+  "units": [
+    {
+      "id": "demo-01",
+      "name": "Tienda Horizonte",
+      "alias": "Unidad Alfa",
+      "location": "Ciudad Modelo 1 · Zona ilustrativa",
+      "region": "Centro",
+      "division": "Tiendas",
+      "segment": "Comercio",
+      "status": "Al día",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 100000,
+          "cost": 72000
+        },
+        {
+          "month": "Feb",
+          "revenue": 108750,
+          "cost": 78300
+        },
+        {
+          "month": "Mar",
+          "revenue": 113750,
+          "cost": 81900
+        },
+        {
+          "month": "Abr",
+          "revenue": 130000,
+          "cost": 93600
+        },
+        {
+          "month": "May",
+          "revenue": 138750,
+          "cost": 99900
+        },
+        {
+          "month": "Jun",
+          "revenue": 147500,
+          "cost": 106200
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Comercio",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Servicios complementarios",
+          "segment": "Comercio",
+          "costCenter": "Administración"
+        }
+      ]
+    },
+    {
+      "id": "demo-02",
+      "name": "Cafetería Encuentro",
+      "alias": "Unidad Beta",
+      "location": "Ciudad Modelo 2 · Zona ilustrativa",
+      "region": "Centro",
+      "division": "Servicios Deportivos y Recreativos",
+      "segment": "Alimentos y bebidas",
+      "status": "Al día",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 33600,
+          "cost": 16128
+        },
+        {
+          "month": "Feb",
+          "revenue": 36540,
+          "cost": 17539
+        },
+        {
+          "month": "Mar",
+          "revenue": 38220,
+          "cost": 18346
+        },
+        {
+          "month": "Abr",
+          "revenue": 43680,
+          "cost": 20966
+        },
+        {
+          "month": "May",
+          "revenue": 46620,
+          "cost": 22378
+        },
+        {
+          "month": "Jun",
+          "revenue": 49560,
+          "cost": 23789
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Alimentos y bebidas",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Servicios complementarios",
+          "segment": "Alimentos y bebidas",
+          "costCenter": "Administración"
+        }
+      ]
+    },
+    {
+      "id": "demo-03",
+      "name": "Centro Recreativo Aurora",
+      "alias": "Unidad Gamma",
+      "location": "Ciudad Modelo 3 · Zona ilustrativa",
+      "region": "Occidente",
+      "division": "Servicios Deportivos y Recreativos",
+      "segment": "Deporte y bienestar",
+      "status": "Al día",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 68000,
+          "cost": 41480
+        },
+        {
+          "month": "Feb",
+          "revenue": 73950,
+          "cost": 45110
+        },
+        {
+          "month": "Mar",
+          "revenue": 77350,
+          "cost": 47184
+        },
+        {
+          "month": "Abr",
+          "revenue": 88400,
+          "cost": 53924
+        },
+        {
+          "month": "May",
+          "revenue": 94350,
+          "cost": 57554
+        },
+        {
+          "month": "Jun",
+          "revenue": 100300,
+          "cost": 61183
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Deporte y bienestar",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Cafetería",
+          "segment": "Alimentos y bebidas",
+          "costCenter": "Administración"
+        }
+      ]
+    },
+    {
+      "id": "demo-04",
+      "name": "Hotel Mirador",
+      "alias": "Unidad Delta",
+      "location": "Ciudad Modelo 4 · Zona ilustrativa",
+      "region": "Sur",
+      "division": "Servicios Turísticos",
+      "segment": "Hospedaje",
+      "status": "Al día",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 89600,
+          "cost": 57344
+        },
+        {
+          "month": "Feb",
+          "revenue": 97440,
+          "cost": 62362
+        },
+        {
+          "month": "Mar",
+          "revenue": 101920,
+          "cost": 65229
+        },
+        {
+          "month": "Abr",
+          "revenue": 116480,
+          "cost": 74547
+        },
+        {
+          "month": "May",
+          "revenue": 124320,
+          "cost": 79565
+        },
+        {
+          "month": "Jun",
+          "revenue": 132160,
+          "cost": 84582
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Hospedaje",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Servicios complementarios",
+          "segment": "Hospedaje",
+          "costCenter": "Administración"
+        }
+      ]
+    },
+    {
+      "id": "demo-05",
+      "name": "Tienda Sendero",
+      "alias": "Unidad Épsilon",
+      "location": "Ciudad Modelo 5 · Zona ilustrativa",
+      "region": "Norte",
+      "division": "Tiendas",
+      "segment": "Comercio",
+      "status": "Por conciliar",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 75200,
+          "cost": 56400
+        },
+        {
+          "month": "Feb",
+          "revenue": 81780,
+          "cost": 61335
+        },
+        {
+          "month": "Mar",
+          "revenue": 85540,
+          "cost": 64155
+        },
+        {
+          "month": "Abr",
+          "revenue": 97760,
+          "cost": 73320
+        },
+        {
+          "month": "May",
+          "revenue": 104340,
+          "cost": 78255
+        },
+        {
+          "month": "Jun",
+          "revenue": 110920,
+          "cost": 83190
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Comercio",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Servicios complementarios",
+          "segment": "Comercio",
+          "costCenter": "Administración"
+        }
+      ]
+    },
+    {
+      "id": "demo-06",
+      "name": "Restaurante Estación",
+      "alias": "Unidad Zeta",
+      "location": "Ciudad Modelo 6 · Zona ilustrativa",
+      "region": "Sureste",
+      "division": "Servicios Turísticos",
+      "segment": "Alimentos y bebidas",
+      "status": "Al día",
+      "monthly": [
+        {
+          "month": "Ene",
+          "revenue": 53600,
+          "cost": 28408
+        },
+        {
+          "month": "Feb",
+          "revenue": 58290,
+          "cost": 30894
+        },
+        {
+          "month": "Mar",
+          "revenue": 60970,
+          "cost": 32314
+        },
+        {
+          "month": "Abr",
+          "revenue": 69680,
+          "cost": 36930
+        },
+        {
+          "month": "May",
+          "revenue": 74370,
+          "cost": 39416
+        },
+        {
+          "month": "Jun",
+          "revenue": 79060,
+          "cost": 41902
+        }
+      ],
+      "centers": [
+        {
+          "name": "Operación principal",
+          "segment": "Alimentos y bebidas",
+          "costCenter": "Operación y servicios"
+        },
+        {
+          "name": "Servicios complementarios",
+          "segment": "Alimentos y bebidas",
+          "costCenter": "Administración"
+        }
+      ]
+    }
+  ]
+}

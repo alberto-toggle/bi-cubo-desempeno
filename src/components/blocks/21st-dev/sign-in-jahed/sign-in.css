@@ -1,0 +1,76 @@
+/* Scoped animation support for the classes referenced by the source component. */
+.jahed-sign-in .animate-element,
+.jahed-sign-in .animate-testimonial {
+  animation: jahed-enter 0.6s ease both;
+}
+.jahed-sign-in .animate-slide-right {
+  animation: jahed-slide 0.8s ease both;
+}
+.jahed-sign-in .animate-delay-100 {
+  animation-delay: 0.1s;
+}
+.jahed-sign-in .animate-delay-200 {
+  animation-delay: 0.2s;
+}
+.jahed-sign-in .animate-delay-300 {
+  animation-delay: 0.3s;
+}
+.jahed-sign-in .animate-delay-400 {
+  animation-delay: 0.4s;
+}
+.jahed-sign-in .animate-delay-500 {
+  animation-delay: 0.5s;
+}
+.jahed-sign-in .animate-delay-600 {
+  animation-delay: 0.6s;
+}
+.jahed-sign-in .animate-delay-700 {
+  animation-delay: 0.7s;
+}
+.jahed-sign-in .animate-delay-800 {
+  animation-delay: 0.8s;
+}
+.jahed-sign-in .animate-delay-900 {
+  animation-delay: 0.9s;
+}
+.jahed-sign-in .animate-delay-1000 {
+  animation-delay: 1s;
+}
+.jahed-sign-in .animate-delay-1200 {
+  animation-delay: 1.2s;
+}
+.jahed-sign-in .animate-delay-1400 {
+  animation-delay: 1.4s;
+}
+.jahed-sign-in .custom-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+}
+@keyframes jahed-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes jahed-slide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jahed-sign-in .animate-element,
+  .jahed-sign-in .animate-testimonial,
+  .jahed-sign-in .animate-slide-right {
+    animation: none;
+  }
+}

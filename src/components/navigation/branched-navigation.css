@@ -1,0 +1,102 @@
+.branch-nav {
+  --branch-ink: var(--sidebar-foreground);
+  --branch-muted: var(--sidebar-muted);
+  --branch-track: var(--sidebar-track);
+  --branch-accent: var(--sidebar-accent);
+  margin-top: 20px;
+  padding-left: 12px;
+  border-left: 1px solid var(--branch-track);
+}
+.branch-group + .branch-group {
+  margin-top: 18px;
+}
+.branch-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 0;
+  color: var(--branch-ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+.branch-heading svg {
+  transition: transform 0.25s;
+}
+.branch-heading:not([data-panel-open]) svg {
+  transform: rotate(-90deg);
+}
+.branch-panel {
+  height: var(--collapsible-panel-height);
+  overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.branch-panel[data-starting-style],
+.branch-panel[data-ending-style] {
+  height: 0;
+}
+.branch-tree {
+  position: relative;
+  padding: 6px 0;
+}
+.branch-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.branch-line,
+.branch-reach {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.branch-line {
+  stroke: var(--branch-track);
+}
+.branch-reach {
+  stroke: var(--branch-accent);
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.branch-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 6px 0 38px;
+  color: var(--branch-muted);
+  font-size: 12px;
+  border-radius: 8px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.branch-link svg {
+  flex-shrink: 0;
+}
+.branch-link:hover {
+  color: var(--branch-ink);
+  background: var(--sidebar-hover);
+}
+.branch-link[aria-current="page"] {
+  color: var(--branch-accent);
+  font-weight: 600;
+  background: var(--sidebar-hover);
+}
+.branch-link:focus-visible,
+.branch-heading:focus-visible {
+  outline: 2px solid var(--branch-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .branch-panel,
+  .branch-heading svg,
+  .branch-reach,
+  .branch-link {
+    transition: none;
+  }
+}

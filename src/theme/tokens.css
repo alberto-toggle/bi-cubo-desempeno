@@ -1,0 +1,58 @@
+/* Semantic contract consumed by product components and Tailwind. */
+:root,
+[data-theme] {
+  --radius: 0.625rem;
+  --background: var(--palette-background);
+  --foreground: var(--palette-foreground);
+  --card: var(--palette-card);
+  --card-foreground: var(--palette-card-foreground);
+  --primary: var(--palette-primary);
+  --primary-foreground: var(--palette-primary-foreground);
+  --secondary: var(--palette-secondary);
+  --secondary-foreground: var(--palette-secondary-foreground);
+  --muted: var(--palette-muted);
+  --muted-foreground: var(--palette-muted-foreground);
+  --accent: var(--palette-accent);
+  --accent-foreground: var(--palette-accent-foreground);
+  --popover: var(--palette-popover);
+  --popover-foreground: var(--palette-popover-foreground);
+  --border: var(--palette-border);
+  --input: var(--palette-input);
+  --ring: var(--palette-ring);
+  --destructive: var(--palette-destructive);
+  --chart-1: var(--palette-chart-1);
+  --chart-2: var(--palette-chart-2);
+  --chart-3: var(--palette-chart-3);
+  --chart-4: var(--palette-chart-4);
+  --chart-5: var(--palette-chart-5);
+  --hero: var(--palette-hero);
+  --sidebar: var(--palette-sidebar);
+  --sidebar-foreground: var(--palette-sidebar-foreground);
+  --sidebar-muted: var(--palette-sidebar-muted);
+  --sidebar-accent: var(--palette-sidebar-accent);
+  --sidebar-track: var(--palette-sidebar-track);
+  --hero-foreground: var(--palette-hero-foreground);
+  --warning: var(--palette-warning);
+  --overlay: var(--palette-overlay);
+  --sidebar-hover: color-mix(
+    in srgb,
+    var(--sidebar-foreground) 6%,
+    transparent
+  );
+  --sidebar-border: color-mix(
+    in srgb,
+    var(--sidebar-foreground) 12%,
+    transparent
+  );
+  --surface-shadow: color-mix(in srgb, var(--foreground) 3%, transparent);
+  --hero-control-fill: color-mix(
+    in srgb,
+    var(--hero-foreground) 10%,
+    transparent
+  );
+  --hero-control-border: color-mix(
+    in srgb,
+    var(--hero-foreground) 20%,
+    transparent
+  );
+}
