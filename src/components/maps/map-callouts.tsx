@@ -113,10 +113,10 @@ export function MapCallouts({
   }
   return (
     <div className="map-callouts" aria-hidden="true">
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {cards.map(({ id, anchor, x, y }) => (
           <MapCallout
-            key="active-state"
+            key={id}
             anchor={anchor}
             x={x}
             y={y}
