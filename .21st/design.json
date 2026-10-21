@@ -290,6 +290,10 @@
     {
       "area": "appearance",
       "decision": "Cristal conserva los mismos controles y reflejos de vidrio, sin distorsión SVG. Desenfoque mínimo de 1 px. Liquid Glass original permanece intacto en playground."
+    },
+    {
+      "area": "login",
+      "decision": "Liquid Metal se conserva únicamente en el playground. El login utiliza su dibujo original, sin selector de visual ni shader."
     }
   ],
   "evidence": [

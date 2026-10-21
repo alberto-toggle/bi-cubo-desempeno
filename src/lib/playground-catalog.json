@@ -454,5 +454,158 @@
     "description": "Indicadores SVG animados con ocho estados y variantes para interfaces de agentes. Controles de tamaño, velocidad y pausa.",
     "sourceUrl": "https://21st.dev/r/yogesharc/thinking-orbs",
     "demoId": 34749
+  },
+  {
+    "title": "Liquid Metal Hero",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/liquid-metal-hero",
+    "provider": "21st.dev · chowlol202",
+    "description": "Hero con metal líquido animado mediante Paper Shaders. Bloque original para explorar el efecto empleado en la alternativa visual del login.",
+    "sourceUrl": "https://21st.dev/r/chowlol202/liquid-metal-hero",
+    "demoId": 5808
+  },
+  {
+    "title": "AI Thinking Orb & Input",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/ai-thinking-orb-anark17r",
+    "provider": "21st.dev · anark17r",
+    "description": "Input que se transforma en un orbe animado y una tarjeta de respuesta. Motor original con estilos locales adaptados: el registro no incluye su CSS. Envío simulado sin IA.",
+    "sourceUrl": "https://21st.dev/r/anark17r/ai-thiking-orb-and-input",
+    "demoId": 33953
+  },
+  {
+    "title": "AI Orb",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/ai-orb-konsstepnov",
+    "provider": "21st.dev · konsstepnov",
+    "description": "Orbe animado con diez estados de asistente, colores del tema y una secuencia interactiva de demostración. Simulación local sin conexión a una IA.",
+    "sourceUrl": "https://21st.dev/r/konsstepnov/ai-orb",
+    "demoId": 38324
+  },
+  {
+    "title": "Orbs Lens",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/orbs-lens-kvnkld",
+    "provider": "21st.dev · kvnkld",
+    "description": "Indicadores animados compactos con cinco variantes Lens: Thinking, Searching, Generating, Solving y Routing. Animaciones CSS originales recuperadas del preview del autor.",
+    "sourceUrl": "https://21st.dev/r/kvnkld/orbs-lens",
+    "demoId": 24264
+  },
+  {
+    "title": "AI Mascot Input",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/ai-mascot-input-alexperezcedeno",
+    "provider": "21st.dev · alexperezcedeno",
+    "description": "Input con mascota CRT animada que sigue la escritura y cambia al estado de procesamiento. Incluye selector de modelo y adjuntos locales; envío simulado sin IA.",
+    "sourceUrl": "https://21st.dev/r/alexperezcedeno/ai-mascot-input",
+    "demoId": 37459
+  },
+  {
+    "title": "Globe CDN",
+    "category": "Mapas y globos",
+    "href": "/playground/21st-dev/cobe-globe-cdn-shuding",
+    "provider": "21st.dev · shuding",
+    "description": "Globo WebGL giratorio con marcadores piramidales, conexiones y tráfico simulado. Arrastra para rotarlo. Las etiquetas utilizan CSS Anchor Positioning.",
+    "sourceUrl": "https://21st.dev/r/shuding/cobe-globe-cdn",
+    "demoId": 11607
+  },
+  {
+    "title": "Globe Analytics",
+    "category": "Mapas y globos",
+    "href": "/playground/21st-dev/cobe-globe-analytics-shuding",
+    "provider": "21st.dev · shuding",
+    "description": "Globo WebGL con indicadores de visitantes y tendencias que se actualizan con datos simulados. Arrastra para rotarlo. Etiquetas mediante CSS Anchor Positioning.",
+    "sourceUrl": "https://21st.dev/r/shuding/cobe-globe-analytics",
+    "demoId": 11605
+  },
+  {
+    "title": "Radial Orbital Timeline",
+    "category": "Líneas de tiempo",
+    "href": "/playground/21st-dev/radial-orbital-timeline-jatin",
+    "provider": "21st.dev · jatin-yadav05",
+    "description": "Línea de tiempo orbital interactiva con estados, niveles de energía y nodos relacionados. Selecciona un nodo para abrir sus detalles. Datos de muestra del autor.",
+    "sourceUrl": "https://21st.dev/r/jatin-yadav05/radial-orbital-timeline",
+    "demoId": 1820
+  },
+  {
+    "title": "Sunburst Chart",
+    "category": "Gráficas",
+    "href": "/playground/21st-dev/sunburst-chart-klyv-ui",
+    "provider": "21st.dev · klyv-ui",
+    "description": "Gráfica jerárquica de anillos con zoom por rama, ruta de navegación y tooltips. Gastos de nube simulados del autor. Usa las flechas del teclado para explorar y Enter para acercar.",
+    "sourceUrl": "https://21st.dev/r/klyv-ui/sunburst-chart",
+    "demoId": 38726
+  },
+  {
+    "title": "Globe Bars",
+    "category": "Mapas y globos",
+    "href": "/playground/21st-dev/cobe-globe-bars-shuding",
+    "provider": "21st.dev · shuding",
+    "description": "Globo WebGL con barras de progreso ancladas a ciudades. Arrastra para rotarlo. Porcentajes de muestra del autor; etiquetas mediante CSS Anchor Positioning.",
+    "sourceUrl": "https://21st.dev/r/shuding/cobe-globe-bars",
+    "demoId": 11604
+  },
+  {
+    "title": "AI Assistant",
+    "category": "Asistentes y chat",
+    "href": "/playground/21st-dev/ai-assistat-coderislive07",
+    "provider": "21st.dev · coderislive07",
+    "description": "Chat con mensajes, indicador de escritura y limpieza de conversación. Respuestas predefinidas simuladas localmente; no conecta con una IA ni envía mensajes a servicios externos.",
+    "sourceUrl": "https://21st.dev/r/coderislive07/ai-assistat",
+    "demoId": 1950
+  },
+  {
+    "title": "AI Planning",
+    "category": "Asistentes y chat",
+    "href": "/playground/21st-dev/ai-planning-arunjdass",
+    "provider": "21st.dev · arunjdass",
+    "description": "Plan de agente con pasos desplegables y estados pendiente, activo, completado y error. Escenario estático de muestra del autor: no ejecuta tareas ni se conecta a IA.",
+    "sourceUrl": "https://21st.dev/r/arunjdass/ai-planning",
+    "demoId": 14901
+  },
+  {
+    "title": "Wallet Card 2",
+    "category": "Estadísticas",
+    "href": "/playground/21st-dev/wallet-card-2-beratberkayg",
+    "provider": "21st.dev · beratberkayg",
+    "description": "Tarjeta de saldos con cuentas y acciones de billetera. Vista visual del autor con importes ficticios; los botones no realizan operaciones financieras.",
+    "sourceUrl": "https://21st.dev/r/beratberkayg/wallet-card-2",
+    "demoId": 5214
+  },
+  {
+    "title": "Interactive Tech Stack Builder",
+    "category": "Selectores interactivos",
+    "href": "/playground/21st-dev/interactive-tech-stack-builder-alexperezcedeno",
+    "provider": "21st.dev · alexperezcedeno",
+    "description": "Constructor de stack con bloques de aspecto 2.5D y animaciones. Selecciona tecnologías para apilarlas o retirarlas. Demo local con confirmación y reinicio; no guarda perfiles.",
+    "sourceUrl": "https://21st.dev/r/alexperezcedeno/interactive-tech-stack-builder",
+    "demoId": 17874
+  },
+  {
+    "title": "Data Table Filter",
+    "category": "Selectores interactivos",
+    "href": "/playground/21st-dev/data-table-filter-uniquesonu",
+    "provider": "21st.dev · uniquesonu",
+    "description": "Filtros de estado y prioridad con selección múltiple o individual, búsqueda, seleccionar todo y limpiar. Opciones de muestra locales; muestra los valores elegidos sin consultar datos del producto.",
+    "sourceUrl": "https://21st.dev/r/uniquesonu/data-table-filter",
+    "demoId": 8103
+  },
+  {
+    "title": "Interactive Globe",
+    "category": "Mapas y globos",
+    "href": "/playground/21st-dev/interactive-globe-dev-yadhakim",
+    "provider": "21st.dev · dev.yadhakim",
+    "description": "Globo Canvas con puntos, ciudades, arcos luminosos y rotación por arrastre. Conexiones e indicadores ficticios de la demo del autor; no representan infraestructura real.",
+    "sourceUrl": "https://21st.dev/r/dev.yadhakim/interactive-globe",
+    "demoId": 10073
+  },
+  {
+    "title": "Performance Benchmark Card",
+    "category": "Estadísticas",
+    "href": "/playground/21st-dev/performance-benchmark-card-kavikatiyar",
+    "provider": "21st.dev · kavikatiyar",
+    "description": "Tarjeta de rendimiento con contador animado, promedio de referencia, competidores y niveles. Datos ficticios del autor; el selector es visual y los botones de compartir y copiar no ejecutan acciones.",
+    "sourceUrl": "https://21st.dev/r/kavikatiyar/performance-benchmark-card",
+    "demoId": 8570
   }
 ]

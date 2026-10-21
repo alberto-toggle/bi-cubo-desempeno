@@ -133,3 +133,5 @@ Apariencia mantiene tres preferencias independientes: `theme`, `font` y `finish`
 Liquid Glass de UI Layouts se encuentra en `/playground/ui-layouts/liquid-glass`, categoría **Materiales y efectos**, aislado de la aplicación. Su `SOURCE.md` documenta procedencia, licencia y adaptaciones.
 
 Los iconos de navegador y Apple se regeneran con `node scripts/generate-icons.mjs` a partir de las rutas SVG de `PanoramaMark`. Next los publica mediante las convenciones `icon.svg` y `apple-icon.png`.
+
+Liquid Metal Hero de chowlol202 está disponible únicamente en `/playground/21st-dev/liquid-metal-hero`. El login conserva su dibujo original.
