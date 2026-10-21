@@ -310,6 +310,14 @@
     {
       "area": "analysisAssistant",
       "decision": "AI Orb en encabezado con estados reales del flujo; AI Agent Lanes durante procesamiento simulado, compactado al recibir respuesta. Adaptaciones de producto independientes del playground, tokens y movimiento reducido."
+    },
+    {
+      "area": "analysisAssistant",
+      "decision": "Un único orbe junto al input, que se compacta durante la consulta y muestra el estado reasoning. Carriles seleccionables con detalles de tareas. Escritura por palabra con pausas de puntuación y opción Mostrar completa."
+    },
+    {
+      "area": "performanceCube",
+      "decision": "Cuatro capas: ingresos, costos, gastos y utilidades. Utilidades derivadas de ingresos menos costos y gastos, compartiendo fórmula con reportes; mantenimiento e inversión conservados únicamente en datos."
     }
   ],
   "evidence": [

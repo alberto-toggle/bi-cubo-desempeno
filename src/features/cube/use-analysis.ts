@@ -26,16 +26,32 @@ export function useAnalysis(snapshot: CubeSnapshot) {
   const streaming = !!answer && !complete && !stopped;
   useEffect(() => {
     if (!streaming) return;
-    const timer = setInterval(
-      () => setVisibleWords((n) => Math.min(wordCount, n + 3)),
-      45,
-    );
-    return () => clearInterval(timer);
-  }, [streaming, wordCount]);
+    const paragraphs = answer?.paragraphs ?? [];
+    const words = paragraphs.flatMap(p => p.split(/\s+/));
+    const ends = new Set<number>();
+    let count = 0;
+    for (const p of paragraphs) { count += p.split(/\s+/).length; ends.add(count); }
+    const previous = words[visibleWords - 1] ?? "";
+    const delay = ends.has(visibleWords) ? 650 : /[.!?]$/.test(previous) ? 380 : /[,;:]$/.test(previous) ? 210 : 115;
+    const timer = setTimeout(() => setVisibleWords(n => Math.min(wordCount, n + 1)), delay);
+    return () => clearTimeout(timer);
+  }, [streaming, wordCount, visibleWords, answer]);
   const cancel = () => {
     controller.current?.abort();
     setBusy(false);
     setStopped(true);
+  };
+  const reset = () => {
+    controller.current?.abort();
+    controller.current = null;
+    setAnswer(null);
+    setBusy(false);
+    setError("");
+    setProgress(0);
+    setVisibleWords(0);
+    setStopped(false);
+    setQuestion("");
+    setRequestId(n => n + 1);
   };
   const run = async (intent: AnalysisIntent, questionText = "") => {
     controller.current?.abort();
@@ -79,6 +95,7 @@ export function useAnalysis(snapshot: CubeSnapshot) {
     error,
     run,
     cancel,
+    reset,
     streaming,
     visibleWords: displayedWords,
     complete,

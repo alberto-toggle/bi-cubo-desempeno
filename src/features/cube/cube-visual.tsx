@@ -19,7 +19,7 @@ export function CubeVisual({
       >
         <g fill="none" stroke="var(--border)" strokeWidth="1">
           <path d="M85 90 300 20 515 90 515 345 300 420 85 345Z M85 90 300 165 515 90 M300 165V420 M300 20V275 M85 345 300 275 515 345" />
-          {[0, 1, 2, 3, 4].map((i) => (
+          {cubeMetrics.map((_, i) => (
             <path
               key={i}
               d={`M85 ${135 + i * 42} 300 ${210 + i * 42} 515 ${135 + i * 42}`}
@@ -29,7 +29,7 @@ export function CubeVisual({
         </g>
         {cubeMetrics.map((layer, i) => {
           const selected = value === layer.id;
-          const y = 94 + i * 49;
+          const y = 94 + i * (196 / (cubeMetrics.length - 1));
           return (
             <motion.g
               key={layer.id}

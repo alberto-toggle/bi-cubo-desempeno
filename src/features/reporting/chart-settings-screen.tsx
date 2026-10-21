@@ -27,7 +27,7 @@ const families: { id: ChartFamily; title: string; description: string }[] = [
     id: "goal",
     title: "Cumplimiento de metas",
     description:
-      "Resultado acumulado, meta anual y avance programado. Se mantiene la misma escala y definición del indicador.",
+      "Utilidades acumuladas, meta anual y avance programado. Se mantiene la misma escala y definición del indicador.",
   },
 ];
 export function ChartSettingsScreen() {

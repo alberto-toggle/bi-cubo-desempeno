@@ -59,7 +59,7 @@ export function ReportScreenSkeleton() {
         ))}
       </div>
       <div className={reportLayout.pair}>
-        <ReportPanel title="Resultado por giro comercial">
+        <ReportPanel title="Utilidades por giro comercial">
           <ChartPlaceholder />
         </ReportPanel>
         <ReportPanel title="Avance contra meta anual">

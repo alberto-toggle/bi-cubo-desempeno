@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
-export type AgentStep = { label: string; start: number; end: number };
+export type AgentStep = { label: string; start: number; end: number; result?: string };
 export type AgentLane = { id: string; name: string; steps: AgentStep[] };
 const LANE_H = 44;
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
@@ -15,6 +15,8 @@ const laneEnd = (lane: AgentLane) => lane.steps.at(-1)?.end ?? 0;
 
 export function AgentLanes({ lanes, progress }: { lanes: AgentLane[]; progress: number }) {
   const reduced = useReducedMotion();
+  const [selected, setSelected] = useState(lanes[0]?.id);
+  const selectedLane = lanes.find(l => l.id === selected) ?? lanes[0];
   const now = clamp01(progress);
   const active = lanes.flatMap(l => l.steps).find(s => now >= s.start && now < s.end);
   if (!lanes.length) return null;
@@ -30,7 +32,8 @@ export function AgentLanes({ lanes, progress }: { lanes: AgentLane[]; progress: 
             <li key={lane.id} style={{height: LANE_H}} className="flex items-center gap-2 text-xs">
               {now >= laneEnd(lane) ? <Check size={13} className="shrink-0 text-primary" /> :
                 <span className="size-2 shrink-0 rounded-full border border-primary" />}
-              {lane.name}
+              <button type="button" onClick={()=>setSelected(lane.id)} aria-pressed={selected === lane.id}
+                className="rounded px-1.5 py-1 text-left hover:bg-muted aria-pressed:bg-primary/10 aria-pressed:text-primary focus-visible:ring-2 focus-visible:ring-ring">{lane.name}</button>
             </li>
           ))}
         </ul>
@@ -51,6 +54,18 @@ export function AgentLanes({ lanes, progress }: { lanes: AgentLane[]; progress: 
           ))}
           {!reduced && <div className="pointer-events-none absolute inset-y-0 w-px bg-primary/60" style={{left: `${now*100}%`}} />}
         </div>
+      </div>
+      <div className="flex justify-between px-4 pb-3 text-[10px] tabular-nums text-muted-foreground">
+        <span>Inicio</span><span>{Math.round(now*100)}% del proceso simulado</span><span>Respuesta</span>
+      </div>
+      <div className="min-h-24 border-t border-border px-4 py-3">
+        <p className="mb-2 text-xs font-medium">{selectedLane.name}</p>
+        <ul className="space-y-2 text-xs text-muted-foreground">
+          {selectedLane.steps.map(step => <li key={step.label} className="flex gap-2">
+            <span className="shrink-0 text-primary">{now >= step.end ? "✓" : now >= step.start ? "●" : "○"}</span>
+            <span>{step.label}{now >= step.end && step.result && <span className="mt-1 block text-foreground">{step.result}</span>}</span>
+          </li>)}
+        </ul>
       </div>
       <p className="border-t border-border px-4 py-3 text-xs text-muted-foreground" role="status">
         {active?.label ?? "Preparando respuesta"}

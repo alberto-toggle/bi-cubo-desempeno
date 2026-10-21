@@ -10,20 +10,20 @@ export function StreamedResponse({
   streaming: boolean;
 }) {
   const reduced = useReducedMotion();
-  let remaining = visibleWords;
+
   return (
     <div className="space-y-4" aria-busy={streaming}>
       {paragraphs.map((p, index) => {
         const words = p.split(/\s+/);
-        const count = Math.min(words.length, Math.max(0, remaining));
-        remaining -= words.length;
+        const preceding = paragraphs.slice(0, index).reduce((sum, text) => sum + text.split(/\s+/).length, 0);
+        const count = Math.min(words.length, Math.max(0, visibleWords - preceding));
         if (!count) return null;
-        const active = streaming && remaining <= 0;
+        const active = streaming && visibleWords <= preceding + words.length;
         return (
           <p key={index} className="text-sm leading-7">
-            {Array.from({ length: Math.ceil(count / 3) }, (_, chunk) => {
+            {Array.from({ length: count }, (_, chunk) => {
               const text = words
-                .slice(chunk * 3, Math.min(count, chunk * 3 + 3))
+                .slice(chunk, chunk + 1)
                 .join(" ");
               return (
                 <motion.span

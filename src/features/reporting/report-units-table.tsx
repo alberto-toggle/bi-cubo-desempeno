@@ -28,7 +28,7 @@ export function ReportUnitsTable({ rows }: { rows: ReportUnitRow[] }) {
             {[
               "Establecimiento",
               "Giro",
-              "Resultado",
+              "Utilidades",
               "Meta anual",
               "Avance",
             ].map((h) => (

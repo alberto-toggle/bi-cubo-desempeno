@@ -92,7 +92,7 @@ export function CubeScreen() {
           <p className="eyebrow">Consulta / Explorador multidimensional</p>
           <h1 className="page-title">Cubo nacional de desempeño</h1>
           <p className="page-copy">
-            Cruza periodo, giro y cuenta para consultar resultados.
+            Cruza periodo, giro e indicador para consultar resultados.
           </p>
         </div>
         <AnalysisPanel key={contextKey} snapshot={snapshot} />
@@ -131,7 +131,7 @@ export function CubeScreen() {
       </div>
       <p className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
         Cifras simuladas · {snapshot.period} · {snapshot.context} · MXN.
-        Resultado de gestión = ingresos − costos − gastos operativos.
+        Utilidades = ingresos − costos − gastos.
         {snapshot.metricNote && <span className="mt-1 block">{snapshot.metricNote}</span>}
       </p>
       <ReportMetrics
@@ -147,9 +147,13 @@ export function CubeScreen() {
             note: `Año anterior: ${reportMoney(snapshot.previous)}`,
           },
           {
-            label: "Resultado de gestión",
-            value: reportMoney(snapshot.result),
-            note: "Importe derivado; no es utilidad neta contable",
+            label: filters.metric === "profit" ? "Margen de utilidades" : "Utilidades",
+            value: filters.metric === "profit"
+              ? formatPercent(percent(snapshot.result, snapshot.revenue))
+              : reportMoney(snapshot.result),
+            note: filters.metric === "profit"
+              ? "Utilidades / ingresos; sin impuestos ni otros ajustes"
+              : "Ingresos menos costos y gastos",
           },
           {
             label: "Avance de meta anual",
@@ -162,7 +166,7 @@ export function CubeScreen() {
         <section className={cubeLayout.visual}>
           <header className="flex items-center gap-2 text-sm font-semibold">
             <Box size={17} className="text-primary" />
-            Cinco cuentas · tres dimensiones
+            Cuatro indicadores · tres dimensiones
           </header>
           <CubeVisual
             value={filters.metric}

@@ -9,3 +9,5 @@ Los bloques de producto no importan Playground. La obtención de cifras, permiso
 
 - `agent-lanes.tsx`: adaptación de AI Agent Lanes, @kokonutui (MIT), https://kokonutui.com/r/ai-agent-lanes.json. Conserva carriles temporales, barras y conectores; avance controlado por el servicio demo, sin reproducción ni datos internos.
 - `ai-orb.tsx`: AI Orb, konsstepnov, https://21st.dev/r/konsstepnov/ai-orb. Conserva thinking-orbs, transiciones entre estados y lectura de tokens; etiquetas accesibles en español.
+
+- `orb-composer.tsx`: composición propia adaptada del patrón pill → orb → input de AI Thinking Orb & Input (anark17r), https://21st.dev/r/anark17r/ai-thiking-orb-and-input. Usa el render de AI Orb en lugar del motor y las respuestas internas del bloque.

@@ -82,6 +82,7 @@ export function timeline(profile: ReportProfile, end: string) {
             );
       return {
         label: `${monthNames[Number(m.period.slice(5)) - 1]} ${m.period.slice(0, 4)}`,
+        year: Number(m.period.slice(0, 4)),
         value: result(m),
         short: average(6),
         long: average(24),

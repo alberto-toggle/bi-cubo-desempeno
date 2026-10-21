@@ -45,12 +45,14 @@ export function UnitReport({ unitId }: { unitId: string }) {
   const sameCut = [period.year - 2, period.year - 1, period.year]
     .filter((y) => y >= 2023)
     .map((y) => ({
+      year: y,
       label: `Ene–${monthNames[period.month - 1]} ${y}`,
       value: total(profile, y, period.month),
     }));
   const annual = [2023, 2024, 2025, 2026]
     .filter((y) => y <= period.year)
     .map((y) => ({
+      year: y,
       label:
         y === period.year
           ? `${y} · a ${monthNames[period.month - 1]}`
@@ -88,7 +90,7 @@ export function UnitReport({ unitId }: { unitId: string }) {
       <ReportMetrics
         items={[
           {
-            label: "Resultado al corte",
+            label: "Utilidades al corte",
             value: reportMoney(amount),
             note: `Enero–${monthNames[period.month - 1]} ${period.year}`,
           },
@@ -105,7 +107,7 @@ export function UnitReport({ unitId }: { unitId: string }) {
           {
             label: "Promedio mensual al corte",
             value: reportMoney(Math.round(amount / period.month)),
-            note: "Resultado acumulado / meses transcurridos",
+            note: "Utilidades acumuladas / meses transcurridos",
           },
         ]}
       />
@@ -118,6 +120,7 @@ export function UnitReport({ unitId }: { unitId: string }) {
             options={[
               { value: "12", label: "Últimos 12 meses" },
               { value: "24", label: "Últimos 24 meses" },
+              { value: "36", label: "Últimos 36 meses" },
               { value: "48", label: "Todo el histórico" },
             ]}
           />
@@ -125,7 +128,7 @@ export function UnitReport({ unitId }: { unitId: string }) {
         <ReportChart
           id="unit-history"
           title="Histórico mensual"
-          description="Resultado de gestión y medias móviles de 6 y 24 meses. Las tendencias utilizan el histórico previo, aunque quede fuera de la ventana visible."
+          description="Utilidades y medias móviles de 6 y 24 meses. Las tendencias utilizan el histórico previo, aunque quede fuera de la ventana visible."
           family="timeline"
           data={series}
         />

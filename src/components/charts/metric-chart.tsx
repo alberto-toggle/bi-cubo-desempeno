@@ -2,6 +2,7 @@
 import {
   Area,
   Bar,
+  Cell,
   CartesianGrid,
   ComposedChart,
   Line,
@@ -12,9 +13,12 @@ import {
   YAxis,
   Legend,
 } from "recharts";
+import { useId } from "react";
+import { yearColor } from "./year-colors";
 import { useReducedMotion } from "motion/react";
 export type MetricPoint = {
   label: string;
+  year?: number;
   value: number;
   short?: number | null;
   long?: number | null;
@@ -35,6 +39,10 @@ export function MetricChart({
   reference?: number;
 }) {
   const reduced = useReducedMotion();
+  const gradientId = useId().replace(/:/g, "");
+  const years = [...new Set(data.flatMap(point => point.year === undefined ? [] : [point.year]))].sort((a,b)=>a-b);
+  const byYear = years.length > 0 && data.every(point => point.year !== undefined);
+  const seriesColor = byYear ? `url(#${gradientId})` : "var(--chart-1)";
   if (!data.length)
     return (
       <p className="flex h-80 items-center justify-center text-sm text-muted-foreground">
@@ -90,7 +98,13 @@ export function MetricChart({
       maximumFractionDigits: 1,
     }).format(v / 100);
   return (
-    <div className="min-w-0" style={{ height }}>
+    <div className="min-w-0">
+      {byYear && <ul aria-label="Colores por año" className="mb-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
+        {years.map(year => <li key={year} className="flex items-center gap-1.5">
+          <span aria-hidden="true" className="size-2.5 rounded-sm" style={{background: yearColor(year)}} />{year}
+        </li>)}
+      </ul>}
+      <div style={{height}}>
       <ResponsiveContainer
         width="100%"
         height="100%"
@@ -102,6 +116,18 @@ export function MetricChart({
           margin={{ left: 0, right: 20, top: 12, bottom: 10 }}
           accessibilityLayer
         >
+          {byYear && <defs>
+            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+              {data.flatMap((point, i) => {
+                const start = data.length === 1 ? 0 : Math.max(0, (i - .5) / (data.length - 1)) * 100;
+                const end = data.length === 1 ? 100 : Math.min(1, (i + .5) / (data.length - 1)) * 100;
+                return [
+                  <stop key={`${i}-start`} offset={`${start}%`} stopColor={yearColor(point.year!)} />,
+                  <stop key={`${i}-end`} offset={`${end}%`} stopColor={yearColor(point.year!)} />,
+                ];
+              })}
+            </linearGradient>
+          </defs>}
           <CartesianGrid
             stroke="var(--border)"
             horizontal={!horizontal}
@@ -152,8 +178,8 @@ export function MetricChart({
             <Area
               name={valueLabel}
               dataKey="value"
-              stroke="var(--chart-1)"
-              fill="var(--chart-1)"
+              stroke={seriesColor}
+              fill={seriesColor}
               fillOpacity={0.14}
               isAnimationActive={!reduced}
             />
@@ -161,7 +187,7 @@ export function MetricChart({
             <Line
               name={valueLabel}
               dataKey="value"
-              stroke="var(--chart-1)"
+              stroke={seriesColor}
               strokeWidth={2}
               dot={false}
               isAnimationActive={!reduced}
@@ -170,19 +196,21 @@ export function MetricChart({
             <Bar
               name={valueLabel}
               dataKey="value"
-              fill="var(--chart-1)"
+              fill={seriesColor}
               radius={horizontal ? [0, 4, 4, 0] : [4, 4, 0, 0]}
               maxBarSize={40}
               isAnimationActive={!reduced}
-            />
+            >
+              {byYear && data.map(point => <Cell key={point.label} fill={yearColor(point.year!)} />)}
+            </Bar>
           )}
           {temporal && (
             <>
               <Line
                 name="Media móvil · 6 meses"
                 dataKey="short"
-                stroke="var(--chart-2)"
-                strokeWidth={2}
+                stroke="var(--foreground)"
+                strokeWidth={2.5}
                 dot={false}
                 connectNulls={false}
                 isAnimationActive={!reduced}
@@ -190,9 +218,9 @@ export function MetricChart({
               <Line
                 name="Media móvil · 24 meses"
                 dataKey="long"
-                stroke="var(--chart-3)"
-                strokeWidth={2}
-                strokeDasharray="4 3"
+                stroke="var(--muted-foreground)"
+                strokeWidth={3}
+                strokeDasharray="8 5"
                 dot={false}
                 connectNulls={false}
                 isAnimationActive={!reduced}
@@ -202,6 +230,7 @@ export function MetricChart({
           )}
         </ComposedChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Dialog } from "@base-ui/react/dialog";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
+  Plus,
   Check,
   Download,
   Sparkles,
@@ -13,11 +14,8 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { AnalysisLanes } from "./analysis-lanes";
-import { AiOrb } from "@/components/analysis/ai-orb";
+import { OrbComposer } from "@/components/analysis/orb-composer";
 import { StatusIsland } from "@/components/analysis/status-island";
-import {
-  PromptComposer,
-} from "@/components/analysis/prompt-composer";
 import { StreamedResponse } from "@/components/analysis/streamed-response";
 import {
   analysisActions,
@@ -33,6 +31,13 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
     [query, setQuery] = useState(""),
     [hint, setHint] = useState("");
   const analysis = useAnalysis(snapshot);
+  const focusNewQuery = useRef(false);
+  const inputRef = useCallback((input: HTMLInputElement | null) => {
+    if (input && focusNewQuery.current) {
+      input.focus({ preventScroll: true });
+      focusNewQuery.current = false;
+    }
+  }, []);
   const scrollRef = useRef<HTMLDivElement>(null);
   const followResponse = useRef(true);
   useEffect(() => {
@@ -45,6 +50,14 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
     setHint("");
     followResponse.current = true;
     void analysis.run(intent, text);
+  };
+  const reset = () => {
+    focusNewQuery.current = true;
+    analysis.reset();
+    setQuery("");
+    setHint("");
+    followResponse.current = true;
+    scrollRef.current?.scrollTo({ top: 0 });
   };
   const send = () => {
     const intent = inferIntent(query);
@@ -82,16 +95,9 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Backdrop className="fixed inset-0 z-50 bg-overlay" />
-          <Dialog.Popup className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-border bg-card text-foreground shadow-xl">
+          <Dialog.Popup className="fixed inset-y-2 right-2 z-50 flex w-[calc(100%_-_1rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card text-foreground shadow-xl sm:inset-y-4 sm:right-4 sm:w-[calc(100%_-_2rem)] sm:rounded-3xl">
             <header className="flex items-start justify-between gap-4 border-b border-border p-5 sm:p-6">
               <div className="flex min-w-0 items-center gap-3">
-                <div className="shrink-0">
-                  <AiOrb size="lg" state={
-                    analysis.error ? "error" : analysis.busy ? "thinking" :
-                    analysis.streaming ? "streaming" : analysis.complete ? "done" :
-                    query.trim() ? "listening" : "idle"
-                  } />
-                </div>
                 <div>
                   <Dialog.Title className="text-lg font-semibold">
                     Asistente de análisis
@@ -99,6 +105,12 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
                   <Dialog.Description className="mt-1 text-xs leading-5 text-muted-foreground">
                     {snapshot.context} · {snapshot.period} · {snapshot.metric}
                   </Dialog.Description>
+                  {analysis.question && (
+                    <button type="button" onClick={reset}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring">
+                      <Plus size={14} /> Nueva consulta
+                    </button>
+                  )}
                 </div>
               </div>
               <Dialog.Close
@@ -266,6 +278,11 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
                     setHint("");
                   }}
                 />
+                {analysis.streaming && (
+                  <button className="text-xs text-primary underline" onClick={analysis.finish}>
+                    Mostrar completa
+                  </button>
+                )}
                 {analysis.working && (
                   <button
                     className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs hover:bg-muted"
@@ -276,22 +293,18 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
                   </button>
                 )}
               </div>
-              <PromptComposer
-                aria-label="Consulta sobre esta selección"
+              <OrbComposer
+                key={analysis.requestId}
+                inputRef={inputRef}
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={setQuery}
                 onSend={send}
-                isLoading={analysis.working}
-                loadingText={
-                  analysis.busy
-                    ? "Analizando la selección…"
-                    : "Escribiendo respuesta…"
-                }
+                busy={analysis.working}
                 disabled={!snapshot.count}
-                placeholder="Pregunta sobre esta selección…"
-                maxLength={500}
-                maxAutoGrowPx={110}
-                showAttach={false}
+                state={analysis.error ? "error" : analysis.busy
+                  ? analysis.progress < .25 ? "thinking" : "reasoning"
+                  : analysis.streaming ? "streaming"
+                  : analysis.complete ? "done" : query.trim() ? "listening" : "idle"}
               />
               {hint && (
                 <p role="status" className="text-xs text-muted-foreground">

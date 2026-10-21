@@ -26,13 +26,13 @@ export function inferIntent(query: string): AnalysisIntent | null {
   if (/reporte|informe|borrador/.test(q)) return "report";
   if (/meta|rezag|objetivo/.test(q)) return "goals";
   if (/compar|anterior|variaci|aumento|caida/.test(q)) return "compare";
-  if (/resum|resultado|ingreso|costo|gasto|mantenimiento|inversion|analiza/.test(q)) return "summary";
+  if (/resum|resultado|ingreso|costo|gasto|utilidad|ganancia|analiza/.test(q)) return "summary";
   return null;
 }
 function compose(s: CubeSnapshot, intent: AnalysisIntent): AnalysisResult {
-  const summary = `${s.metric}: ${reportMoney(s.value)} en ${s.count} establecimientos. El resultado de gestión es ${reportMoney(s.result)}: ingresos (${reportMoney(s.revenue)}) menos costos directos (${reportMoney(s.cost)}) y gastos operativos (${reportMoney(s.expenses)}). ${s.metricNote ?? ""}`;
+  const summary = `${s.metric}: ${reportMoney(s.value)} en ${s.count} establecimientos. Las utilidades son ${reportMoney(s.result)}: ingresos (${reportMoney(s.revenue)}) menos costos (${reportMoney(s.cost)}) y gastos (${reportMoney(s.expenses)}). ${s.metricNote ?? ""}`;
   const change = `Respecto al mismo corte del año anterior, ${s.metric.toLowerCase()} pasa de ${reportMoney(s.previous)} a ${reportMoney(s.value)}. Variación: ${formatPercent(growth(s.value, s.previous))}. ${s.metric !== "Ingresos" ? "Una variación del importe seleccionado, por sí sola, no demuestra una mejora de desempeño." : "La comparación no identifica las causas de la variación."}`;
-  const advance = `El resultado cubre ${formatPercent(percent(s.result, s.target))} de la meta anual de ${reportMoney(s.target)}. La referencia lineal al corte es ${formatPercent((s.month / 12) * 100)}; es una programación ilustrativa, sin ajuste por estacionalidad.`;
+  const advance = `Las utilidades cubren ${formatPercent(percent(s.result, s.target))} de la meta anual de ${reportMoney(s.target)}. La referencia lineal al corte es ${formatPercent((s.month / 12) * 100)}; es una programación ilustrativa, sin ajuste por estacionalidad.`;
   const behind = s.rows
     .filter((r) => r.target > 0 && r.result / r.target < s.month / 12)
     .sort((a, b) => a.result / a.target - b.result / b.target);
@@ -92,7 +92,7 @@ export async function requestCubeAnalysis(
       reject(new DOMException("Cancelado", "AbortError"));
     };
     const started = performance.now();
-    const duration = 3600;
+    const duration = 6200;
     const progressTimer = setInterval(() => {
       onProgress?.(Math.min(.98, (performance.now() - started) / duration));
     }, 80);
@@ -113,6 +113,6 @@ export function analysisText(result: AnalysisResult, snapshot: CubeSnapshot) {
     snapshot.period,
     "DEMO · Análisis simulado. Cifras ilustrativas, no validación contable.",
     ...result.paragraphs,
-    "Fuente: reporte de gestión simulado de Panorama GTyG. Importes en MXN. Mantenimiento incluido en gastos operativos; inversión separada del resultado de gestión.",
+    "Fuente: reporte de gestión simulado de Panorama GTyG. Importes en MXN. Utilidades calculadas como ingresos menos costos y gastos, sin impuestos ni otros ajustes contables.",
   ].join("\n\n");
 }

@@ -11,7 +11,7 @@ import {
   type ReportMonth,
 } from "@/features/reporting/model";
 import type { ReportPeriod } from "@/features/reporting/period-control";
-export type CubeMetric = "revenue" | "cost" | "expenses" | "maintenance" | "investment";
+export type CubeMetric = "revenue" | "cost" | "expenses" | "profit";
 export const cubeMetrics: {
   id: CubeMetric;
   label: string;
@@ -19,28 +19,28 @@ export const cubeMetrics: {
   color: string;
   note?: string;
 }[] = [
-  { id: "revenue", label: "Ingresos", code: "4xxx", color: "var(--chart-1)" },
+  { id: "revenue", label: "Ingresos", code: "4xxx", color: "var(--cube-revenue)" },
   {
     id: "cost",
-    label: "Costos directos",
+    label: "Costos",
     code: "5xxx",
-    color: "var(--chart-2)",
+    color: "var(--cube-cost)",
   },
   {
     id: "expenses",
-    label: "Gastos operativos",
+    label: "Gastos",
     code: "6xxx",
-    color: "var(--chart-3)",
+    color: "var(--cube-expenses)",
   },
   {
-    id: "maintenance", label: "Mantenimiento", code: "61xx", color: "var(--chart-4)",
-    note: "Mantenimiento está incluido en gastos operativos; no se descuenta de nuevo del resultado de gestión.",
-  },
-  {
-    id: "investment", label: "Inversión", code: "8xxx", color: "var(--chart-5)",
-    note: "Inversión se registra por separado y no se descuenta del resultado de gestión.",
+    id: "profit", label: "Utilidades", code: "=", color: "var(--cube-profit)",
+    note: "No incluye impuestos ni otros ajustes contables.",
   },
 ];
+/** Profit is derived from the same monthly accounting formula as management reports. */
+function metricValue(month: ReportMonth, metric: CubeMetric): number {
+  return metric === "profit" ? result(month) : month[metric];
+}
 export type CubeFilters = ReportPeriod & {
   state: string;
   line: string;
@@ -127,12 +127,12 @@ export function cubeSnapshot(
       m.period.startsWith(`${year}-`) &&
       Number(m.period.slice(5)) <= filters.month;
     for (const m of p.months)
-      history.set(m.period, (history.get(m.period) ?? 0) + m[filters.metric]);
+      history.set(m.period, (history.get(m.period) ?? 0) + metricValue(m, filters.metric));
     const months = p.months.filter((m) => inPeriod(m, filters.year));
-    const value = months.reduce((s, m) => s + m[filters.metric], 0);
+    const value = months.reduce((s, m) => s + metricValue(m, filters.metric), 0);
     const previous = p.months
       .filter((m) => inPeriod(m, filters.year - 1))
-      .reduce((s, m) => s + m[filters.metric], 0);
+      .reduce((s, m) => s + metricValue(m, filters.metric), 0);
     const outcome = months.reduce((s, m) => s + result(m), 0);
     const target = p.targets[filters.year] ?? 0;
     snapshot.count++;
@@ -145,7 +145,7 @@ export function cubeSnapshot(
       snapshot.cost += m.cost;
       snapshot.expenses += m.expenses;
       snapshot.timeline[Number(m.period.slice(5)) - 1].value +=
-        m[filters.metric];
+        metricValue(m, filters.metric);
     }
     const line = commercialLine(unit);
     groups.set(line, (groups.get(line) ?? 0) + value);

@@ -57,13 +57,13 @@ export function GoalPanel({
             {actual > target
               ? "Meta superada."
               : actual < 0
-                ? "Resultado negativo al corte."
+                ? "Utilidades negativas al corte."
                 : ""}
           </p>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-xs text-muted-foreground">
-                Resultado acumulado
+                Utilidades acumuladas
               </p>
               <p className="mt-2 font-semibold">{reportMoney(actual)}</p>
             </div>
@@ -79,11 +79,11 @@ export function GoalPanel({
         <MetricChart
           data={
             view === "target"
-              ? [{ label: "Resultado", value: actual }]
+              ? [{ label: "Utilidades", value: actual }]
               : [
                   { label: "Meta anual", value: target },
                   { label: "Programado", value: planned },
-                  { label: "Resultado", value: actual },
+                  { label: "Utilidades", value: actual },
                 ]
           }
           view={view === "target" ? "bars" : "columns"}

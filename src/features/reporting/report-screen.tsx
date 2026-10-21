@@ -93,13 +93,13 @@ export function ReportScreen() {
       </div>
       <p className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
         Cifras simuladas · Enero–{monthNames[period.month - 1]} {period.year} ·
-        MXN. Resultado de gestión: ingresos menos costos y gastos operativos.
+        MXN. Utilidades: ingresos menos costos y gastos.
         Las metas son ilustrativas.
       </p>
       <ReportMetrics
         items={[
           {
-            label: "Resultado acumulado",
+            label: "Utilidades acumuladas",
             value: reportMoney(actual),
             note: `${rows.length} unidades en esta selección`,
           },
@@ -126,7 +126,7 @@ export function ReportScreen() {
       <div className={reportLayout.pair}>
         <ReportChart
           id="report-giro"
-          title="Resultado por giro comercial"
+          title="Utilidades por giro comercial"
           description="Comparativo del acumulado al corte · MXN"
           data={categories}
         />
@@ -140,7 +140,7 @@ export function ReportScreen() {
       {line !== "all" && (
         <ReportChart
           id="report-units"
-          title="Resultado por establecimiento"
+          title="Utilidades por establecimiento"
           description="Nombres visibles según tu rol · Acumulado al corte · MXN"
           data={ranked.map((r) => ({ label: r.label, value: r.value }))}
         />
@@ -149,7 +149,7 @@ export function ReportScreen() {
         <ReportChart
           id="report-programs"
           title="Programas productivos"
-          description="Distribución ilustrativa del resultado de granjas y criadero; no se suma nuevamente al total."
+          description="Distribución ilustrativa de las utilidades de granjas y criadero; no se suma nuevamente al total."
           data={programs}
         />
       )}

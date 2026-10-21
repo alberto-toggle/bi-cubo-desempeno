@@ -1,3 +1,10 @@
+/* Decorative layer colors belong only to the cube, not financial charts. */
+.cube-visual {
+  --cube-revenue: #4ade80;
+  --cube-cost: #fbbf24;
+  --cube-expenses: #fb7185;
+  --cube-profit: #2dd4bf;
+}
 .cube-visual svg {
   width: 100%;
   max-height: 450px;
