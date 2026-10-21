@@ -9,7 +9,8 @@ import { TraceabilityPanel } from "./traceability/traceability-panel";
 import { FilterSelect } from "./filters";
 import { useState } from "react";
 import { unitTotals, money } from "./model";
-import { Metrics, TrendChart, PortfolioState } from "./presentation";
+import { UnitReport } from "@/features/reporting/unit-report";
+import { Metrics, PortfolioState } from "./presentation";
 export function UnitDetail({ id }: { id: string }) {
   const { data, status, error, reload, mode } = usePortfolio();
   const [period, setPeriod] = useState("all");
@@ -108,7 +109,7 @@ export function UnitDetail({ id }: { id: string }) {
           financiero mensual.
         </p>
       </section>
-      <TrendChart units={[unit]} period={period} />
+      <UnitReport unitId={unit.id} />
       <section className="surface p-6">
         <h2 className="font-semibold">Centros de negocio</h2>
         <p className="mt-2 text-sm text-muted-foreground">

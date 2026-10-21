@@ -23,6 +23,8 @@
   "menuAccent": "subtle",
   "registries": {
     "@react-bits": "https://reactbits.dev/r/{name}.json",
-    "@uitripled": "https://ui.tripled.work/r/{name}.json"
+    "@uitripled": "https://ui.tripled.work/r/{name}.json",
+    "@kokonutui": "https://kokonutui.com/r/{name}.json",
+    "@cult-ui": "https://cult-ui.com/r/{name}.json"
   }
 }

@@ -607,5 +607,85 @@
     "description": "Tarjeta de rendimiento con contador animado, promedio de referencia, competidores y niveles. Datos ficticios del autor; el selector es visual y los botones de compartir y copiar no ejecutan acciones.",
     "sourceUrl": "https://21st.dev/r/kavikatiyar/performance-benchmark-card",
     "demoId": 8570
+  },
+  {
+    "title": "AI Loading",
+    "category": "Asistentes y chat",
+    "href": "/playground/kokonutui/ai-loading",
+    "provider": "Kokonut UI",
+    "description": "Indicador animado de ejecución por pasos, con estados y tiempos de una tarea simulada.",
+    "sourceUrl": "https://kokonutui.com/r/ai-loading.json"
+  },
+  {
+    "title": "AI Agent Lanes",
+    "category": "Asistentes y chat",
+    "href": "/playground/kokonutui/ai-agent-lanes",
+    "provider": "Kokonut UI",
+    "description": "Línea de ejecución de agentes paralelos con controles de pausa y reinicio.",
+    "sourceUrl": "https://kokonutui.com/r/ai-agent-lanes.json"
+  },
+  {
+    "title": "AI Input Search",
+    "category": "Asistentes y chat",
+    "href": "/playground/kokonutui/ai-input-search",
+    "provider": "Kokonut UI",
+    "description": "Buscador conversacional con herramientas, fuentes y selección de modelo; ejecución simulada.",
+    "sourceUrl": "https://kokonutui.com/r/ai-input-search.json"
+  },
+  {
+    "title": "Halo Search",
+    "category": "Asistentes y chat",
+    "href": "/playground/cult-ui/halo-search",
+    "provider": "Cult UI",
+    "description": "Campo de búsqueda con halo animado y simulación local del estado de carga.",
+    "sourceUrl": "https://cult-ui.com/r/halo-search.json"
+  },
+  {
+    "title": "Prompt Composer",
+    "category": "Asistentes y chat",
+    "href": "/playground/cult-ui/prompt-composer",
+    "provider": "Cult UI",
+    "description": "Compositor de mensajes con avatar animado y envío local de demostración.",
+    "sourceUrl": "https://cult-ui.com/r/prompt-composer.json"
+  },
+  {
+    "title": "Prompt Library",
+    "category": "Asistentes y chat",
+    "href": "/playground/cult-ui/prompt-library",
+    "provider": "Cult UI",
+    "description": "Biblioteca de prompts con búsqueda, selección, vista previa y creación local.",
+    "sourceUrl": "https://cult-ui.com/r/prompt-library.json"
+  },
+  {
+    "title": "AI Instructions",
+    "category": "Asistentes y chat",
+    "href": "/playground/cult-ui/ai-instructions",
+    "provider": "Cult UI",
+    "description": "Selector de instrucciones con vista previa y creación de entradas locales.",
+    "sourceUrl": "https://cult-ui.com/r/ai-instructions.json"
+  },
+  {
+    "title": "AI Blob Warp",
+    "category": "Materiales y efectos",
+    "href": "/playground/cult-ui/ai-blob-warp",
+    "provider": "Cult UI",
+    "description": "Avatar con shader Warp animado; demostración visual independiente de servicios de IA.",
+    "sourceUrl": "https://cult-ui.com/r/ai-blob-warp.json"
+  },
+  {
+    "title": "Status Island",
+    "category": "Indicadores de estado",
+    "href": "/playground/kokonutui/status-island",
+    "provider": "Kokonut UI",
+    "description": "Isla animada de tareas en segundo plano con progreso, estados de éxito y error, reintento y acciones. Simulación local.",
+    "sourceUrl": "https://kokonutui.com/r/status-island.json"
+  },
+  {
+    "title": "AI Token Alternatives",
+    "category": "Asistentes y chat",
+    "href": "/playground/kokonutui/ai-token-alternatives",
+    "provider": "Kokonut UI",
+    "description": "Explora alternativas de palabras y su confianza ilustrativa, cambia la respuesta y revierte las ediciones. Demostración local sin conexión a IA.",
+    "sourceUrl": "https://kokonutui.com/r/ai-token-alternatives.json"
   }
 ]

@@ -1,0 +1,24 @@
+.cube-visual svg {
+  width: 100%;
+  max-height: 450px;
+  overflow: visible;
+}
+.cube-layer {
+  cursor: pointer;
+  outline: none;
+}
+.cube-layer:focus-visible rect {
+  stroke: var(--ring);
+  stroke-width: 3;
+}
+.cube-layer:hover rect {
+  stroke: currentColor;
+}
+.cube-axis {
+  fill: var(--muted-foreground);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+/* Decorative planes must not intercept the labels of neighboring layers. */
+.cube-layer path, .cube-layer text { pointer-events: none; }
+.cube-layer rect { pointer-events: all; }

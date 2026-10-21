@@ -1,0 +1,6 @@
+# ai-input-search
+
+Proveedor: kokonutui
+Registro original: https://kokonutui.com/r/ai-input-search.json
+Instalado con shadcn. Primitivas Base UI aisladas por proveedor.
+Demo local sin conexión a modelos ni servicios de IA.

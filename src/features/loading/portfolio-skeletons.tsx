@@ -1,3 +1,4 @@
+import { ReportDetailSkeleton } from "@/features/reporting/report-skeleton";
 import { GeographyLayout } from "@/features/intelligence/geography/geography-layout";
 import { intelligenceLayout } from "@/features/intelligence/layout";
 import {
@@ -139,7 +140,7 @@ export function DetailBodySkeleton() {
         </div>
         <Bone className="mt-4 h-4 w-4/5" />
       </section>
-      <ChartSkeleton />
+      <ReportDetailSkeleton />
       <section className="surface p-6">
         <Bone className="h-6 w-40" />
         <Bone className="mt-2 h-5 w-4/5" />

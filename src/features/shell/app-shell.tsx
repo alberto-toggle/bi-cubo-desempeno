@@ -11,6 +11,8 @@ import { DemoHelp } from "@/features/demo/demo-controls";
 import {
   ArrowUpRight,
   Compass,
+  Box,
+  ChartNoAxesCombined,
   Layers3,
   Building2,
   BookOpen,
@@ -45,6 +47,16 @@ export function AppShell({
     ...(!internal
       ? [
           {
+            href: "/cube",
+            label: "Cubo de desempeño",
+            icon: Box,
+          },
+          {
+            href: "/reports",
+            label: "Utilidades y metas",
+            icon: ChartNoAxesCombined,
+          },
+          {
             href: "/establishments",
             label: "Establecimientos",
             icon: Building2,
@@ -55,6 +67,11 @@ export function AppShell({
       ? [
           { href: "/catalogs", label: "Catálogos maestros", icon: BookOpen },
           { href: "/settings/appearance", label: "Apariencia", icon: Palette },
+          {
+            href: "/settings/charts",
+            label: "Gráficas",
+            icon: ChartNoAxesCombined,
+          },
         ]
       : []),
   ];
@@ -104,7 +121,9 @@ export function AppShell({
                 label: "Consulta",
                 links: items.filter(
                   (item) =>
-                    item.href === "/" || item.href === "/establishments",
+                    item.href === "/" ||
+                    item.href === "/establishments" ||
+                    item.href === "/reports" || item.href === "/cube",
                 ),
               },
               ...(admin

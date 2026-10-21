@@ -1,5 +1,10 @@
 "use client";
+import { CubeSkeleton } from "@/features/cube/cube-skeleton";
 
+import {
+  ReportScreenSkeleton,
+  ChartSettingsSkeleton,
+} from "@/features/reporting/report-skeleton";
 import { appearanceLayout } from "@/features/appearance/layout";
 import { intelligenceLayout } from "@/features/intelligence/layout";
 import { useAppSelector } from "@/store/hooks";
@@ -47,8 +52,18 @@ export function LoginSkeleton() {
   );
 }
 export type ViewKind =
-  "overview" | "directory" | "detail" | "catalogs" | "appearance";
+  | "overview"
+  | "directory"
+  | "detail"
+  | "catalogs"
+  | "appearance"
+  | "cube"
+  | "reports"
+  | "charts";
 export function viewKind(path: string): ViewKind {
+  if (path === "/cube") return "cube";
+  if (path === "/reports") return "reports";
+  if (path === "/settings/charts") return "charts";
   return path.includes("/settings")
     ? "appearance"
     : path.includes("/catalogs")
@@ -78,7 +93,10 @@ export function ViewSkeleton({
       </LoadingFrame>
     );
   const admin = role === "admin";
-  if (!admin && (kind === "catalogs" || kind === "appearance"))
+  if (
+    !admin &&
+    (kind === "catalogs" || kind === "appearance" || kind === "charts")
+  )
     return (
       <LoadingFrame>
         <div className="surface space-y-4 p-8">
@@ -88,6 +106,9 @@ export function ViewSkeleton({
         </div>
       </LoadingFrame>
     );
+  if (kind === "cube") return <CubeSkeleton geographyAllowed={admin} />;
+  if (kind === "reports") return <ReportScreenSkeleton />;
+  if (kind === "charts") return <ChartSettingsSkeleton />;
   const portfolio = kind === "overview" || kind === "directory";
   return (
     <LoadingFrame

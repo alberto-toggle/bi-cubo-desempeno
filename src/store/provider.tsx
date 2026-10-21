@@ -1,4 +1,8 @@
 "use client";
+import {
+  chartStorageKey,
+  restoreCharts,
+} from "@/features/reporting/chart-preferences";
 import { applyAppearance } from "@/theme/browser";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
@@ -37,6 +41,35 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
             validateAppearance(JSON.parse(event.newValue ?? "null")),
           ),
         );
+      } catch {}
+    };
+    window.addEventListener("storage", sync);
+    return () => {
+      unsubscribe();
+      window.removeEventListener("storage", sync);
+    };
+  }, [store]);
+  useEffect(() => {
+    try {
+      store.dispatch(
+        restoreCharts(
+          JSON.parse(localStorage.getItem(chartStorageKey) ?? "null"),
+        ),
+      );
+    } catch {}
+    let previous = store.getState().chartPreferences;
+    const unsubscribe = store.subscribe(() => {
+      const value = store.getState().chartPreferences;
+      if (value === previous) return;
+      previous = value;
+      try {
+        localStorage.setItem(chartStorageKey, JSON.stringify(value));
+      } catch {}
+    });
+    const sync = (event: StorageEvent) => {
+      if (event.key !== chartStorageKey && event.key !== null) return;
+      try {
+        store.dispatch(restoreCharts(JSON.parse(event.newValue ?? "null")));
       } catch {}
     };
     window.addEventListener("storage", sync);

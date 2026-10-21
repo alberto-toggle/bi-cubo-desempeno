@@ -3,13 +3,25 @@
   "project": {
     "name": "gtyg-platform",
     "productType": "Inteligencia operativa y financiera",
-    "stack": ["nextjs", "react", "shadcn", "tailwind-v4", "base-ui"]
+    "stack": [
+      "nextjs",
+      "react",
+      "shadcn",
+      "tailwind-v4",
+      "base-ui"
+    ]
   },
   "sources": {
-    "tokens": ["src/app/globals.css"],
-    "components": ["src/components/ui"],
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [
+      "src/components/ui"
+    ],
     "assets": [],
-    "instructions": ["AGENTS.md"]
+    "instructions": [
+      "AGENTS.md"
+    ]
   },
   "design": {
     "colorMode": "light-and-dark",
@@ -290,6 +302,14 @@
     {
       "area": "geographyMap",
       "decision": "Una sola tarjeta anclada: hover o foco de teclado tienen prioridad; al salir se muestra la selección. Sin tarjetas automáticas por ranking ni por nivel de zoom."
+    },
+    {
+      "area": "performanceCube",
+      "decision": "Cubo SVG por capas con perspectiva discreta, filtros de periodo/giro y geografía restringida por rol. Análisis contextual determinista señalado como demo; borradores TXT con identidades proyectadas. Servicio simulado y presentación separados, sin dependencias de Playground."
+    },
+    {
+      "area": "analysisAssistant",
+      "decision": "AI Orb en encabezado con estados reales del flujo; AI Agent Lanes durante procesamiento simulado, compactado al recibir respuesta. Adaptaciones de producto independientes del playground, tokens y movimiento reducido."
     }
   ],
   "evidence": [
