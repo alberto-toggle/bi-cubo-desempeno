@@ -1,4 +1,5 @@
 "use client";
+import { intelligenceLayout } from "@/features/intelligence/layout";
 
 import Link from "next/link";
 import {
@@ -30,7 +31,7 @@ function ContributionRanking({
     .sort((a, b) => b.value - a.value);
   const scale = Math.max(...rows.map((row) => Math.abs(row.value)), 1);
   return (
-    <section className="surface min-w-0 p-5 sm:p-6">
+    <section className={intelligenceLayout.bentoCard}>
       <div className="flex items-start justify-between gap-3">
         <div>
           <h2 className="font-semibold">Contribución por unidad</h2>
@@ -112,9 +113,9 @@ function WorkspaceLinks({ role }: { role: DemoRole | undefined }) {
       : []),
   ];
   return (
-    <section className="surface p-5 sm:p-6">
+    <section className={intelligenceLayout.bentoCard}>
       <h2 className="text-sm font-semibold">Accesos de trabajo</h2>
-      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+      <div className={intelligenceLayout.workspaceLinks}>
         {links.map(({ href, title, note, icon: Icon }) => (
           <Link
             key={href}
@@ -160,11 +161,11 @@ export function OperationalBento({
   return (
     <div className="space-y-4">
       <Metrics units={units} period={period} />
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
+      <div className={intelligenceLayout.bento}>
         <TrendChart units={units} period={period} />
         <ContributionRanking units={units} period={period} mode={mode} />
         <WorkspaceLinks role={role} />
-        <section className="surface p-5 sm:p-6">
+        <section className={intelligenceLayout.bentoCard}>
           <h2 className="text-sm font-semibold">Estado de conciliación</h2>
           <div className="mt-4 grid grid-cols-2 divide-x divide-border">
             <div>

@@ -1,4 +1,5 @@
 "use client";
+import { tableLayout } from "./table-layout";
 import { useState } from "react";
 import { UnitsTable } from "./presentation";
 import type { BusinessUnit } from "./model";
@@ -22,7 +23,7 @@ export function PaginatedUnits({
         mode={mode}
         period={period}
       />
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border p-4 text-xs">
+      <div className={tableLayout.footer}>
         <span className="text-muted-foreground">
           {units.length
             ? `${current * 10 + 1}–${Math.min(current * 10 + 10, units.length)}`

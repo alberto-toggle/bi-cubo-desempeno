@@ -1,4 +1,8 @@
 "use client";
+import { DataTableLayout } from "@/components/layout/data-table-layout";
+import { tableLayout, unitColumns } from "@/features/intelligence/table-layout";
+
+import { intelligenceLayout } from "@/features/intelligence/layout";
 import { ViewSkeleton, type ViewKind } from "@/features/loading/skeletons";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -49,7 +53,7 @@ export function Metrics({
 }) {
   const t = aggregate(units, period);
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className={intelligenceLayout.metrics}>
       {[
         {
           label: "Ingresos",
@@ -72,7 +76,7 @@ export function Metrics({
           note: "En el periodo seleccionado",
         },
       ].map((m) => (
-        <article key={m.label} className="surface p-5">
+        <article key={m.label} className={intelligenceLayout.metricCard}>
           <p className="text-xs text-muted-foreground">{m.label}</p>
           <p className="mt-4 text-2xl font-semibold tracking-tight tabular-nums">
             {m.value}
@@ -92,7 +96,7 @@ export function TrendChart({
 }) {
   if (!units.length)
     return (
-      <section className="surface p-6">
+      <section className={intelligenceLayout.chartCard}>
         <h2 className="font-semibold">Evolución financiera</h2>
         <p className="flex h-64 items-center justify-center text-center text-sm text-muted-foreground">
           Sin registros para esta selección.
@@ -104,12 +108,12 @@ export function TrendChart({
   );
   const rows = months.map((month) => ({ month, ...aggregate(units, month) }));
   return (
-    <section className="surface p-6">
-      <div className="mb-6 flex flex-wrap justify-between gap-3">
+    <section className={intelligenceLayout.chartCard}>
+      <div className={intelligenceLayout.chartHeader}>
         <h2 className="font-semibold">Evolución financiera</h2>
         <p className="text-xs text-muted-foreground">Ingresos y costos · MXN</p>
       </div>
-      <div className="h-64 min-w-0">
+      <div className={intelligenceLayout.chartPlot}>
         <ResponsiveContainer
           width="100%"
           height="100%"
@@ -192,9 +196,9 @@ export function UnitsTable({
   period?: string;
 }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left text-sm">
-        <thead className="border-b border-border text-xs text-muted-foreground">
+    <>
+      <DataTableLayout columns={unitColumns} className={tableLayout.units}>
+        <thead className={tableLayout.unitHead}>
           <tr>
             {[
               "Establecimiento",
@@ -204,7 +208,7 @@ export function UnitsTable({
               "Estado",
               "",
             ].map((h, i) => (
-              <th key={i} className="px-5 py-4 font-medium">
+              <th key={i} className={`${tableLayout.unitCell} font-medium`}>
                 {h}
               </th>
             ))}
@@ -216,7 +220,7 @@ export function UnitsTable({
               t = unitTotals(u, period);
             return (
               <tr key={u.id} className="hover:bg-muted/40">
-                <td className="px-5 py-4">
+                <td className={tableLayout.unitCell}>
                   <Link
                     href={"/establishments/" + u.id}
                     className="font-medium hover:text-primary"
@@ -227,16 +231,22 @@ export function UnitsTable({
                     {identity.location}
                   </p>
                 </td>
-                <td className="px-5 py-4 text-xs text-muted-foreground">
+                <td
+                  className={`${tableLayout.unitCell} text-xs text-muted-foreground`}
+                >
                   {u.segment}
                 </td>
-                <td className="px-5 py-4 tabular-nums whitespace-nowrap">
+                <td
+                  className={`${tableLayout.unitCell} tabular-nums whitespace-nowrap`}
+                >
                   {money(t.revenue)}
                 </td>
-                <td className="px-5 py-4 tabular-nums whitespace-nowrap">
+                <td
+                  className={`${tableLayout.unitCell} tabular-nums whitespace-nowrap`}
+                >
                   {money(t.contribution)}
                 </td>
-                <td className="px-5 py-4">
+                <td className={tableLayout.unitCell}>
                   <span
                     className={
                       "pill whitespace-nowrap " +
@@ -248,7 +258,7 @@ export function UnitsTable({
                     {u.status}
                   </span>
                 </td>
-                <td className="px-5 py-4">
+                <td className={tableLayout.unitCell}>
                   <Link
                     href={"/establishments/" + u.id}
                     aria-label={"Ver detalle de " + identity.name}
@@ -260,12 +270,12 @@ export function UnitsTable({
             );
           })}
         </tbody>
-      </table>
+      </DataTableLayout>
       {!units.length && (
         <p className="p-10 text-center text-sm text-muted-foreground">
           No hay establecimientos para estos filtros.
         </p>
       )}
-    </div>
+    </>
   );
 }

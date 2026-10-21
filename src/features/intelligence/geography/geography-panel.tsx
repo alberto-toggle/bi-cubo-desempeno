@@ -1,4 +1,6 @@
 "use client";
+import { GeographyLayout } from "@/features/intelligence/geography/geography-layout";
+
 import { useState } from "react";
 import { LockKeyhole, Map } from "lucide-react";
 import {
@@ -57,42 +59,44 @@ export function GeographyPanel({
     .sort((a, b) => b[1].value - a[1].value)
     .slice(0, 5);
   return (
-    <section className="surface overflow-hidden">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
-        <div>
-          <h2 className="flex items-center gap-2 font-semibold">
-            <Map size={16} className="text-primary" />
-            Distribución nacional
-          </h2>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {Object.keys(data).length} entidades con registros · Universo
-            documental propuesto
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <FilterSelect
-            label="Indicador del mapa"
-            value={metric}
-            onChange={setMetric}
-            options={[
-              { value: "revenue", label: "Ingresos" },
-              { value: "contribution", label: "Contribución" },
-              { value: "count", label: "Unidades" },
-            ]}
-          />
-          <FilterSelect
-            label="Entidad federativa"
-            value={selected}
-            onChange={onSelect}
-            options={[
-              { value: "all", label: "Todo México" },
-              ...mexicanStates.map((s) => ({ value: s.id, label: s.name })),
-            ]}
-          />
-        </div>
-      </header>
-      <div className="grid lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
-        <div className="min-w-0 p-5 sm:px-8">
+    <GeographyLayout
+      header={
+        <>
+          <div>
+            <h2 className="flex items-center gap-2 font-semibold">
+              <Map size={16} className="text-primary" />
+              Distribución nacional
+            </h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {Object.keys(data).length} entidades con registros · Universo
+              documental propuesto
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <FilterSelect
+              label="Indicador del mapa"
+              value={metric}
+              onChange={setMetric}
+              options={[
+                { value: "revenue", label: "Ingresos" },
+                { value: "contribution", label: "Contribución" },
+                { value: "count", label: "Unidades" },
+              ]}
+            />
+            <FilterSelect
+              label="Entidad federativa"
+              value={selected}
+              onChange={onSelect}
+              options={[
+                { value: "all", label: "Todo México" },
+                ...mexicanStates.map((s) => ({ value: s.id, label: s.name })),
+              ]}
+            />
+          </div>
+        </>
+      }
+      map={
+        <>
           <MexicoMap
             data={data}
             selected={selected}
@@ -112,8 +116,10 @@ export function GeographyPanel({
             {metric === "count" ? "número de unidades" : "importe"}
             <span>Sin registros ≠ cero ingresos</span>
           </div>
-        </div>
-        <div className="border-t border-border p-5 lg:border-t-0 lg:border-l">
+        </>
+      }
+      ranking={
+        <>
           <p className="eyebrow">
             Mayor{" "}
             {metric === "count"
@@ -151,8 +157,8 @@ export function GeographyPanel({
             Las cifras corresponden al periodo y actividad seleccionados.
             Seleccionar una entidad filtra el resumen y el directorio de abajo.
           </p>
-        </div>
-      </div>
-    </section>
+        </>
+      }
+    />
   );
 }

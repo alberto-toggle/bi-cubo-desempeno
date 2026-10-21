@@ -57,3 +57,8 @@
 - Estas prácticas no añaden requisitos de tests automatizados: sigue vigente la
   instrucción de no crearlos ni ejecutarlos salvo petición explícita. Informar
   qué se comprobó y qué quedó pendiente; compilar no equivale a verificar la UI.
+
+- Compartir las reglas de distribución entre vistas y skeletons: usar los layouts
+  y contratos de clases de cada funcionalidad para columnas, espacios y alturas.
+  Mantener contenido real y placeholders separados; no duplicar esos contratos
+  ni añadir lógica de carga a componentes puramente presentacionales.

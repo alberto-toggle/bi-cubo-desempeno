@@ -1,4 +1,5 @@
 "use client";
+import { intelligenceLayout } from "@/features/intelligence/layout";
 import { useState } from "react";
 import { Download, RefreshCw, Search } from "lucide-react";
 import { DemoHelp } from "@/features/demo/demo-controls";
@@ -34,7 +35,7 @@ export function PortfolioScreen({
     setNotice("Exportación lista con la visibilidad y filtros actuales.");
   }
   return (
-    <div className="space-y-7">
+    <div className={intelligenceLayout.page}>
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="eyebrow">
@@ -128,7 +129,7 @@ export function PortfolioScreen({
             />
           )}
           <section className="surface overflow-hidden">
-            <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-5">
+            <header className={intelligenceLayout.directoryHeader}>
               <h2 className="font-semibold">
                 {directory
                   ? "Directorio de unidades"

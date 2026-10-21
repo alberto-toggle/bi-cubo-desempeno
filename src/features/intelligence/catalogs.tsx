@@ -1,4 +1,10 @@
 "use client";
+import { DataTableLayout } from "@/components/layout/data-table-layout";
+import {
+  tableLayout,
+  catalogColumns,
+} from "@/features/intelligence/table-layout";
+
 import { useState } from "react";
 import { Search, Plus, LockKeyhole } from "lucide-react";
 import {
@@ -102,59 +108,62 @@ export function CatalogsScreen() {
         </p>
       )}
       <section className="surface overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="border-b border-border bg-muted/40 text-muted-foreground">
-              <tr>
-                {["Clave", "Nombre", "Relación", "Fuente", ""].map((h, i) => (
-                  <th key={i} className="p-4 font-medium">
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.slice(current * 10, current * 10 + 10).map((r) => (
-                <tr
-                  key={r.code}
-                  className="border-b border-border last:border-0"
+        <DataTableLayout
+          columns={catalogColumns}
+          className={tableLayout.catalogs}
+        >
+          <thead className={tableLayout.catalogHead}>
+            <tr>
+              {["Clave", "Nombre", "Relación", "Fuente", ""].map((h, i) => (
+                <th
+                  key={i}
+                  className={`${tableLayout.catalogCell} font-medium`}
                 >
-                  <td className="p-4 font-mono whitespace-nowrap">{r.code}</td>
-                  <td className="p-4">
-                    <span className="font-medium">{r.name}</span>
-                    <p className="mt-1 text-muted-foreground">
-                      {r.description}
-                    </p>
-                    {proposals.some((p) => p.code === r.code) && (
-                      <span className="mt-2 inline-block text-warning">
-                        Cambio propuesto
-                      </span>
-                    )}
-                  </td>
-                  <td className="p-4">{r.relation}</td>
-                  <td className="p-4 whitespace-nowrap">
-                    Catálogos · p. {r.page}
-                  </td>
-                  <td className="p-4">
-                    <button
-                      className="text-primary underline whitespace-nowrap"
-                      onClick={() => setDialog({ record: r })}
-                    >
-                      Proponer cambio
-                      <span className="sr-only"> de {r.name}</span>
-                    </button>
-                  </td>
-                </tr>
+                  {h}
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.slice(current * 10, current * 10 + 10).map((r) => (
+              <tr key={r.code} className="border-b border-border last:border-0">
+                <td
+                  className={`${tableLayout.catalogCell} font-mono whitespace-nowrap`}
+                >
+                  {r.code}
+                </td>
+                <td className={tableLayout.catalogCell}>
+                  <span className="font-medium">{r.name}</span>
+                  <p className="mt-1 text-muted-foreground">{r.description}</p>
+                  {proposals.some((p) => p.code === r.code) && (
+                    <span className="mt-2 inline-block text-warning">
+                      Cambio propuesto
+                    </span>
+                  )}
+                </td>
+                <td className={tableLayout.catalogCell}>{r.relation}</td>
+                <td className={`${tableLayout.catalogCell} whitespace-nowrap`}>
+                  Catálogos · p. {r.page}
+                </td>
+                <td className={tableLayout.catalogCell}>
+                  <button
+                    className="text-primary underline whitespace-nowrap"
+                    onClick={() => setDialog({ record: r })}
+                  >
+                    Proponer cambio
+                    <span className="sr-only"> de {r.name}</span>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </DataTableLayout>
         {!rows.length && (
           <p className="p-10 text-center text-sm text-muted-foreground">
             Sin coincidencias.
           </p>
         )}
-        <footer className="flex items-center justify-between gap-3 border-t border-border p-4 text-xs">
+        <footer className={tableLayout.footer}>
           <span>
             {rows.length} registros · {current + 1}/{pages}
           </span>

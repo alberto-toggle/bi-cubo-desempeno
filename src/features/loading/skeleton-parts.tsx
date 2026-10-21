@@ -1,3 +1,10 @@
+import { DataTableLayout } from "@/components/layout/data-table-layout";
+import {
+  tableLayout,
+  unitColumns,
+  catalogColumns,
+} from "@/features/intelligence/table-layout";
+import { intelligenceLayout } from "@/features/intelligence/layout";
 import type { ReactNode } from "react";
 
 export function Bone({ className = "" }: { className?: string }) {
@@ -53,9 +60,9 @@ export function FiltersSkeleton({ count = 4 }: { count?: number }) {
 }
 export function MetricsSkeleton() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className={intelligenceLayout.metrics}>
       {Array.from({ length: 4 }, (_, i) => (
-        <div key={i} className="surface p-5">
+        <div key={i} className={intelligenceLayout.metricCard}>
           <Bone className="h-4 w-24" />
           <Bone className="mt-4 h-8 w-32" />
           <Bone className="mt-3 h-4 w-4/5" />
@@ -66,12 +73,14 @@ export function MetricsSkeleton() {
 }
 export function ChartSkeleton() {
   return (
-    <section className="surface p-6">
-      <div className="mb-6 flex flex-wrap justify-between gap-3">
+    <section className={intelligenceLayout.chartCard}>
+      <div className={intelligenceLayout.chartHeader}>
         <Bone className="h-6 w-40" />
         <Bone className="h-4 w-32" />
       </div>
-      <div className="relative h-64 border-b border-l border-border">
+      <div
+        className={`${intelligenceLayout.chartPlot} relative border-b border-l border-border`}
+      >
         <div className="absolute inset-0 flex flex-col justify-between pb-6">
           {[0, 1, 2, 3].map((i) => (
             <Bone key={i} className="h-px w-full" />
@@ -95,7 +104,7 @@ export function ChartSkeleton() {
 }
 export function RankingSkeleton({ rows = 6 }: { rows?: number }) {
   return (
-    <section className="surface p-5 sm:p-6">
+    <section className={intelligenceLayout.bentoCard}>
       <Bone className="h-6 w-40" />
       <Bone className="mt-1 h-4 w-4/5" />
       <div className="mt-6 space-y-4">
@@ -113,47 +122,47 @@ export function RankingSkeleton({ rows = 6 }: { rows?: number }) {
   );
 }
 export function TableSkeleton({ catalog = false }: { catalog?: boolean }) {
-  const columns = catalog ? 5 : 6;
+  const columns = catalog ? catalogColumns : unitColumns;
+  const cell = catalog ? tableLayout.catalogCell : tableLayout.unitCell;
   return (
     <section className="surface overflow-hidden">
       {!catalog && (
-        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-5">
+        <header className={intelligenceLayout.directoryHeader}>
           <Bone className="h-6 w-48" />
           <Bone className="h-9 w-52" />
         </header>
       )}
-      <div className="overflow-x-auto">
-        <div className="min-w-[720px]">
-          <div
-            className="grid gap-5 border-b border-border p-4"
-            style={{
-              gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-            }}
-          >
-            {Array.from({ length: columns }, (_, i) => (
-              <Bone key={i} className="h-4" />
+      <DataTableLayout
+        columns={columns}
+        className={catalog ? tableLayout.catalogs : tableLayout.units}
+      >
+        <thead
+          className={catalog ? tableLayout.catalogHead : tableLayout.unitHead}
+        >
+          <tr>
+            {columns.map((column) => (
+              <th key={column.key} className={cell}>
+                <Bone className="h-4 w-4/5" />
+              </th>
             ))}
-          </div>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
           {Array.from({ length: 10 }, (_, i) => (
-            <div
-              key={i}
-              className="grid items-center gap-5 border-b border-border px-5 py-4"
-              style={{
-                gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-              }}
-            >
-              <div className="space-y-2">
-                <Bone className="h-4" />
-                <Bone className="h-3 w-4/5" />
-              </div>
-              {Array.from({ length: columns - 1 }, (_, j) => (
-                <Bone key={j} className="h-4 w-4/5" />
+            <tr key={i}>
+              {columns.map((column) => (
+                <td key={column.key} className={cell}>
+                  <Bone className="h-4 w-4/5" />
+                  {(column.key === "identity" || column.key === "name") && (
+                    <Bone className="mt-1 h-4 w-3/4" />
+                  )}
+                </td>
               ))}
-            </div>
+            </tr>
           ))}
-        </div>
-      </div>
-      <footer className="flex flex-wrap items-center justify-between gap-3 p-4">
+        </tbody>
+      </DataTableLayout>
+      <footer className={tableLayout.footer}>
         <Bone className="h-4 w-32" />
         <div className="flex gap-3">
           <Bone className="h-9 w-24" />

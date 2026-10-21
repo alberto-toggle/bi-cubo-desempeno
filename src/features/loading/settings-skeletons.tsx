@@ -1,3 +1,4 @@
+import { appearanceLayout } from "@/features/appearance/layout";
 import { themes, fonts, finishes } from "@/theme/config";
 import { Bone, TableSkeleton } from "./skeleton-parts";
 
@@ -7,7 +8,7 @@ export function AppearanceBodySkeleton() {
       <section>
         <Bone className="h-7 w-40" />
         <Bone className="mt-1 mb-5 h-5 w-3/4" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={appearanceLayout.palettes}>
           {themes.map((t) => (
             <div key={t.id} className="theme-option">
               <Bone className="h-24 rounded-lg" />
@@ -20,10 +21,12 @@ export function AppearanceBodySkeleton() {
       <section>
         <Bone className="h-7 w-24" />
         <Bone className="mt-1 mb-5 h-5 w-4/5" />
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className={appearanceLayout.finishes}>
           {finishes.map((f) => (
             <div key={f.id} className="theme-option">
-              <Bone className="h-24 rounded-lg" />
+              <Bone
+                className={`${appearanceLayout.finishPreview} rounded-lg`}
+              />
               <Bone className="mt-4 h-5 w-24" />
               <Bone className="mt-1 h-4" />
             </div>
@@ -32,7 +35,7 @@ export function AppearanceBodySkeleton() {
       </section>
       <section>
         <Bone className="mb-5 h-7 w-32" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className={appearanceLayout.fonts}>
           {fonts.map((f) => (
             <div key={f.id} className="theme-option">
               <Bone className="h-10 w-14" />
@@ -42,7 +45,7 @@ export function AppearanceBodySkeleton() {
           ))}
         </div>
       </section>
-      <section className="surface p-7">
+      <section className={appearanceLayout.preview}>
         <Bone className="h-3 w-44" />
         <Bone className="mt-3 h-9 w-3/5" />
         <Bone className="mt-3 h-6 w-4/5" />
@@ -52,7 +55,7 @@ export function AppearanceBodySkeleton() {
           ))}
         </div>
       </section>
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className={appearanceLayout.footer}>
         <Bone className="h-4 w-3/5" />
         <Bone className="h-9 w-32" />
       </div>

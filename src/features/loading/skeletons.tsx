@@ -1,5 +1,7 @@
 "use client";
 
+import { appearanceLayout } from "@/features/appearance/layout";
+import { intelligenceLayout } from "@/features/intelligence/layout";
 import { useAppSelector } from "@/store/hooks";
 import { useDemoPreferences } from "@/features/demo/use-demo-preferences";
 import {
@@ -91,10 +93,10 @@ export function ViewSkeleton({
     <LoadingFrame
       className={
         kind === "appearance"
-          ? "mx-auto max-w-5xl space-y-9"
+          ? appearanceLayout.page
           : kind === "catalogs"
             ? "space-y-6"
-            : "space-y-7"
+            : intelligenceLayout.page
       }
     >
       {!bodyOnly && (

@@ -1,3 +1,5 @@
+import { GeographyLayout } from "@/features/intelligence/geography/geography-layout";
+import { intelligenceLayout } from "@/features/intelligence/layout";
 import {
   Bone,
   ChartSkeleton,
@@ -22,28 +24,32 @@ export function GeographySkeleton({
       </section>
     );
   return (
-    <section className="surface overflow-hidden">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
-        <div className="space-y-2">
-          <Bone className="h-6 w-44" />
-          <Bone className="h-4 w-64 max-w-full" />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Bone className="h-9 w-40" />
-          <Bone className="h-9 w-40" />
-        </div>
-      </header>
-      <div className="grid lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
-        <div className="min-w-0 p-5 sm:px-8">
+    <GeographyLayout
+      header={
+        <>
+          <div className="space-y-2">
+            <Bone className="h-6 w-44" />
+            <Bone className="h-4 w-64 max-w-full" />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Bone className="h-9 w-40" />
+            <Bone className="h-9 w-40" />
+          </div>
+        </>
+      }
+      map={
+        <>
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <Bone className="h-3 w-48" />
             <Bone className="h-9 w-36" />
           </div>
-          <Bone className="h-[clamp(240px,30vw,380px)] w-full rounded-xl" />
+          <Bone className="h-[var(--geography-map-height)] w-full rounded-xl" />
           <Bone className="mt-2 h-12 w-full" />
           <Bone className="mt-3 h-3 w-4/5" />
-        </div>
-        <div className="border-t border-border p-5 lg:border-t-0 lg:border-l">
+        </>
+      }
+      ranking={
+        <>
           <Bone className="h-3 w-32" />
           <div className="mt-4 space-y-1">
             {[0, 1, 2, 3, 4].map((i) => (
@@ -58,9 +64,9 @@ export function GeographySkeleton({
             ))}
           </div>
           <Bone className="mt-5 h-10 w-full" />
-        </div>
-      </div>
-    </section>
+        </>
+      }
+    />
   );
 }
 export function PortfolioBodySkeleton({
@@ -76,19 +82,19 @@ export function PortfolioBodySkeleton({
       <div className="space-y-4">
         <MetricsSkeleton />
         {!directory && (
-          <div className="grid gap-4 xl:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
+          <div className={intelligenceLayout.bento}>
             <ChartSkeleton />
             <RankingSkeleton />
-            <section className="surface p-5 sm:p-6">
+            <section className={intelligenceLayout.bentoCard}>
               <Bone className="h-5 w-40" />
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              <div className={intelligenceLayout.workspaceLinks}>
                 {Array.from({ length: geographyAllowed ? 4 : 2 }, (_, i) => (
                   <Bone key={i} className="h-16 rounded-xl" />
                 ))}
               </div>
               <Bone className="mt-4 h-4 w-48" />
             </section>
-            <section className="surface p-5 sm:p-6">
+            <section className={intelligenceLayout.bentoCard}>
               <Bone className="h-5 w-44" />
               <div className="mt-4 grid grid-cols-2 gap-5">
                 {[0, 1].map((i) => (
@@ -110,7 +116,7 @@ export function PortfolioBodySkeleton({
 export function DetailBodySkeleton() {
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className={intelligenceLayout.detailIdentity}>
         {[0, 1, 2].map((i) => (
           <article key={i} className="surface p-5">
             <Bone className="h-5 w-5" />
@@ -123,7 +129,7 @@ export function DetailBodySkeleton() {
       <MetricsSkeleton />
       <section className="surface p-5">
         <Bone className="h-5 w-56 max-w-full" />
-        <div className="mt-5 grid gap-5 sm:grid-cols-3">
+        <div className={intelligenceLayout.operations}>
           {[0, 1, 2].map((i) => (
             <div key={i}>
               <Bone className="h-4 w-32" />
@@ -137,7 +143,7 @@ export function DetailBodySkeleton() {
       <section className="surface p-6">
         <Bone className="h-6 w-40" />
         <Bone className="mt-2 h-5 w-4/5" />
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className={intelligenceLayout.centers}>
           {[0, 1].map((i) => (
             <div
               key={i}

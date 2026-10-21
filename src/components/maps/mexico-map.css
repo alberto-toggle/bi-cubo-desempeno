@@ -1,7 +1,7 @@
 .mexico-map {
   display: block;
   width: 100%;
-  height: clamp(240px, 30vw, 380px);
+  height: var(--geography-map-height, clamp(240px, 30vw, 380px));
   overflow: hidden;
   user-select: none;
 }

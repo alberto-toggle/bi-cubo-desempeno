@@ -1,4 +1,5 @@
 "use client";
+import { appearanceLayout } from "@/features/appearance/layout";
 import { Check, RotateCcw } from "lucide-react";
 import { themes, fonts, finishes, defaults } from "./config";
 import { setAppearance } from "./appearance-slice";
@@ -7,7 +8,7 @@ export function AppearanceScreen() {
   const value = useAppSelector((s) => s.appearance),
     dispatch = useAppDispatch();
   return (
-    <div className="mx-auto max-w-5xl space-y-9">
+    <div className={appearanceLayout.page}>
       <header>
         <p className="eyebrow">Configuración / Identidad visual</p>
         <h1 className="page-title">Apariencia de la plataforma</h1>
@@ -20,7 +21,7 @@ export function AppearanceScreen() {
         <p className="mt-1 mb-5 text-sm text-muted-foreground">
           Cambia los colores de la plataforma sin modificar la tipografía.
         </p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={appearanceLayout.palettes}>
           {themes.map((t) => (
             <button
               key={t.id}
@@ -57,7 +58,7 @@ export function AppearanceScreen() {
           Combina cualquier paleta con el acabado que prefieras. La tipografía
           se conserva.
         </p>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className={appearanceLayout.finishes}>
           {finishes.map((finish) => (
             <button
               key={finish.id}
@@ -68,7 +69,7 @@ export function AppearanceScreen() {
               }
             >
               <div
-                className="finish-swatch"
+                className={`finish-swatch ${appearanceLayout.finishPreview}`}
                 data-preview-finish={finish.id}
                 aria-hidden="true"
               >
@@ -88,7 +89,7 @@ export function AppearanceScreen() {
       </section>
       <section>
         <h2 className="mb-5 text-lg font-semibold">Tipografía</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className={appearanceLayout.fonts}>
           {fonts.map((f) => (
             <button
               key={f.id}
@@ -109,7 +110,7 @@ export function AppearanceScreen() {
           ))}
         </div>
       </section>
-      <section className="surface p-7">
+      <section className={appearanceLayout.preview}>
         <p className="eyebrow">Vista previa en tiempo real</p>
         <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight">
           Vista previa de contenido
@@ -127,7 +128,7 @@ export function AppearanceScreen() {
           ))}
         </div>
       </section>
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className={appearanceLayout.footer}>
         <p role="status" className="text-xs text-muted-foreground">
           Se aplica al instante y se guarda en este navegador. Configuración
           local de demostración.
