@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSession } from "@/features/auth/auth-slice";
 import { DemoHelp } from "@/features/demo/demo-controls";
-import { setIdentityMode } from "@/features/demo/demo-slice";
 import {
   ArrowUpRight,
   Compass,
@@ -220,7 +219,6 @@ export function AppShell({
                   aria-label="Cerrar sesión"
                   className="rounded-full border border-border p-2"
                   onClick={() => {
-                    dispatch(setIdentityMode("alias"));
                     dispatch(setSession(null));
                   }}
                 >

@@ -47,15 +47,8 @@ export const initialFilters: Filters = {
   region: "all",
   division: "all",
 };
-export function effectiveIdentity(
-  role: DemoRole | null,
-  requested: IdentityMode,
-): IdentityMode {
-  return role === "admin"
-    ? requested
-    : requested === "hidden"
-      ? "hidden"
-      : "alias";
+export function effectiveIdentity(role: DemoRole | null): IdentityMode {
+  return role === "admin" ? "full" : role === "staff" ? "alias" : "hidden";
 }
 export function unitTotals(unit: BusinessUnit, period = "all") {
   const rows = unit.monthly.filter(

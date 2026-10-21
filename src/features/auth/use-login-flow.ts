@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
-import { setIdentityMode } from "@/features/demo/demo-slice";
 import { authenticateDemo, type DemoRole } from "./access";
 import { setSession } from "./auth-slice";
 import {
@@ -33,7 +32,6 @@ export function useLoginFlow() {
   function finish(role: DemoRole) {
     setChallenge(null);
     setNotice("");
-    dispatch(setIdentityMode(role === "admin" ? "full" : "alias"));
     dispatch(setSession({ role, expiresAt: Date.now() + 8 * 60 * 60 * 1000 }));
     router.replace("/");
   }

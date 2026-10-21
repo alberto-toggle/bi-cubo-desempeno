@@ -22,8 +22,15 @@ export function MexicoMap({
 }) {
   const viewport = useMapViewport();
   const [hovered, setHovered] = useState<string | null>(null);
+  const [focused, setFocused] = useState<string | null>(null);
   const max = Math.max(...Object.values(data).map((d) => Math.abs(d.value)), 1);
-  const active = geometry.states.find((s) => s.id === (hovered ?? selected));
+  const active = geometry.states.find(
+    (s) => s.id === (hovered ?? focused ?? selected),
+  );
+  // Paint outlines last without moving the interactive paths or their tab order.
+  const outlinedStates = [...new Set([selected, hovered, focused])]
+    .map((id) => geometry.states.find((state) => state.id === id))
+    .filter((state) => state !== undefined);
   const draw = (state: (typeof geometry.states)[number]) => {
     const item = data[state.id];
     const fill = item?.count
@@ -45,11 +52,12 @@ export function MexicoMap({
         onMouseEnter={() => setHovered(state.id)}
         onMouseLeave={() => setHovered(null)}
         onFocus={(e) => {
-          setHovered(state.id);
-          if (e.currentTarget.matches(":focus-visible"))
+          if (e.currentTarget.matches(":focus-visible")) {
+            setFocused(state.id);
             viewport.reveal(e.currentTarget.getBBox());
+          }
         }}
-        onBlur={() => setHovered(null)}
+        onBlur={() => setFocused(null)}
         onClick={() => {
           if (viewport.allowClick())
             onSelect(state.id === selected ? "all" : state.id);
@@ -110,6 +118,17 @@ export function MexicoMap({
         aria-label="Filtrar por entidad federativa"
       >
         {geometry.states.map((s) => draw(s))}
+        <g aria-hidden="true" pointerEvents="none">
+          {outlinedStates.map((state) => (
+            <path
+              key={state.id}
+              d={state.path}
+              className="mexico-state-outline"
+              data-selected={state.id === selected}
+              data-focused={state.id === focused}
+            />
+          ))}
+        </g>
       </svg>
       <div
         className="mt-2 min-h-12 rounded-lg bg-muted/60 px-3 py-2 text-xs"

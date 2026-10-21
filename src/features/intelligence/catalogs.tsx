@@ -15,7 +15,7 @@ const categories = [...new Set(catalogRecords.map((r) => r.category))];
 export function CatalogsScreen() {
   const role = useAppSelector((s) => s.auth.session?.role);
   const mode = useAppSelector((s) =>
-    effectiveIdentity(s.auth.session?.role ?? null, s.demo.identityMode),
+    effectiveIdentity(s.auth.session?.role ?? null),
   );
   const [category, setCategory] = useState("Unidades");
   const [query, setQuery] = useState("");

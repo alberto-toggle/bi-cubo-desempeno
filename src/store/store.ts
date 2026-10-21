@@ -3,7 +3,6 @@ import appearance from "@/features/appearance/appearance-slice";
 import portfolio from "@/features/intelligence/portfolio-slice";
 import { demoPortfolioRepository } from "@/services/portfolio-repository";
 import auth from "@/features/auth/auth-slice";
-import demo from "@/features/demo/demo-slice";
 import overview from "@/features/overview/overview-slice";
 import {
   demoOverviewRepository,
@@ -13,7 +12,7 @@ export const makeStore = (
   repository: OverviewRepository = demoOverviewRepository,
 ) =>
   configureStore({
-    reducer: { appearance, overview, demo, auth, portfolio },
+    reducer: { appearance, overview, auth, portfolio },
     middleware: (getDefault) =>
       getDefault({
         thunk: {

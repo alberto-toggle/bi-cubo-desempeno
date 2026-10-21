@@ -1,10 +1,13 @@
 "use client";
 import { ShieldCheck } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
-import { identityModes, presentIdentity } from "./identity-policy";
+import { presentIdentity } from "./identity-policy";
+import { effectiveIdentity } from "@/features/intelligence/model";
 import establishments from "./establishments.json";
 export function IdentityPreview() {
-  const mode = useAppSelector((s) => s.demo.identityMode);
+  const mode = useAppSelector((s) =>
+    effectiveIdentity(s.auth.session?.role ?? null),
+  );
   return (
     <section
       className="surface overflow-hidden"
@@ -22,7 +25,7 @@ export function IdentityPreview() {
         </div>
         <span className="pill gap-2" role="status">
           <ShieldCheck size={14} />
-          {identityModes.find((m) => m.id === mode)?.label}
+          {mode === "full" ? "Datos completos" : "Identidad protegida"}
         </span>
       </header>
       <ul className="divide-y divide-border">

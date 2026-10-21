@@ -47,7 +47,6 @@ Los documentos iniciales tienen diferencias de conteos y clasificaciones; todav�
 ```sh
 npm run typecheck
 npm run lint
-npm test
 npm run build
 ```
 
@@ -57,7 +56,7 @@ Las pruebas cubren preferencias inválidas, consistencia de cálculos, validaci�
 
 `src/app/(demo)` contiene las pantallas presentables; `src/app/(internal)/playground` tiene su layout de laboratorio. La URL `/playground` sigue disponible directamente, sin enlaces desde la demo. Un route group organiza layouts y dependencias: **no es un control de acceso**. Si se requiere excluirlo del despliegue de cliente, hay que implementar una restricción de servidor o separarlo en otro despliegue.
 
-El widget Demo permite alternar nombres completos ficticios, alias estables y datos ocultos en la perspectiva de establecimientos. El modo inicial es alias; no se persiste ni representa roles reales. `features/demo/identity-policy.ts` proyecta únicamente campos visibles, sin valores sensibles en títulos o etiquetas del DOM. Los fixtures siguen siendo públicos y sintéticos: la futura API deberá autorizar y proyectar los campos antes de enviarlos al navegador.
+La visibilidad se deriva exclusivamente del rol autenticado: administrador recibe nombres y ubicaciones completos; staff ve `•••• ` seguido del alias estable y ubicación reservada. El widget Demo no modifica esta política. `features/demo/identity-policy.ts` proyecta los campos visibles. Los fixtures siguen siendo públicos: la futura API deberá autorizar y proyectar los campos antes de enviarlos al navegador.
 
 El hero usa planos de vidrio animados propios, con tokens de material, fallback sin backdrop-filter y respeto por movimiento reducido. Se revisaron Liquid Glass de UI Layouts en toggle-landing y los materiales de Boletera como referencia, sin importar dependencias de aquellos productos.
 
@@ -77,7 +76,7 @@ Credenciales exclusivamente ficticias:
 | Administrador | admin@panorama.demo | Panorama2026! |
 | Staff | staff@panorama.demo | Panorama2026! |
 
-Supuesto provisional: administrador puede ver nombres completos y administrar apariencia; staff consulta con alias u ocultación. El widget no permite elevar staff al modo completo. Búsqueda, exportación, detalles y etiquetas usan la misma política de presentación. Los permisos concretos aún deben confirmarse con el cliente.
+Roles provisionales: administrador consulta nombres y ubicaciones completos y administra apariencia; staff consulta nombres con prefijo ofuscado y alias. Búsqueda, exportación, detalles y etiquetas usan la misma política de presentación, sin preferencia de visibilidad en Redux ni en el widget.
 
 Sesión simulada por pestaña en sessionStorage, duración ocho horas, con expiración, restauración y salida. No se guarda la contraseña. NO es un mecanismo de seguridad real: fixtures públicos y lógica cliente se usan solo para la demostración. En producción deben reemplazarse por autenticación y autorización en servidor, entregando únicamente campos permitidos.
 
@@ -93,7 +92,7 @@ Las rutas de demo tienen skeletons por tipo de vista y transiciones de entrada. 
 
 El login no describe el negocio y usa metadatos genéricos. El widget azul comparte la opción «Mostrar controles y ayudas» entre login y vistas internas (`showHelp` en las preferencias demo). Ocultarlas no desactiva dos pasos ni cambia permisos. Durante el desafío, «Dejar 10 segundos para expirar» acorta la vigencia sin extender desafíos expirados; la cuenta regresiva muestra la expiración y la validación rechaza ese código hasta reenviarlo.
 
-El modo «Datos ofuscados» reemplaza nombres y ubicaciones por una máscara fija, también en búsqueda y exportación; no aplica blur sobre texto original. Staff solo dispone de alias u ofuscación; admin también tiene la vista completa ficticia.
+Sin sesión válida se ocultan nombres y ubicaciones con una máscara fija. Para staff el prefijo ofuscado no contiene caracteres del nombre real; el alias permite reconocer y buscar cada establecimiento.
 
 Playground / Autenticación: Sign In de jahed (`/playground/21st-dev/sign-in-jahed`), descargado desde 21st mediante MCP (registro directo respondió 403). Original en `vendor-sources/21st-sign-in-jahed.json`; adaptación aislada con ancho del contenedor, labels accesibles, animaciones CSS locales y movimiento reducido. Los callbacks son simulados y no registran contraseñas. No sustituye el acceso del producto.
 

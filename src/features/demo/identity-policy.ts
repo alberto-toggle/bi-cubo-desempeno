@@ -5,23 +5,6 @@ export type EstablishmentIdentity = {
   location: string;
   alias: string;
 };
-export const identityModes = [
-  {
-    id: "full",
-    label: "Datos completos",
-    description: "Identidades documentadas; cifras simuladas.",
-  },
-  {
-    id: "alias",
-    label: "Alias",
-    description: "Identificadores estables, sin ubicación.",
-  },
-  {
-    id: "hidden",
-    label: "Datos ofuscados",
-    description: "Nombre y ubicación enmascarados.",
-  },
-] as const;
 // Presentation policy for synthetic demo data. Real authorization belongs in the API.
 export function presentIdentity(
   item: EstablishmentIdentity,
@@ -31,7 +14,7 @@ export function presentIdentity(
     case "full":
       return { name: item.name, location: item.location };
     case "alias":
-      return { name: item.alias, location: "Ubicación reservada" };
+      return { name: `•••• ${item.alias}`, location: "Ubicación reservada" };
     case "hidden":
       return {
         name: "••••••••",

@@ -7,7 +7,7 @@ export function usePortfolio() {
   const dispatch = useAppDispatch(),
     portfolio = useAppSelector((s) => s.portfolio),
     mode = useAppSelector((s) =>
-      effectiveIdentity(s.auth.session?.role ?? null, s.demo.identityMode),
+      effectiveIdentity(s.auth.session?.role ?? null),
     );
   useEffect(() => {
     const request = dispatch(loadPortfolio());
