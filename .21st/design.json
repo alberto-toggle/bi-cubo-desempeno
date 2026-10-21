@@ -274,7 +274,11 @@
     "Login adaptado de Sign In de jahed: card centrada, formulario izquierdo y visual SVG tokenizado a la derecha, campos redondeados y animaciones suaves. Sin información del negocio, testimonios ni acceso social. Lógica de sesión y dos pasos separada del layout.",
     "Sidebar con ramas inspirado en React Bits BranchedMenu, primitivas Base UI y enlaces reales; grupos Consulta/Administración filtrados por rol.",
     "BranchedMenu e InfiniteMenu originales JS/CSS aislados en playground; sidebar de producto sin importaciones del playground.",
-    "Marca: SVG geométrico reconstruido de la referencia del usuario, transparente, degradado blanco-magenta-cian y variante monocroma. Componente PanoramaMark en sidebar; colores independientes del tema mediante src/theme/brand.css."
+    "Marca: SVG geométrico reconstruido de la referencia del usuario, transparente, degradado blanco-magenta-cian y variante monocroma. Componente PanoramaMark en sidebar; colores independientes del tema mediante src/theme/brand.css.",
+    {
+      "area": "geographyMap",
+      "decision": "SVG plano con límites contrastados por tokens, hover sin sombras ni desplazamiento y controles discretos de zoom 1–6x, arrastre y restablecer; selección accesible por teclado."
+    }
   ],
   "evidence": [
     {

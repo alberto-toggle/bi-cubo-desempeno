@@ -2,11 +2,13 @@
 import { useState } from "react";
 import { Download, RefreshCw, Search } from "lucide-react";
 import { DemoHelp } from "@/features/demo/demo-controls";
+import { GeographyPanel } from "./geography/geography-panel";
+import { PaginatedUnits } from "./paginated-units";
 import { OperationalBento } from "./operational-bento";
 import { useAppSelector } from "@/store/hooks";
 import { usePortfolio } from "./use-portfolio";
 import { initialFilters } from "./model";
-import { Metrics, UnitsTable, PortfolioState } from "./presentation";
+import { Metrics, PortfolioState } from "./presentation";
 import { PortfolioFilters } from "./filters";
 import { filterUnits, buildCsv } from "./queries";
 export function PortfolioScreen({
@@ -63,7 +65,13 @@ export function PortfolioScreen({
         <PortfolioFilters
           value={filters}
           onChange={setFilters}
-          segments={[...new Set(data?.units.map((u) => u.segment))]}
+          segments={[
+            ...new Set(
+              data?.units.flatMap((u) => u.centers.map((c) => c.segment)),
+            ),
+          ]}
+          units={data?.units ?? []}
+          geographyAllowed={mode === "full"}
         />
         <button
           className="secondary-button"
@@ -83,8 +91,9 @@ export function PortfolioScreen({
         </p>
       )}
       <DemoHelp>
-        Datos sintéticos · Enero–junio 2026 · Muestra ilustrativa, no padrón
-        oficial.
+        54 unidades del catálogo propuesto · Identidades documentadas;
+        resultados y asignaciones operativas simulados · Enero–junio 2026. La
+        relación de instalaciones adicional requiere conciliación.
       </DemoHelp>
       {!data || error ? (
         <PortfolioState
@@ -95,6 +104,19 @@ export function PortfolioScreen({
         />
       ) : (
         <>
+          <GeographyPanel
+            units={filterUnits(data.units, { ...filters, state: "all" }, mode)}
+            period={filters.period}
+            mode={mode}
+            selected={filters.state}
+            onSelect={(state) => setFilters({ ...filters, state })}
+          />
+          {filters.segment !== "all" && (
+            <p className="text-xs text-muted-foreground">
+              Resultados de los centros de negocio de {filters.segment}; la
+              división y el segmento principal de cada unidad se conservan.
+            </p>
+          )}
           {directory ? (
             <Metrics units={units} period={filters.period} />
           ) : (
@@ -128,7 +150,12 @@ export function PortfolioScreen({
                 />
               </label>
             </header>
-            <UnitsTable units={units} mode={mode} period={filters.period} />
+            <PaginatedUnits
+              key={JSON.stringify(filters) + mode}
+              units={units}
+              mode={mode}
+              period={filters.period}
+            />
           </section>
         </>
       )}

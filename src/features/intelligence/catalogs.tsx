@@ -1,143 +1,232 @@
 "use client";
 import { useState } from "react";
-import { Search, Layers3, ArrowDown } from "lucide-react";
-const catalog = [
-  {
-    name: "Región",
-    key: "REG",
-    purpose: "Agrupación territorial de unidades.",
-    example: "Centro · Norte · Sur",
-  },
-  {
-    name: "Estado",
-    key: "EST",
-    purpose: "Entidad federativa de ubicación.",
-    example: "Asociado a una región",
-  },
-  {
-    name: "División",
-    key: "DIV",
-    purpose: "Adscripción organizacional de la unidad.",
-    example: "Tiendas · Servicios Deportivos y Recreativos",
-  },
-  {
-    name: "Segmento",
-    key: "SEG",
-    purpose: "Familia económica para analizar resultados.",
-    example: "Comercio · Alimentos y bebidas · Hospedaje",
-  },
-  {
-    name: "Unidad de negocio",
-    key: "UN",
-    purpose: "Instalación física u operación autónoma.",
-    example: "Una tienda, un hotel o un centro recreativo",
-  },
-  {
-    name: "Centro de negocio",
-    key: "CN",
-    purpose: "Fuente diferenciable de ingresos o valor.",
-    example: "Cafetería dentro de una unidad deportiva",
-  },
-  {
-    name: "Sublínea",
-    key: "SUB",
-    purpose: "Producto, servicio, paquete o modalidad.",
-    example: "Consumo de cafetería",
-  },
-  {
-    name: "Centro de costo",
-    key: "CC",
-    purpose: "Lugar o función donde se consumen recursos.",
-    example: "Operación · Administración",
-  },
-];
+import { Search, Plus, LockKeyhole } from "lucide-react";
+import {
+  catalogRecords,
+  type CatalogRecord,
+} from "@/features/catalog-management/catalog-model";
+import { useCatalogProposals } from "@/features/catalog-management/proposal-store";
+import { ProposalDialog } from "@/features/catalog-management/proposal-dialog";
+import { useAppSelector } from "@/store/hooks";
+import { effectiveIdentity } from "./model";
+import { FilterSelect } from "./filters";
+import { DemoHelp } from "@/features/demo/demo-controls";
+const categories = [...new Set(catalogRecords.map((r) => r.category))];
 export function CatalogsScreen() {
+  const role = useAppSelector((s) => s.auth.session?.role);
+  const mode = useAppSelector((s) =>
+    effectiveIdentity(s.auth.session?.role ?? null, s.demo.identityMode),
+  );
+  const [category, setCategory] = useState("Unidades");
   const [query, setQuery] = useState("");
-  return (
-    <div className="space-y-7">
-      <header>
-        <p className="eyebrow">Administración / Modelo de información</p>
-        <h1 className="page-title">Catálogos maestros</h1>
+  const [dialog, setDialog] = useState<{ record: CatalogRecord | null } | null>(
+    null,
+  );
+  const [page, setPage] = useState(0);
+  const [notice, setNotice] = useState("");
+  const { proposals, add } = useCatalogProposals();
+  if (role !== "admin" || mode !== "full")
+    return (
+      <section className="surface p-8">
+        <LockKeyhole className="text-primary" />
+        <h1 className="page-title">Catálogos maestros protegidos</h1>
         <p className="page-copy">
-          Las dimensiones que conectan operación, contabilidad y análisis.
-        </p>
-      </header>
-      <section className="surface p-6">
-        <div className="flex items-center gap-3">
-          <Layers3 className="text-primary" />
-          <h2 className="font-semibold">De la organización a la actividad</h2>
-        </div>
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          {[
-            "División",
-            "Unidad de negocio",
-            "Centro de negocio",
-            "Segmento operativo",
-          ].map((s, i) => (
-            <div key={s} className="flex items-center gap-3">
-              <span className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm">
-                {s}
-              </span>
-              {i < 3 && (
-                <ArrowDown
-                  size={14}
-                  className="-rotate-90 text-muted-foreground"
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Un centro deportivo conserva su división organizacional. Su cafetería
-          se analiza dentro de alimentos y bebidas. Ambas perspectivas conviven
-          sin cambiar la adscripción de la unidad.
+          La consulta de nombres, claves territoriales y cambios requiere acceso
+          administrador con visibilidad de datos completos.
         </p>
       </section>
-      <label className="flex max-w-sm items-center gap-2 rounded-xl border border-border bg-card px-4 py-3">
-        <Search size={16} />
-        <input
-          className="w-full bg-transparent text-sm outline-none"
-          aria-label="Buscar catálogo"
-          placeholder="Buscar dimensión…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+    );
+  const rows = catalogRecords.filter(
+    (r) =>
+      r.category === category &&
+      [r.name, r.code, r.relation]
+        .join(" ")
+        .toLocaleLowerCase("es")
+        .includes(query.toLocaleLowerCase("es")),
+  );
+  const pages = Math.max(1, Math.ceil(rows.length / 10));
+  const current = Math.min(page, pages - 1);
+  return (
+    <div className="space-y-6">
+      <header className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="eyebrow">Administración / Datos maestros</p>
+          <h1 className="page-title">Catálogos maestros</h1>
+          <p className="page-copy">
+            Registros documentados, relaciones y propuestas de actualización.
+          </p>
+        </div>
+        <button
+          className="primary-button"
+          onClick={() => setDialog({ record: null })}
+        >
+          <Plus size={15} />
+          Proponer alta
+        </button>
+      </header>
+      <DemoHelp>
+        Catálogo propuesto, sujeto a validación institucional. Cambios guardados
+        como propuestas locales; no se modifica el documento ni el padrón base.
+      </DemoHelp>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <FilterSelect
+          label="Catálogo"
+          value={category}
+          onChange={(v) => {
+            setCategory(v);
+            setPage(0);
+            setQuery("");
+          }}
+          options={categories.map((c) => ({
+            value: c,
+            label: `${c} (${catalogRecords.filter((r) => r.category === c).length})`,
+          }))}
         />
-      </label>
-      <div className="grid gap-4 md:grid-cols-2">
-        {catalog
-          .filter((c) =>
-            [c.name, c.purpose]
-              .join(" ")
-              .toLowerCase()
-              .includes(query.toLowerCase()),
-          )
-          .map((c) => (
-            <article key={c.key} className="surface p-6">
-              <div className="flex items-center justify-between">
-                <h2 className="font-semibold">{c.name}</h2>
-                <span className="pill font-mono text-primary">{c.key}</span>
-              </div>
-              <p className="mt-3 text-sm text-muted-foreground">{c.purpose}</p>
-              <p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">
-                {c.example}
-              </p>
-            </article>
-          ))}
+        <label className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2">
+          <Search size={15} />
+          <input
+            aria-label="Buscar registro de catálogo"
+            placeholder="Nombre o clave…"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setPage(0);
+            }}
+            className="min-w-0 bg-transparent text-sm outline-none"
+          />
+        </label>
       </div>
-      {!catalog.some((c) =>
-        [c.name, c.purpose]
-          .join(" ")
-          .toLowerCase()
-          .includes(query.toLowerCase()),
-      ) && (
-        <p role="status" className="text-sm text-muted-foreground">
-          No hay dimensiones para esa búsqueda.
+      {notice && (
+        <p role="status" className="text-sm text-primary">
+          {notice}
         </p>
       )}
-      <p className="text-xs text-muted-foreground">
-        Basado en Catálogos maestros GTyG Defensa. Estructura propuesta
-        pendiente de validación; esta vista es de consulta.
-      </p>
+      <section className="surface overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="border-b border-border bg-muted/40 text-muted-foreground">
+              <tr>
+                {["Clave", "Nombre", "Relación", "Fuente", ""].map((h, i) => (
+                  <th key={i} className="p-4 font-medium">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.slice(current * 10, current * 10 + 10).map((r) => (
+                <tr
+                  key={r.code}
+                  className="border-b border-border last:border-0"
+                >
+                  <td className="p-4 font-mono whitespace-nowrap">{r.code}</td>
+                  <td className="p-4">
+                    <span className="font-medium">{r.name}</span>
+                    <p className="mt-1 text-muted-foreground">
+                      {r.description}
+                    </p>
+                    {proposals.some((p) => p.code === r.code) && (
+                      <span className="mt-2 inline-block text-warning">
+                        Cambio propuesto
+                      </span>
+                    )}
+                  </td>
+                  <td className="p-4">{r.relation}</td>
+                  <td className="p-4 whitespace-nowrap">
+                    Catálogos · p. {r.page}
+                  </td>
+                  <td className="p-4">
+                    <button
+                      className="text-primary underline whitespace-nowrap"
+                      onClick={() => setDialog({ record: r })}
+                    >
+                      Proponer cambio
+                      <span className="sr-only"> de {r.name}</span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!rows.length && (
+          <p className="p-10 text-center text-sm text-muted-foreground">
+            Sin coincidencias.
+          </p>
+        )}
+        <footer className="flex items-center justify-between gap-3 border-t border-border p-4 text-xs">
+          <span>
+            {rows.length} registros · {current + 1}/{pages}
+          </span>
+          <div className="flex gap-2">
+            <button
+              className="secondary-button disabled:opacity-40"
+              disabled={!current}
+              onClick={() => setPage(current - 1)}
+            >
+              Anterior
+            </button>
+            <button
+              className="secondary-button disabled:opacity-40"
+              disabled={current + 1 === pages}
+              onClick={() => setPage(current + 1)}
+            >
+              Siguiente
+            </button>
+          </div>
+        </footer>
+      </section>
+      <section className="surface p-5">
+        <h2 className="font-semibold">Propuestas e historial</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Pendientes de validación · Sesión administrador · Conservadas en este
+          navegador
+        </p>
+        {!proposals.length ? (
+          <p className="mt-5 text-sm text-muted-foreground">
+            No hay propuestas registradas.
+          </p>
+        ) : (
+          <ul className="mt-5 divide-y divide-border">
+            {proposals.map((p) => (
+              <li key={p.id} className="py-3">
+                <p className="text-sm font-medium">
+                  {p.action} · {p.name}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {p.code} · {new Date(p.date).toLocaleString("es-MX")} ·
+                  Pendiente de validación
+                </p>
+                <p className="mt-2 text-xs">{p.reason}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+      <details className="surface p-5 text-sm">
+        <summary className="cursor-pointer font-medium">
+          Conciliación de fuentes documentales
+        </summary>
+        <p className="mt-3 leading-relaxed text-muted-foreground">
+          El catálogo propone 54 unidades en 12 entidades. La relación de
+          instalaciones contiene 86 renglones, con numeración repetida y
+          anotaciones de cierre, además de tres registros financieros generales.
+          No se han sumado ni asociado automáticamente: requiere validar
+          equivalencias entre unidad, instalación y centro de negocio. No se
+          incorporaron números de cuentas bancarias.
+        </p>
+      </details>
+      {dialog && (
+        <ProposalDialog
+          record={dialog.record}
+          category={category}
+          onClose={() => setDialog(null)}
+          onSave={(p) => {
+            add(p);
+            setNotice("Propuesta registrada. Pendiente de validación.");
+          }}
+        />
+      )}
     </div>
   );
 }

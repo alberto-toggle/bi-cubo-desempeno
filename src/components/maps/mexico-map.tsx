@@ -1,0 +1,135 @@
+"use client";
+import { useState, type CSSProperties } from "react";
+import { Plus, Minus, RotateCcw } from "lucide-react";
+import { useMapViewport } from "./use-map-viewport";
+import geometry from "./mexico-paths.json";
+import "./mexico-map.css";
+export const mexicanStates = geometry.states.map(({ id, name }) => ({
+  id,
+  name,
+}));
+export type MapDatum = { count: number; value: number };
+export function MexicoMap({
+  data,
+  selected,
+  onSelect,
+  formatValue,
+}: {
+  data: Record<string, MapDatum>;
+  selected: string;
+  onSelect: (state: string) => void;
+  formatValue: (value: number) => string;
+}) {
+  const viewport = useMapViewport();
+  const [hovered, setHovered] = useState<string | null>(null);
+  const max = Math.max(...Object.values(data).map((d) => Math.abs(d.value)), 1);
+  const active = geometry.states.find((s) => s.id === (hovered ?? selected));
+  const draw = (state: (typeof geometry.states)[number]) => {
+    const item = data[state.id];
+    const fill = item?.count
+      ? `color-mix(in srgb, var(--chart-1) ${40 + (Math.abs(item.value) / max) * 60}%, var(--card))`
+      : "var(--muted)";
+    return (
+      <path
+        key={state.id}
+        d={state.path}
+        className="mexico-state"
+        data-selected={state.id === selected}
+        data-hovered={state.id === hovered}
+        data-empty={!item?.count}
+        style={{ "--state-fill": fill } as CSSProperties}
+        role="button"
+        tabIndex={0}
+        aria-pressed={state.id === selected}
+        aria-label={`${state.name}: ${item?.count ? `${item.count} unidades, ${formatValue(item.value)}` : "sin información en la muestra"}`}
+        onMouseEnter={() => setHovered(state.id)}
+        onMouseLeave={() => setHovered(null)}
+        onFocus={(e) => {
+          setHovered(state.id);
+          if (e.currentTarget.matches(":focus-visible"))
+            viewport.reveal(e.currentTarget.getBBox());
+        }}
+        onBlur={() => setHovered(null)}
+        onClick={() => {
+          if (viewport.allowClick())
+            onSelect(state.id === selected ? "all" : state.id);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect(state.id === selected ? "all" : state.id);
+          }
+        }}
+      />
+    );
+  };
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[11px] text-muted-foreground">
+          {viewport.zoom > 1
+            ? "Arrastra para explorar el mapa"
+            : "Acerca para distinguir los estados pequeños"}
+        </span>
+        <div role="group" aria-label="Zoom del mapa" className="map-controls">
+          <button
+            type="button"
+            aria-label="Alejar mapa"
+            disabled={viewport.zoom <= 1}
+            onClick={() => viewport.zoomBy(1 / 1.5)}
+          >
+            <Minus size={15} />
+          </button>
+          <output aria-live="polite">{Math.round(viewport.zoom * 100)}%</output>
+          <button
+            type="button"
+            aria-label="Acercar mapa"
+            disabled={viewport.zoom >= 6}
+            onClick={() => viewport.zoomBy(1.5)}
+          >
+            <Plus size={15} />
+          </button>
+          <button
+            type="button"
+            aria-label="Restablecer vista del mapa"
+            disabled={viewport.zoom === 1}
+            onClick={viewport.reset}
+          >
+            <RotateCcw size={14} />
+          </button>
+        </div>
+      </div>
+      <svg
+        viewBox={viewport.viewBox}
+        data-zoomed={viewport.zoom > 1}
+        onPointerDown={viewport.onPointerDown}
+        onPointerMove={viewport.onPointerMove}
+        onPointerUp={viewport.onPointerUp}
+        onPointerCancel={viewport.onPointerCancel}
+        className="mexico-map"
+        aria-label="Filtrar por entidad federativa"
+      >
+        {geometry.states.map((s) => draw(s))}
+      </svg>
+      <div
+        className="mt-2 min-h-12 rounded-lg bg-muted/60 px-3 py-2 text-xs"
+        aria-live="polite"
+      >
+        {active ? (
+          <>
+            <strong>{active.name}</strong>
+            <span className="ml-2 text-muted-foreground">
+              {data[active.id]?.count
+                ? `${data[active.id].count} unidades · ${formatValue(data[active.id].value)}`
+                : "Sin información en la muestra"}
+            </span>
+          </>
+        ) : (
+          <span className="text-muted-foreground">
+            Selecciona un estado para consultar sus resultados.
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}

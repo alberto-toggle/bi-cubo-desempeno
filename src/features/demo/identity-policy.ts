@@ -9,7 +9,7 @@ export const identityModes = [
   {
     id: "full",
     label: "Datos completos",
-    description: "Nombres y ubicaciones ficticias.",
+    description: "Identidades documentadas; cifras simuladas.",
   },
   {
     id: "alias",

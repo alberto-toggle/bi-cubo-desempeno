@@ -149,8 +149,11 @@ test("staff cannot reveal identities via search, requested mode or CSV", () => {
     0,
   );
   assert.equal(
-    filterUnits(data.units, { ...initialFilters, query: "Unidad Alfa" }, mode)
-      .length,
+    filterUnits(
+      data.units,
+      { ...initialFilters, query: data.units[0].alias },
+      mode,
+    ).length,
     1,
   );
   const csv = buildCsv(data.units, mode, "Jun");
@@ -158,9 +161,9 @@ test("staff cannot reveal identities via search, requested mode or CSV", () => {
     assert.equal(csv.includes(u.name), false);
     assert.equal(csv.includes(u.location), false);
   }
-  assert.equal(csv.includes("Unidad Alfa"), true);
+  assert.equal(csv.includes(data.units[0].alias), true);
   assert.equal(
-    buildCsv(data.units, "hidden", "all").includes("Unidad Alfa"),
+    buildCsv(data.units, "hidden", "all").includes(data.units[0].alias),
     false,
   );
 });
@@ -171,7 +174,11 @@ test("portfolio filters and totals agree across dashboard, detail and export", (
       { ...initialFilters, segment: "Comercio" },
       "full",
     );
-  assert.equal(units.length, 2);
+  assert.equal(
+    units.length,
+    data.units.filter((u) => u.centers.some((c) => c.segment === "Comercio"))
+      .length,
+  );
   const sum = aggregate(units, "Jun");
   assert.equal(sum.contribution, sum.revenue - sum.cost);
   assert.ok(sum.revenue < aggregate(units).revenue);

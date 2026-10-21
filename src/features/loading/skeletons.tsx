@@ -74,16 +74,21 @@ export function ViewSkeleton({
         </>
       ) : kind === "catalogs" ? (
         <>
-          <Bone className="h-52" />
-          <div className="grid gap-4 md:grid-cols-2">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="surface space-y-5 p-6">
-                <Bone className="h-5 w-1/2" />
-                <Bone className="h-4" />
-                <Bone className="h-3 w-3/4" />
+          <div className="flex flex-wrap gap-3">
+            <Bone className="h-10 w-48" />
+            <Bone className="h-10 w-64" />
+          </div>
+          <div className="surface space-y-5 p-6">
+            <Bone className="h-8 w-full" />
+            {Array.from({ length: 10 }, (_, i) => (
+              <div key={i} className="grid grid-cols-3 gap-5">
+                <Bone className="h-6" />
+                <Bone className="h-6" />
+                <Bone className="h-6" />
               </div>
             ))}
           </div>
+          <Bone className="h-32" />
         </>
       ) : (
         <>

@@ -1,0 +1,81 @@
+.mexico-map {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 30vw, 380px);
+  overflow: hidden;
+  user-select: none;
+}
+.mexico-map[data-zoomed="true"] {
+  touch-action: none;
+  cursor: grab;
+}
+.mexico-map[data-zoomed="true"]:active {
+  cursor: grabbing;
+}
+.mexico-state {
+  fill: var(--state-fill);
+  stroke-linejoin: round;
+  stroke: color-mix(in srgb, var(--muted-foreground) 55%, var(--card));
+  stroke-width: 0.85;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 0.18s ease;
+}
+.mexico-state[data-hovered="true"] {
+  fill: color-mix(in srgb, var(--state-fill) 88%, var(--primary));
+  stroke: var(--primary);
+  stroke-width: 1;
+}
+.mexico-state[data-selected="true"] {
+  fill: color-mix(in srgb, var(--state-fill) 75%, var(--primary));
+  stroke: var(--primary);
+  stroke-width: 1.4;
+}
+/* Empty states keep their neutral fill even when inspected or selected. */
+.mexico-state[data-empty="true"][data-hovered="true"],
+.mexico-state[data-empty="true"][data-selected="true"] {
+  fill: color-mix(in srgb, var(--state-fill) 90%, var(--muted-foreground));
+}
+.mexico-state:focus-visible {
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-dasharray: 3 2;
+  outline: none;
+}
+.map-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--card);
+}
+.map-controls button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.map-controls button:hover:not(:disabled) {
+  background: var(--accent);
+}
+.map-controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.map-controls button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.map-controls output {
+  min-width: 42px;
+  text-align: center;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mexico-state {
+    transition: none;
+  }
+}

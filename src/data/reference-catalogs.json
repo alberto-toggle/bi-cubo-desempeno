@@ -1,0 +1,890 @@
+[
+  {
+    "category": "Centros de negocio",
+    "code": "CN-COM-001",
+    "name": "Venta minorista general",
+    "relation": "SEG-COM",
+    "description": "Venta en tienda, minisúper o centro comercial",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-COM-002",
+    "name": "Venta especializada",
+    "relation": "SEG-COM",
+    "description": "Artículos militares, uniformes o categorías específicas",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-COM-003",
+    "name": "Venta de conveniencia 24 horas",
+    "relation": "SEG-COM",
+    "description": "Operación Centinela",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AGR-001",
+    "name": "Producción agrícola",
+    "relation": "SEG-AGR",
+    "description": "Cultivo y cosecha",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AGR-002",
+    "name": "Producción pecuaria",
+    "relation": "SEG-AGR",
+    "description": "Engorda, crianza y venta de ganado",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AGR-003",
+    "name": "Producción avícola",
+    "relation": "SEG-AGR",
+    "description": "Huevo, aves y derivados",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AGR-004",
+    "name": "Transformación y venta de excedentes",
+    "relation": "SEG-AGR",
+    "description": "Procesamiento y comercialización",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-DEP-001",
+    "name": "Membresías y accesos",
+    "relation": "SEG-DEP",
+    "description": "Inscripciones, vigencias y accesos",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-DEP-002",
+    "name": "Academias y cursos",
+    "relation": "SEG-DEP",
+    "description": "Formación y clases deportivas",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-DEP-003",
+    "name": "Renta de instalaciones deportivas",
+    "relation": "SEG-DEP",
+    "description": "Canchas, albercas y espacios",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AYB-001",
+    "name": "Restaurante",
+    "relation": "SEG-AYB",
+    "description": "Servicio a la carta y menú",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AYB-002",
+    "name": "Cafetería",
+    "relation": "SEG-AYB",
+    "description": "Bebidas, alimentos rápidos y repostería",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AYB-003",
+    "name": "Comedor",
+    "relation": "SEG-AYB",
+    "description": "Servicio institucional de alimentos",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-AYB-004",
+    "name": "Banquetes",
+    "relation": "SEG-AYB",
+    "description": "Alimentos para grupos y eventos",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-HOS-001",
+    "name": "Habitaciones",
+    "relation": "SEG-HOS",
+    "description": "Alojamiento individual y familiar",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-HOS-002",
+    "name": "Grupos y paquetes",
+    "relation": "SEG-HOS",
+    "description": "Estancias colectivas y paquetes",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-HOS-003",
+    "name": "Servicios al huésped",
+    "relation": "SEG-HOS",
+    "description": "Lavandería y servicios adicionales",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-REC-001",
+    "name": "Cine y taquilla",
+    "relation": "SEG-REC",
+    "description": "Boletos, funciones y dulcería asociada",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-REC-002",
+    "name": "Boliche",
+    "relation": "SEG-REC",
+    "description": "Renta de pistas y juegos",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-REC-003",
+    "name": "Entretenimiento infantil",
+    "relation": "SEG-REC",
+    "description": "Fiestas, juegos y paquetes",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-EVE-001",
+    "name": "Renta de salones y espacios",
+    "relation": "SEG-EVE",
+    "description": "Renta por hora o evento",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-EVE-002",
+    "name": "Producción de eventos",
+    "relation": "SEG-EVE",
+    "description": "Montaje, audio, iluminación y coordinación",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-EVE-003",
+    "name": "Boletaje y patrocinios",
+    "relation": "SEG-EVE",
+    "description": "Entradas, aportaciones y derechos",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-ARR-001",
+    "name": "Renta de locales",
+    "relation": "SEG-ARR",
+    "description": "Renta fija o variable",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-ARR-002",
+    "name": "Concesiones y kioscos",
+    "relation": "SEG-ARR",
+    "description": "Explotación por terceros",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-ARR-003",
+    "name": "Cuotas y servicios comunes",
+    "relation": "SEG-ARR",
+    "description": "Mantenimiento, energía y publicidad",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-MOV-001",
+    "name": "Estacionamiento por rotación",
+    "relation": "SEG-MOV",
+    "description": "Cobro por hora o día",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-MOV-002",
+    "name": "Pensiones y convenios",
+    "relation": "SEG-MOV",
+    "description": "Abonos mensuales y validaciones",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-FUN-001",
+    "name": "Servicios funerarios",
+    "relation": "SEG-FUN",
+    "description": "Paquetes y servicios individuales",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-LOG-001",
+    "name": "Almacenamiento",
+    "relation": "SEG-LOG",
+    "description": "Resguardo e inventario",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-LOG-002",
+    "name": "Distribución",
+    "relation": "SEG-LOG",
+    "description": "Surtido, traslado y entrega",
+    "page": 7
+  },
+  {
+    "category": "Centros de negocio",
+    "code": "CN-INS-001",
+    "name": "Servicios sociales",
+    "relation": "SEG-INS",
+    "description": "Atención y servicios institucionales",
+    "page": 7
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-ADM",
+    "name": "Administración y dirección",
+    "relation": "Transversal",
+    "description": "Gestión, coordinación y control de la unidad Todos",
+    "page": 7
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-FIN",
+    "name": "Finanzas y caja",
+    "relation": "Transversal",
+    "description": "Tesorería, cortes, conciliación y cobranza Todos",
+    "page": 7
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-OPE",
+    "name": "Operación principal",
+    "relation": "Transversal",
+    "description": "Prestación directa del servicio principal Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-COM",
+    "name": "Comercial y atención",
+    "relation": "Transversal",
+    "description": "Promoción, ventas y servicio al usuario Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-MAN",
+    "name": "Mantenimiento",
+    "relation": "Transversal",
+    "description": "Conservación preventiva y correctiva Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-LIM",
+    "name": "Limpieza e higiene",
+    "relation": "Transversal",
+    "description": "Aseo, sanitización y residuos Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-SEG",
+    "name": "Seguridad física",
+    "relation": "Transversal",
+    "description": "Vigilancia, control y resguardo Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-PCV",
+    "name": "Protección civil",
+    "relation": "Transversal",
+    "description": "Prevención, capacitación y respuesta Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-TIC",
+    "name": "Tecnologías y comunicaciones",
+    "relation": "Transversal",
+    "description": "Sistemas, redes, licencias y soporte Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-RHU",
+    "name": "Recursos humanos",
+    "relation": "Transversal",
+    "description": "Nómina, capacitación y bienestar Todos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-ALM",
+    "name": "Almacén e inventarios",
+    "relation": "Transversal",
+    "description": "Recepción, resguardo y surtido Comercio, alimentos, logística",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-LOG",
+    "name": "Logística y transporte",
+    "relation": "Transversal",
+    "description": "Traslado, distribución y combustible Comercio, agropecuario, logística",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-COC",
+    "name": "Cocina y preparación",
+    "relation": "Transversal",
+    "description": "Producción de alimentos Alimentos, hospedaje, eventos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-SAL",
+    "name": "Servicio de salón",
+    "relation": "Transversal",
+    "description": "Mesas, atención y montaje Alimentos y eventos",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-DEP",
+    "name": "Instalaciones deportivas",
+    "relation": "Transversal",
+    "description": "Alberca, gimnasio, canchas y vestidores Deporte y bienestar",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-AGR",
+    "name": "Producción agrícola",
+    "relation": "Transversal",
+    "description": "Cultivo, riego, cosecha y maquinaria Producción agropecuaria",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-PEC",
+    "name": "Producción pecuaria",
+    "relation": "Transversal",
+    "description": "Crianza, alimentación y sanidad Producción agropecuaria",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-HAB",
+    "name": "Habitaciones",
+    "relation": "Transversal",
+    "description": "Limpieza, blancos y conservación Hospedaje",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-EST",
+    "name": "Operación de estacionamiento",
+    "relation": "Transversal",
+    "description": "Barreras, cajeros, señalización y patio Movilidad",
+    "page": 8
+  },
+  {
+    "category": "Centros de costo",
+    "code": "CC-ARE",
+    "name": "Áreas comunes",
+    "relation": "Transversal",
+    "description": "Pasillos, sanitarios y servicios compartidos",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-001",
+    "name": "Canasta básica",
+    "relation": "CN-COM-001",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-002",
+    "name": "Abarrotes y bebidas",
+    "relation": "CN-COM-001",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-003",
+    "name": "Higiene y cuidado personal",
+    "relation": "CN-COM-001",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-004",
+    "name": "Uniformes y artículos militares",
+    "relation": "CN-COM-002",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-005",
+    "name": "Electrónica y línea blanca",
+    "relation": "CN-COM-002",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-COM-006",
+    "name": "Conveniencia 24 horas",
+    "relation": "CN-COM-003",
+    "description": "SEG-COM",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AGR-001",
+    "name": "Granos y forrajes",
+    "relation": "CN-AGR-001",
+    "description": "SEG-AGR",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AGR-002",
+    "name": "Hortalizas",
+    "relation": "CN-AGR-001",
+    "description": "SEG-AGR",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AGR-003",
+    "name": "Ganado bovino",
+    "relation": "CN-AGR-002",
+    "description": "SEG-AGR",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AGR-004",
+    "name": "Huevo y productos avícolas",
+    "relation": "CN-AGR-003",
+    "description": "SEG-AGR",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AGR-005",
+    "name": "Venta de excedentes",
+    "relation": "CN-AGR-004",
+    "description": "SEG-AGR",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-001",
+    "name": "Membresía individual",
+    "relation": "CN-DEP-001",
+    "description": "SEG-DEP",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-002",
+    "name": "Membresía familiar",
+    "relation": "CN-DEP-001",
+    "description": "SEG-DEP",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-003",
+    "name": "Acceso diario",
+    "relation": "CN-DEP-001",
+    "description": "SEG-DEP",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-004",
+    "name": "Natación",
+    "relation": "CN-DEP-002",
+    "description": "SEG-DEP",
+    "page": 8
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-005",
+    "name": "Gimnasio y acondicionamiento",
+    "relation": "CN-DEP-002",
+    "description": "SEG-DEP",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-006",
+    "name": "Deportes de cancha",
+    "relation": "CN-DEP-002",
+    "description": "SEG-DEP",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-007",
+    "name": "Renta de cancha",
+    "relation": "CN-DEP-003",
+    "description": "SEG-DEP",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-DEP-008",
+    "name": "Renta de alberca o área deportiva",
+    "relation": "CN-DEP-003",
+    "description": "SEG-DEP",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-001",
+    "name": "Servicio a la carta",
+    "relation": "CN-AYB-001",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-002",
+    "name": "Menú ejecutivo",
+    "relation": "CN-AYB-001",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-003",
+    "name": "Comida para llevar",
+    "relation": "CN-AYB-001",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-004",
+    "name": "Bebidas calientes",
+    "relation": "CN-AYB-002",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-005",
+    "name": "Bebidas frías",
+    "relation": "CN-AYB-002",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-006",
+    "name": "Alimentos rápidos y repostería",
+    "relation": "CN-AYB-002",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-007",
+    "name": "Desayunos, comidas y cenas",
+    "relation": "CN-AYB-003",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-AYB-008",
+    "name": "Banquete por persona",
+    "relation": "CN-AYB-004",
+    "description": "SEG-AYB",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-HOS-001",
+    "name": "Habitación sencilla",
+    "relation": "CN-HOS-001",
+    "description": "SEG-HOS",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-HOS-002",
+    "name": "Habitación doble o familiar",
+    "relation": "CN-HOS-001",
+    "description": "SEG-HOS",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-HOS-003",
+    "name": "Estancia grupal",
+    "relation": "CN-HOS-002",
+    "description": "SEG-HOS",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-HOS-004",
+    "name": "Paquete de alojamiento",
+    "relation": "CN-HOS-002",
+    "description": "SEG-HOS",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-HOS-005",
+    "name": "Lavandería y servicios adicionales",
+    "relation": "CN-HOS-003",
+    "description": "SEG-HOS",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-001",
+    "name": "Entrada general",
+    "relation": "CN-REC-001",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-002",
+    "name": "Función especial",
+    "relation": "CN-REC-001",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-003",
+    "name": "Renta de pista",
+    "relation": "CN-REC-002",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-004",
+    "name": "Juego adicional",
+    "relation": "CN-REC-002",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-005",
+    "name": "Paquete infantil básico",
+    "relation": "CN-REC-003",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-REC-006",
+    "name": "Paquete infantil integral",
+    "relation": "CN-REC-003",
+    "description": "SEG-REC",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-001",
+    "name": "Renta por hora",
+    "relation": "CN-EVE-001",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-002",
+    "name": "Renta por evento",
+    "relation": "CN-EVE-001",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-003",
+    "name": "Montaje y mobiliario",
+    "relation": "CN-EVE-002",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-004",
+    "name": "Audio e iluminación",
+    "relation": "CN-EVE-002",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-005",
+    "name": "Boletaje",
+    "relation": "CN-EVE-003",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-EVE-006",
+    "name": "Patrocinio",
+    "relation": "CN-EVE-003",
+    "description": "SEG-EVE",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-ARR-001",
+    "name": "Renta fija",
+    "relation": "CN-ARR-001",
+    "description": "SEG-ARR",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-ARR-002",
+    "name": "Renta variable",
+    "relation": "CN-ARR-001",
+    "description": "SEG-ARR",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-ARR-003",
+    "name": "Kiosco o espacio temporal",
+    "relation": "CN-ARR-002",
+    "description": "SEG-ARR",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-ARR-004",
+    "name": "Cuota de mantenimiento",
+    "relation": "CN-ARR-003",
+    "description": "SEG-ARR",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-ARR-005",
+    "name": "Publicidad y servicios",
+    "relation": "CN-ARR-003",
+    "description": "SEG-ARR",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-MOV-001",
+    "name": "Cobro por hora",
+    "relation": "CN-MOV-001",
+    "description": "SEG-MOV",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-MOV-002",
+    "name": "Tarifa diaria y boleto perdido",
+    "relation": "CN-MOV-001",
+    "description": "SEG-MOV",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-MOV-003",
+    "name": "Pensión mensual",
+    "relation": "CN-MOV-002",
+    "description": "SEG-MOV",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-MOV-004",
+    "name": "Convenio y validación",
+    "relation": "CN-MOV-002",
+    "description": "SEG-MOV",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-FUN-001",
+    "name": "Paquete funerario",
+    "relation": "CN-FUN-001",
+    "description": "SEG-FUN",
+    "page": 9
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-FUN-002",
+    "name": "Servicio individual",
+    "relation": "CN-FUN-001",
+    "description": "SEG-FUN",
+    "page": 10
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-LOG-001",
+    "name": "Almacenamiento y custodia",
+    "relation": "CN-LOG-001",
+    "description": "SEG-LOG",
+    "page": 10
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-LOG-002",
+    "name": "Surtido y distribución",
+    "relation": "CN-LOG-002",
+    "description": "SEG-LOG",
+    "page": 10
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-INS-001",
+    "name": "Atención social",
+    "relation": "CN-INS-001",
+    "description": "SEG-INS",
+    "page": 10
+  },
+  {
+    "category": "Sublíneas",
+    "code": "SUB-INS-002",
+    "name": "Servicio institucional interno",
+    "relation": "CN-INS-001",
+    "description": "SEG-INS",
+    "page": 10
+  }
+]

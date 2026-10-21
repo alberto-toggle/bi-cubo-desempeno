@@ -6,7 +6,11 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import type { Filters as FilterValues } from "./model";
+import {
+  initialFilters,
+  type BusinessUnit,
+  type Filters as FilterValues,
+} from "./model";
 export function FilterSelect({
   label,
   value,
@@ -43,10 +47,14 @@ export function PortfolioFilters({
   value,
   onChange,
   segments,
+  units,
+  geographyAllowed,
 }: {
   value: FilterValues;
   onChange: (v: FilterValues) => void;
   segments: string[];
+  units: BusinessUnit[];
+  geographyAllowed: boolean;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -71,10 +79,41 @@ export function PortfolioFilters({
           ...segments.map((v) => ({ value: v, label: v })),
         ]}
       />
-      {(value.segment !== "all" || value.period !== "all" || value.query) && (
+      <FilterSelect
+        label="División"
+        value={value.division}
+        onChange={(division) => onChange({ ...value, division })}
+        options={[
+          { value: "all", label: "Todas las divisiones" },
+          ...[...new Set(units.map((u) => u.division))].map((v) => ({
+            value: v,
+            label: v,
+          })),
+        ]}
+      />
+      {geographyAllowed && (
+        <FilterSelect
+          label="Región"
+          value={value.region}
+          onChange={(region) => onChange({ ...value, region, state: "all" })}
+          options={[
+            { value: "all", label: "Todas las regiones" },
+            ...[...new Set(units.map((u) => u.region))].map((v) => ({
+              value: v,
+              label: v,
+            })),
+          ]}
+        />
+      )}
+      {(value.segment !== "all" ||
+        value.period !== "all" ||
+        value.division !== "all" ||
+        value.region !== "all" ||
+        value.state !== "all" ||
+        value.query) && (
         <button
           className="text-xs text-primary underline"
-          onClick={() => onChange({ segment: "all", period: "all", query: "" })}
+          onClick={() => onChange(initialFilters)}
         >
           Limpiar filtros
         </button>

@@ -35,7 +35,7 @@ function ContributionRanking({
         <div>
           <h2 className="font-semibold">Contribución por unidad</h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            Ingresos menos costos · MXN
+            Primeras 6 unidades · Ingresos menos costos · MXN
           </p>
         </div>
         <span className="rounded-md bg-muted px-2 py-1 text-xs tabular-nums">
@@ -43,7 +43,7 @@ function ContributionRanking({
         </span>
       </div>
       <ol className="mt-6 space-y-4">
-        {rows.map(({ unit, value }, index) => (
+        {rows.slice(0, 6).map(({ unit, value }, index) => (
           <li key={unit.id}>
             <Link
               href={`/establishments/${unit.id}`}
@@ -88,6 +88,12 @@ function WorkspaceLinks({ role }: { role: DemoRole | undefined }) {
       note: "Consultar unidades",
       icon: Building2,
     },
+    {
+      href: "/establishments/unit-017#trazabilidad",
+      title: "Trazabilidad",
+      note: "Caso de cafetería",
+      icon: BookOpen,
+    },
     ...(role === "admin"
       ? [
           {
@@ -108,7 +114,7 @@ function WorkspaceLinks({ role }: { role: DemoRole | undefined }) {
   return (
     <section className="surface p-5 sm:p-6">
       <h2 className="text-sm font-semibold">Accesos de trabajo</h2>
-      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {links.map(({ href, title, note, icon: Icon }) => (
           <Link
             key={href}

@@ -50,17 +50,17 @@ export function Metrics({
       {[
         {
           label: "Ingresos",
-          value: money(t.revenue),
+          value: units.length ? money(t.revenue) : "—",
           note: "Periodo seleccionado",
         },
         {
           label: "Costos",
-          value: money(t.cost),
+          value: units.length ? money(t.cost) : "—",
           note: "Costos ilustrativos registrados",
         },
         {
           label: "Contribución",
-          value: money(t.contribution),
+          value: units.length ? money(t.contribution) : "—",
           note: "Ingresos menos costos; no utilidad neta",
         },
         {
@@ -87,6 +87,15 @@ export function TrendChart({
   units: BusinessUnit[];
   period?: string;
 }) {
+  if (!units.length)
+    return (
+      <section className="surface p-6">
+        <h2 className="font-semibold">Evolución financiera</h2>
+        <p className="flex h-64 items-center justify-center text-center text-sm text-muted-foreground">
+          Sin registros para esta selección.
+        </p>
+      </section>
+    );
   const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun"].filter(
     (m) => period === "all" || m === period,
   );
@@ -133,6 +142,7 @@ export function TrendChart({
               fill="var(--chart-1)"
               fillOpacity={0.12}
               strokeWidth={2.5}
+              dot={rows.length === 1 ? { r: 5 } : false}
             />
             <Area
               dataKey="cost"
@@ -140,6 +150,7 @@ export function TrendChart({
               stroke="var(--chart-2)"
               fill="transparent"
               strokeWidth={2}
+              dot={rows.length === 1 ? { r: 4 } : false}
             />
           </AreaChart>
         </ResponsiveContainer>

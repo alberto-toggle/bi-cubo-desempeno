@@ -115,3 +115,13 @@ El sidebar de producto adapta la geometría de ramas a un componente TypeScript 
 - `browser.ts`: aplicación al DOM y restauración antes de la primera pintura desde el mismo catálogo.
 
 La feature `appearance` administra selección y Redux; el provider persiste la preferencia y sincroniza pestañas. El azul de `features/demo/demo-materials.css` es independiente por diseño. Los bloques originales del playground conservan sus estilos de proveedor y no forman parte del contrato visual de producto. Para agregar un tema, registrarlo en `config.ts` e implementar todos los valores en `palettes.css`; las pruebas verifican la integridad del contrato y la paridad entre arranque y cambios de tema.
+
+### Universo documental y simulación ampliada
+
+`src/data/master-units.json` contiene las 54 unidades del catálogo propuesto (pp. 5–6); no se suman a las 86 filas de la relación de instalaciones, pendiente de conciliación. No se incorporan cuentas bancarias. `reference-catalogs.json` conserva centros de negocio, centros de costo y sublíneas con su página de origen.
+
+`node scripts/generate-portfolio.mjs` regenera determinísticamente `public/demo/portfolio.json`. Los nombres proceden del documento; importes, estados operativos y asignaciones de centros son simulados. Cada total mensual se deriva de sus centros. El filtro por segmento proyecta solo los centros pertinentes, incluso cuando pertenecen a una unidad de otra división.
+
+El mapa reutilizable está en `src/components/maps`, con procedencia y licencia en `SOURCE.md`. Las ubicaciones y filtros geográficos se muestran solo en modo completo del administrador. Es una simulación de permisos de interfaz: los datos de demo son públicos y esto no sustituye autorización de servidor.
+
+El detalle `unit-017` incluye el ciclo independiente de cafetería documentado en pp. 27–32 y 36. Sus cifras no se suman de nuevo al portafolio. Los catálogos permiten registrar propuestas de alta, modificación e inactivación con motivo e historial local (`gtyg.catalog-proposals.v1`); permanecen pendientes y no alteran el catálogo base.

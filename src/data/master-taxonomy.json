@@ -1,0 +1,94 @@
+{
+  "regions": {
+    "CEN": "Centro",
+    "OCC": "Occidente",
+    "NTE": "Norte",
+    "NOE": "Noroeste",
+    "SUR": "Sur",
+    "SSE": "Sureste"
+  },
+  "states": {
+    "CMX": {
+      "name": "Ciudad de México",
+      "region": "CEN",
+      "mapId": "MXCMX"
+    },
+    "MEX": {
+      "name": "Estado de México",
+      "region": "CEN",
+      "mapId": "MXMEX"
+    },
+    "PUE": {
+      "name": "Puebla",
+      "region": "CEN",
+      "mapId": "MXPUE"
+    },
+    "QUE": {
+      "name": "Querétaro",
+      "region": "CEN",
+      "mapId": "MXQUE"
+    },
+    "AGS": {
+      "name": "Aguascalientes",
+      "region": "CEN",
+      "mapId": "MXAGU"
+    },
+    "GUA": {
+      "name": "Guanajuato",
+      "region": "OCC",
+      "mapId": "MXGUA"
+    },
+    "CHH": {
+      "name": "Chihuahua",
+      "region": "NTE",
+      "mapId": "MXCHH"
+    },
+    "BCN": {
+      "name": "Baja California",
+      "region": "NOE",
+      "mapId": "MXBCN"
+    },
+    "BCS": {
+      "name": "Baja California Sur",
+      "region": "NOE",
+      "mapId": "MXBCS"
+    },
+    "CHP": {
+      "name": "Chiapas",
+      "region": "SUR",
+      "mapId": "MXCHP"
+    },
+    "OAX": {
+      "name": "Oaxaca",
+      "region": "SUR",
+      "mapId": "MXOAX"
+    },
+    "ROO": {
+      "name": "Quintana Roo",
+      "region": "SSE",
+      "mapId": "MXROO"
+    }
+  },
+  "divisions": {
+    "TIE": "Tiendas",
+    "GRA": "Granjas",
+    "SDR": "Servicios deportivos y recreativos",
+    "HOT": "Hospedaje y turismo",
+    "AYB": "Alimentos y bebidas",
+    "SCO": "Servicios complementarios"
+  },
+  "segments": {
+    "COM": "Comercio",
+    "AGR": "Producción agropecuaria",
+    "DEP": "Deporte y bienestar",
+    "AYB": "Alimentos y bebidas",
+    "HOS": "Hospedaje",
+    "REC": "Recreación y entretenimiento",
+    "EVE": "Eventos",
+    "ARR": "Arrendamiento inmobiliario",
+    "MOV": "Movilidad y estacionamientos",
+    "FUN": "Servicios funerarios",
+    "LOG": "Logística y almacenamiento",
+    "INS": "Servicios institucionales"
+  }
+}
