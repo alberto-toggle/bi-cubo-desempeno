@@ -98,6 +98,13 @@ export function GeographyPanel({
             selected={selected}
             onSelect={onSelect}
             formatValue={format}
+            metricLabel={
+              metric === "revenue"
+                ? "Ingresos"
+                : metric === "contribution"
+                  ? "Contribución"
+                  : "Unidades"
+            }
           />
           <div className="mt-3 flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground">
             <span className="h-2 w-20 rounded bg-gradient-to-r from-chart-1/20 to-chart-1" />

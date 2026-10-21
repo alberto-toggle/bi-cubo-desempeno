@@ -3,25 +3,13 @@
   "project": {
     "name": "gtyg-platform",
     "productType": "Inteligencia operativa y financiera",
-    "stack": [
-      "nextjs",
-      "react",
-      "shadcn",
-      "tailwind-v4",
-      "base-ui"
-    ]
+    "stack": ["nextjs", "react", "shadcn", "tailwind-v4", "base-ui"]
   },
   "sources": {
-    "tokens": [
-      "src/app/globals.css"
-    ],
-    "components": [
-      "src/components/ui"
-    ],
+    "tokens": ["src/app/globals.css"],
+    "components": ["src/components/ui"],
     "assets": [],
-    "instructions": [
-      "AGENTS.md"
-    ]
+    "instructions": ["AGENTS.md"]
   },
   "design": {
     "colorMode": "light-and-dark",
@@ -294,6 +282,14 @@
     {
       "area": "login",
       "decision": "Liquid Metal se conserva únicamente en el playground. El login utiliza su dibujo original, sin selector de visual ni shader."
+    },
+    {
+      "area": "geographyMap",
+      "decision": "Tarjetas ancladas inspiradas en Globe Analytics y Globe CDN: hasta tres indicadores, hasta cinco con zoom y espacio disponible; en móvil solo la selección. Conectores y anclas proyectados desde el SVG, sin escalar texto. Profundidad leve del país completo, contornos superiores intactos y cristal discreto sin distorsión. Se reutilizan los agregados del periodo y se conserva la restricción geográfica por rol."
+    },
+    {
+      "area": "geographyMap",
+      "decision": "Una sola tarjeta anclada: hover o foco de teclado tienen prioridad; al salir se muestra la selección. Sin tarjetas automáticas por ranking ni por nivel de zoom."
     }
   ],
   "evidence": [

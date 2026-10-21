@@ -1,7 +1,9 @@
 "use client";
-import { useState, type CSSProperties } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { Plus, Minus, RotateCcw } from "lucide-react";
 import { useMapViewport } from "./use-map-viewport";
+import { useMapHover } from "./use-map-hover";
+import { MapCallouts } from "./map-callouts";
 import geometry from "./mexico-paths.json";
 import "./mexico-map.css";
 export const mexicanStates = geometry.states.map(({ id, name }) => ({
@@ -14,18 +16,21 @@ export function MexicoMap({
   selected,
   onSelect,
   formatValue,
+  metricLabel = "Importe",
 }: {
   data: Record<string, MapDatum>;
   selected: string;
   onSelect: (state: string) => void;
   formatValue: (value: number) => string;
+  metricLabel?: string;
 }) {
   const viewport = useMapViewport();
-  const [hovered, setHovered] = useState<string | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const { hovered, preview, hover, confirm } = useMapHover();
   const [focused, setFocused] = useState<string | null>(null);
   const max = Math.max(...Object.values(data).map((d) => Math.abs(d.value)), 1);
   const active = geometry.states.find(
-    (s) => s.id === (hovered ?? focused ?? selected),
+    (s) => s.id === (focused ?? preview ?? selected),
   );
   // Paint outlines last without moving the interactive paths or their tab order.
   const outlinedStates = [...new Set([selected, hovered, focused])]
@@ -40,6 +45,7 @@ export function MexicoMap({
       <path
         key={state.id}
         d={state.path}
+        data-state-id={state.id}
         className="mexico-state"
         data-selected={state.id === selected}
         data-hovered={state.id === hovered}
@@ -49,18 +55,21 @@ export function MexicoMap({
         tabIndex={0}
         aria-pressed={state.id === selected}
         aria-label={`${state.name}: ${item?.count ? `${item.count} unidades, ${formatValue(item.value)}` : "sin información en la muestra"}`}
-        onMouseEnter={() => setHovered(state.id)}
-        onMouseLeave={() => setHovered(null)}
+        onMouseEnter={() => hover(state.id)}
+        onMouseLeave={() => hover(null)}
         onFocus={(e) => {
           if (e.currentTarget.matches(":focus-visible")) {
+            confirm(null);
             setFocused(state.id);
             viewport.reveal(e.currentTarget.getBBox());
           }
         }}
         onBlur={() => setFocused(null)}
         onClick={() => {
-          if (viewport.allowClick())
+          if (viewport.allowClick()) {
+            confirm(state.id === selected ? null : state.id);
             onSelect(state.id === selected ? "all" : state.id);
+          }
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -107,29 +116,48 @@ export function MexicoMap({
           </button>
         </div>
       </div>
-      <svg
-        viewBox={viewport.viewBox}
-        data-zoomed={viewport.zoom > 1}
-        onPointerDown={viewport.onPointerDown}
-        onPointerMove={viewport.onPointerMove}
-        onPointerUp={viewport.onPointerUp}
-        onPointerCancel={viewport.onPointerCancel}
-        className="mexico-map"
-        aria-label="Filtrar por entidad federativa"
-      >
-        {geometry.states.map((s) => draw(s))}
-        <g aria-hidden="true" pointerEvents="none">
-          {outlinedStates.map((state) => (
-            <path
-              key={state.id}
-              d={state.path}
-              className="mexico-state-outline"
-              data-selected={state.id === selected}
-              data-focused={state.id === focused}
-            />
-          ))}
-        </g>
-      </svg>
+      <div className="mexico-map-stage">
+        <svg
+          ref={svgRef}
+          viewBox={viewport.viewBox}
+          data-zoomed={viewport.zoom > 1}
+          onPointerDown={viewport.onPointerDown}
+          onPointerMove={viewport.onPointerMove}
+          onPointerUp={viewport.onPointerUp}
+          onPointerCancel={viewport.onPointerCancel}
+          className="mexico-map"
+          aria-label="Filtrar por entidad federativa"
+        >
+          <path
+            aria-hidden="true"
+            pointerEvents="none"
+            className="mexico-map-depth"
+            d={geometry.states.map((s) => s.path).join(" ")}
+            transform={`translate(0 ${3 / viewport.zoom})`}
+          />
+          {geometry.states.map((s) => draw(s))}
+          <g aria-hidden="true" pointerEvents="none">
+            {outlinedStates.map((state) => (
+              <path
+                key={state.id}
+                d={state.path}
+                className="mexico-state-outline"
+                data-selected={state.id === selected}
+                data-focused={state.id === focused}
+              />
+            ))}
+          </g>
+        </svg>
+        <MapCallouts
+          svgRef={svgRef}
+          viewBox={viewport.viewBox}
+          data={data}
+          active={active?.id}
+          selected={selected}
+          formatValue={formatValue}
+          metricLabel={metricLabel}
+        />
+      </div>
       <div
         className="mt-2 min-h-12 rounded-lg bg-muted/60 px-3 py-2 text-xs"
         aria-live="polite"
