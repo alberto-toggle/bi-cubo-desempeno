@@ -26,6 +26,7 @@ export default function RootLayout({
       lang="es"
       data-theme={defaults.theme}
       data-font={defaults.font}
+      data-finish={defaults.finish}
       suppressHydrationWarning
     >
       <head>

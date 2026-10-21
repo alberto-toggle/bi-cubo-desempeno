@@ -42,7 +42,7 @@ test("prepaint bootstrap and runtime adapter agree for every theme", () => {
       },
     });
     let thisElement = createElement();
-    const value = { theme: theme.id, font: defaults.font };
+    const value = { theme: theme.id, font: defaults.font, finish: defaults.finish };
     applyAppearance(thisElement as unknown as HTMLElement, value);
     const expected = {
       dataset: { ...thisElement.dataset },
@@ -63,4 +63,29 @@ test("prepaint bootstrap and runtime adapter agree for every theme", () => {
       expected,
     );
   }
+});
+
+import { fonts, finishes, validateAppearance } from "../src/theme/config";
+test("palette, font and finish remain independent through restoration and bootstrap", () => {
+  for (const theme of themes) for (const font of fonts) for (const finish of finishes) {
+    const value = { theme: theme.id, font: font.id, finish: finish.id };
+    assert.deepEqual(validateAppearance(value), value);
+    const element = { dataset: {} as Record<string, string>, classList: { toggle() {} } };
+    runInNewContext(appearanceBootstrap(), {
+      document: { documentElement: element },
+      localStorage: { getItem: () => JSON.stringify(value) },
+    });
+    assert.deepEqual(element.dataset, value);
+  }
+});
+test("legacy Orbit preferences migrate to Prisma without changing the font", () => {
+  const legacy = { theme: "violet", font: "patria" };
+  const expected = { theme: "prism", font: "patria", finish: "original" };
+  assert.deepEqual(validateAppearance(legacy), expected);
+  const element = { dataset: {}, classList: { toggle() {} } };
+  runInNewContext(appearanceBootstrap(), {
+    document: { documentElement: element }, localStorage: { getItem: () => JSON.stringify(legacy) },
+  });
+  assert.deepEqual(element.dataset, expected);
+  assert.deepEqual(validateAppearance({ ...expected, finish: "unsupported" }), expected);
 });

@@ -22,6 +22,7 @@ test("validates persisted preferences and rejects unknown theme/font", () => {
   assert.deepEqual(validateAppearance({ theme: "night", font: "plex" }), {
     theme: "night",
     font: "plex",
+    finish: "original",
   });
   assert.deepEqual(validateAppearance(null), defaults);
 });

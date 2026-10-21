@@ -36,42 +36,6 @@
   --palette-overlay: #00000080;
 }
 
-[data-theme="violet"] {
-  color-scheme: light;
-  --palette-background: #f7f5fb;
-  --palette-foreground: #172033;
-  --palette-card: #fff;
-  --palette-card-foreground: #171717;
-  --palette-primary: #7c3aed;
-  --palette-primary-foreground: #fff;
-  --palette-secondary: #ededed;
-  --palette-secondary-foreground: #202020;
-  --palette-muted: #edf1f7;
-  --palette-muted-foreground: #68758a;
-  --palette-accent: #f0e9ff;
-  --palette-accent-foreground: #172033;
-  --palette-popover: #fff;
-  --palette-popover-foreground: #171717;
-  --palette-border: #e3e8ef;
-  --palette-input: #d8d8d8;
-  --palette-ring: #7c3aed;
-  --palette-destructive: #c43030;
-  --palette-chart-1: #8b5cf6;
-  --palette-chart-2: #06b6d4;
-  --palette-chart-3: #06b6d4;
-  --palette-chart-4: #f59e0b;
-  --palette-chart-5: #f472b6;
-  --palette-hero: #5326a0;
-  --palette-sidebar: #211833;
-  --palette-sidebar-foreground: #dce5f4;
-  --palette-sidebar-muted: #aab9d0;
-  --palette-sidebar-accent: #c4b5fd;
-  --palette-sidebar-track: #49375e;
-  --palette-hero-foreground: #fff;
-  --palette-warning: #b45309;
-  --palette-overlay: #00000080;
-}
-
 [data-theme="copper"] {
   color-scheme: light;
   --palette-background: #faf7f3;
@@ -142,4 +106,79 @@
   --palette-hero-foreground: #fff;
   --palette-warning: #fbbf24;
   --palette-overlay: #00000080;
+}
+
+/* Institutional accents sourced from framework-gb main.css; UI support colors adapted to our semantic contract. */
+[data-theme="institutional"] {
+  color-scheme: light;
+  --palette-background: #f7f5f2;
+  --palette-foreground: #312a2d;
+  --palette-card: #fff;
+  --palette-card-foreground: #312a2d;
+  --palette-primary: #611232;
+  --palette-primary-foreground: #fff;
+  --palette-secondary: #ede5d9;
+  --palette-secondary-foreground: #493b29;
+  --palette-muted: #eeebe7;
+  --palette-muted-foreground: #68615f;
+  --palette-accent: #f3e8ec;
+  --palette-accent-foreground: #611232;
+  --palette-popover: #fff;
+  --palette-popover-foreground: #312a2d;
+  --palette-border: #e2dcd5;
+  --palette-input: #cfc6be;
+  --palette-ring: #611232;
+  --palette-destructive: #b42318;
+  --palette-chart-1: #611232;
+  --palette-chart-2: #b38e5d;
+  --palette-chart-3: #427a83;
+  --palette-chart-4: #7763a3;
+  --palette-chart-5: #bd6444;
+  --palette-hero: #611232;
+  --palette-sidebar: #3d0c20;
+  --palette-sidebar-foreground: #fff8f3;
+  --palette-sidebar-muted: #d5bcc6;
+  --palette-sidebar-accent: #e1c49d;
+  --palette-sidebar-track: #744254;
+  --palette-hero-foreground: #fff;
+  --palette-warning: #986200;
+  --palette-overlay: #00000080;
+}
+
+/* Inspired by the user's Cloud Dock reference: ink-purple navigation,
+   violet accents, neutral white surfaces, lavender and ice-blue support colors. */
+[data-theme="prism"] {
+  color-scheme: light;
+  --palette-background: #f4f3f6;
+  --palette-foreground: #191225;
+  --palette-card: #ffffff;
+  --palette-card-foreground: #191225;
+  --palette-primary: #8047f0;
+  --palette-primary-foreground: #ffffff;
+  --palette-secondary: #e7e2f3;
+  --palette-secondary-foreground: #3c2b60;
+  --palette-muted: #eeedf1;
+  --palette-muted-foreground: #716a7d;
+  --palette-accent: #eee6ff;
+  --palette-accent-foreground: #54259f;
+  --palette-popover: #ffffff;
+  --palette-popover-foreground: #191225;
+  --palette-border: #e3dfec;
+  --palette-input: #cfc8dd;
+  --palette-ring: #8047f0;
+  --palette-destructive: #c43049;
+  --palette-chart-1: #8047f0;
+  --palette-chart-2: #3681d9;
+  --palette-chart-3: #a17cdb;
+  --palette-chart-4: #2c8b8a;
+  --palette-chart-5: #bf638e;
+  --palette-hero: #281943;
+  --palette-sidebar: #130d20;
+  --palette-sidebar-foreground: #f9f7ff;
+  --palette-sidebar-muted: #bcb4cc;
+  --palette-sidebar-accent: #cfb8ff;
+  --palette-sidebar-track: #453754;
+  --palette-hero-foreground: #ffffff;
+  --palette-warning: #a4610b;
+  --palette-overlay: #130d2080;
 }

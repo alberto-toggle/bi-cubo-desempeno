@@ -437,5 +437,22 @@
     "description": "Esfera WebGL interactiva con imágenes, arrastre y navegación por teclado.",
     "href": "/playground/react-bits/infinite-menu",
     "sourceUrl": "https://reactbits.dev/components/infinite-menu"
+  },
+  {
+    "title": "Liquid Glass",
+    "category": "Materiales y efectos",
+    "href": "/playground/ui-layouts/liquid-glass",
+    "provider": "UI Layouts",
+    "description": "Vidrio líquido con distorsión SVG, reflejos y arrastre. Controles para comparar desenfoque e intensidad de bordes.",
+    "sourceUrl": "https://www.ui-layouts.com/r/liquid-glass.json"
+  },
+  {
+    "title": "Thinking Orbs",
+    "category": "Materiales y efectos",
+    "href": "/playground/21st-dev/thinking-orbs-yogesharc",
+    "provider": "21st.dev · yogesharc",
+    "description": "Indicadores SVG animados con ocho estados y variantes para interfaces de agentes. Controles de tamaño, velocidad y pausa.",
+    "sourceUrl": "https://21st.dev/r/yogesharc/thinking-orbs",
+    "demoId": 34749
   }
 ]

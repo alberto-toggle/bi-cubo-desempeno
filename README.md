@@ -125,3 +125,11 @@ La feature `appearance` administra selección y Redux; el provider persiste la p
 El mapa reutilizable está en `src/components/maps`, con procedencia y licencia en `SOURCE.md`. Las ubicaciones y filtros geográficos se muestran solo en modo completo del administrador. Es una simulación de permisos de interfaz: los datos de demo son públicos y esto no sustituye autorización de servidor.
 
 El detalle `unit-017` incluye el ciclo independiente de cafetería documentado en pp. 27–32 y 36. Sus cifras no se suman de nuevo al portafolio. Los catálogos permiten registrar propuestas de alta, modificación e inactivación con motivo e historial local (`gtyg.catalog-proposals.v1`); permanecen pendientes y no alteran el catálogo base.
+
+### Acabados y marca
+
+Apariencia mantiene tres preferencias independientes: `theme`, `font` y `finish` (`original` o `crystal`). El acabado Cristal aplica Liquid Glass selectivo a enlaces activos/hover del sidebar y botones secundarios. Capas decorativas conservan transparencias, reflejos y bordes pulidos con desenfoque mínimo de 1 px, sin refracción ni distorsión SVG. Fondos, tarjetas, tablas y ventanas emergentes permanecen sólidos, sin mesh gradients. Órbita (`violet`) se migra a Prisma al restaurar preferencias antiguas. Navegadores sin backdrop-filter o con transparencia reducida reciben superficies sólidas.
+
+Liquid Glass de UI Layouts se encuentra en `/playground/ui-layouts/liquid-glass`, categoría **Materiales y efectos**, aislado de la aplicación. Su `SOURCE.md` documenta procedencia, licencia y adaptaciones.
+
+Los iconos de navegador y Apple se regeneran con `node scripts/generate-icons.mjs` a partir de las rutas SVG de `PanoramaMark`. Next los publica mediante las convenciones `icon.svg` y `apple-icon.png`.

@@ -1,6 +1,6 @@
 "use client";
 import { Check, RotateCcw } from "lucide-react";
-import { themes, fonts, defaults } from "./config";
+import { themes, fonts, finishes, defaults } from "./config";
 import { setAppearance } from "./appearance-slice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 export function AppearanceScreen() {
@@ -18,9 +18,9 @@ export function AppearanceScreen() {
       <section>
         <h2 className="text-lg font-semibold">Paleta de colores</h2>
         <p className="mt-1 mb-5 text-sm text-muted-foreground">
-          Cambia superficies, acentos y colores semánticos de la plataforma.
+          Cambia los colores de la plataforma sin modificar la tipografía.
         </p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {themes.map((t) => (
             <button
               key={t.id}
@@ -52,8 +52,43 @@ export function AppearanceScreen() {
         </div>
       </section>
       <section>
+        <h2 className="text-lg font-semibold">Acabado</h2>
+        <p className="mt-1 mb-5 text-sm text-muted-foreground">
+          Combina cualquier paleta con el acabado que prefieras. La tipografía
+          se conserva.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {finishes.map((finish) => (
+            <button
+              key={finish.id}
+              className="theme-option text-left"
+              aria-pressed={value.finish === finish.id}
+              onClick={() =>
+                dispatch(setAppearance({ ...value, finish: finish.id }))
+              }
+            >
+              <div
+                className="finish-swatch"
+                data-preview-finish={finish.id}
+                aria-hidden="true"
+              >
+                <span />
+                <span />
+              </div>
+              <span className="mt-4 flex items-center justify-between text-sm font-semibold">
+                {finish.name}
+                {value.finish === finish.id && <Check size={16} />}
+              </span>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {finish.description}
+              </p>
+            </button>
+          ))}
+        </div>
+      </section>
+      <section>
         <h2 className="mb-5 text-lg font-semibold">Tipografía</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {fonts.map((f) => (
             <button
               key={f.id}
@@ -63,7 +98,7 @@ export function AppearanceScreen() {
               data-font={f.id}
               style={{ fontFamily: "var(--app-font)" }}
             >
-              <span className="text-4xl">Aa</span>
+              <span className="font-display text-4xl">Aa</span>
               <p className="mt-3 font-semibold">{f.name}</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 Información que se entiende.
@@ -76,7 +111,7 @@ export function AppearanceScreen() {
       </section>
       <section className="surface p-7">
         <p className="eyebrow">Vista previa en tiempo real</p>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+        <h2 className="font-display mt-3 text-3xl font-semibold tracking-tight">
           Vista previa de contenido
         </h2>
         <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">

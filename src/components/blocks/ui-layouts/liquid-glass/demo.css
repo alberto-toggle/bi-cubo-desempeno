@@ -1,0 +1,26 @@
+/* Playground-only backdrop for judging the provider's refraction. */
+.liquid-demo-scene {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 440px;
+  padding: 48px 24px;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 20%, #8742eb, transparent 55%),
+    radial-gradient(ellipse at 90% 80%, #077ca5, transparent 65%), #171d43;
+}
+.liquid-demo-pattern {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  transform: rotate(-20deg);
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 48px,
+    #ffffff40 49px 52px,
+    transparent 53px 90px
+  );
+}

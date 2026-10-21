@@ -278,6 +278,18 @@
     {
       "area": "geographyMap",
       "decision": "SVG plano con límites contrastados por tokens, hover sin sombras ni desplazamiento y controles discretos de zoom 1–6x, arrastre y restablecer; selección accesible por teclado."
+    },
+    {
+      "area": "appearance",
+      "decision": "Paleta, tipografía y acabado son independientes. Prisma sustituye Órbita con migración de preferencias. Original y Cristal comparten componentes y tokens; gradientes suaves detrás de superficies translúcidas, sin distorsión de cifras. Liquid Glass queda aislado en Materiales y efectos del playground."
+    },
+    {
+      "area": "appearance",
+      "decision": "Cristal selectivo: sin mesh gradients ni vidrio en tarjetas de datos. Refracción SVG decorativa y reflejos en navegación activa/hover y botones secundarios, sin filtrar texto. Material de producto independiente del bloque de playground."
+    },
+    {
+      "area": "appearance",
+      "decision": "Cristal conserva los mismos controles y reflejos de vidrio, sin distorsión SVG. Desenfoque mínimo de 1 px. Liquid Glass original permanece intacto en playground."
     }
   ],
   "evidence": [
