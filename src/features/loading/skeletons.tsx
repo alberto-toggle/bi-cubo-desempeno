@@ -1,27 +1,47 @@
+"use client";
+
+import { useAppSelector } from "@/store/hooks";
+import { useDemoPreferences } from "@/features/demo/use-demo-preferences";
+import {
+  Bone,
+  LoadingFrame,
+  HeadingSkeleton,
+  HelpSkeleton,
+  FiltersSkeleton,
+} from "./skeleton-parts";
+import {
+  PortfolioBodySkeleton,
+  DetailBodySkeleton,
+} from "./portfolio-skeletons";
+import {
+  AppearanceBodySkeleton,
+  CatalogsBodySkeleton,
+} from "./settings-skeletons";
 import "./loading.css";
-function Bone({ className = "" }: { className?: string }) {
-  return <div aria-hidden="true" className={"skeleton-bone " + className} />;
-}
+
 export function LoginSkeleton() {
+  const { preferences } = useDemoPreferences();
   return (
-    <div
-      role="status"
-      aria-label="Cargando formulario de acceso"
-      className="space-y-6"
-    >
-      <Bone className="h-12 w-12 rounded-2xl" />
-      <Bone className="h-12 w-3/4" />
-      <Bone className="h-4 w-full" />
-      {[1, 2].map((i) => (
-        <div key={i} className="space-y-2">
-          <Bone className="h-3 w-32" />
-          <Bone className="h-14 w-full rounded-2xl" />
+    <LoadingFrame className="">
+      <Bone className="h-[48px] w-[48px] rounded-2xl" />
+      <Bone className="mt-6 h-[2.24em] w-4/5 text-[clamp(2rem,3.2vw,3rem)]" />
+      <Bone className="mt-2 h-5 w-full" />
+      <div className="mt-8 space-y-5">
+        {[0, 1].map((i) => (
+          <div key={i}>
+            <Bone className="h-5 w-32" />
+            <Bone className="mt-2 h-[54px] w-full rounded-full" />
+          </div>
+        ))}
+        <Bone className="h-[54px] w-full rounded-full" />
+        {preferences.twoFactor && <Bone className="h-4 w-3/4" />}
+      </div>
+      {preferences.showHelp && (
+        <div className="mt-7">
+          <HelpSkeleton />
         </div>
-      ))}
-      <Bone className="h-14 w-full rounded-2xl" />
-      <Bone className="h-16 w-full" />
-      <span className="sr-only">Cargando formulario de acceso</span>
-    </div>
+      )}
+    </LoadingFrame>
   );
 }
 export type ViewKind =
@@ -37,6 +57,8 @@ export function viewKind(path: string): ViewKind {
           ? "directory"
           : "overview";
 }
+
+/** Shared adapter for route transitions, Suspense fallbacks and data loading. */
 export function ViewSkeleton({
   kind = "overview",
   bodyOnly = false,
@@ -44,119 +66,63 @@ export function ViewSkeleton({
   kind?: ViewKind;
   bodyOnly?: boolean;
 }) {
+  const role = useAppSelector((s) => s.auth.session?.role);
+  const { preferences } = useDemoPreferences();
+  if (!role)
+    return (
+      <LoadingFrame>
+        <HeadingSkeleton />
+        <Bone className="h-20 w-full" />
+      </LoadingFrame>
+    );
+  const admin = role === "admin";
+  if (!admin && (kind === "catalogs" || kind === "appearance"))
+    return (
+      <LoadingFrame>
+        <div className="surface space-y-4 p-8">
+          <Bone className="h-6 w-6" />
+          <Bone className="h-9 w-3/5" />
+          <Bone className="h-5 w-4/5" />
+        </div>
+      </LoadingFrame>
+    );
+  const portfolio = kind === "overview" || kind === "directory";
   return (
-    <div role="status" aria-label="Cargando vista" className="space-y-7">
-      <span className="sr-only">Cargando vista</span>
+    <LoadingFrame
+      className={
+        kind === "appearance"
+          ? "mx-auto max-w-5xl space-y-9"
+          : kind === "catalogs"
+            ? "space-y-6"
+            : "space-y-7"
+      }
+    >
       {!bodyOnly && (
-        <header className="space-y-3">
-          <Bone className="h-3 w-36" />
-          <Bone className="h-9 w-2/3 max-w-md" />
-          <Bone className="h-4 w-3/4 max-w-xl" />
-        </header>
-      )}
-      {kind === "appearance" ? (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="surface space-y-4 p-5">
-                <Bone className="h-24" />
-                <Bone className="h-4 w-20" />
-                <Bone className="h-3" />
-              </div>
-            ))}
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <Bone key={i} className="h-44" />
-            ))}
-          </div>
-          <Bone className="h-48" />
+          {kind === "detail" && <Bone className="h-5 w-40" />}
+          <HeadingSkeleton action={portfolio || kind === "catalogs"} />
+          {portfolio && <FiltersSkeleton count={admin ? 4 : 3} />}
+          {(portfolio || kind === "catalogs") && preferences.showHelp && (
+            <HelpSkeleton />
+          )}
+        </>
+      )}
+      {portfolio ? (
+        <PortfolioBodySkeleton
+          directory={kind === "directory"}
+          geographyAllowed={admin}
+        />
+      ) : kind === "detail" ? (
+        <>
+          <DetailBodySkeleton />
+          {admin && <Bone className="h-4 w-3/4" />}
+          {preferences.showHelp && <HelpSkeleton />}
         </>
       ) : kind === "catalogs" ? (
-        <>
-          <div className="flex flex-wrap gap-3">
-            <Bone className="h-10 w-48" />
-            <Bone className="h-10 w-64" />
-          </div>
-          <div className="surface space-y-5 p-6">
-            <Bone className="h-8 w-full" />
-            {Array.from({ length: 10 }, (_, i) => (
-              <div key={i} className="grid grid-cols-3 gap-5">
-                <Bone className="h-6" />
-                <Bone className="h-6" />
-                <Bone className="h-6" />
-              </div>
-            ))}
-          </div>
-          <Bone className="h-32" />
-        </>
+        <CatalogsBodySkeleton />
       ) : (
-        <>
-          {kind === "detail" ? (
-            <div className="grid gap-4 md:grid-cols-3">
-              {[1, 2, 3].map((i) => (
-                <Bone key={i} className="h-32" />
-              ))}
-            </div>
-          ) : (
-            <div className="flex gap-3">
-              <Bone className="h-8 w-40" />
-              <Bone className="h-8 w-48" />
-            </div>
-          )}
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="surface space-y-4 p-5">
-                <Bone className="h-3 w-24" />
-                <Bone className="h-7 w-32" />
-                <Bone className="h-3 w-3/4" />
-              </div>
-            ))}
-          </div>
-          {kind !== "directory" && (
-            <div
-              className={
-                "grid gap-5 " +
-                (kind === "overview" ? "xl:grid-cols-[1.65fr_1fr]" : "")
-              }
-            >
-              <div className="surface p-6">
-                <Bone className="mb-8 h-5 w-40" />
-                <div className="flex h-60 items-end gap-5 border-b border-border">
-                  {["h-24", "h-36", "h-28", "h-44", "h-40", "h-52"].map(
-                    (height, i) => (
-                      <Bone key={i} className={"flex-1 " + height} />
-                    ),
-                  )}
-                </div>
-              </div>
-              {kind === "overview" && (
-                <div className="surface space-y-7 p-6">
-                  {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <Bone key={i} className="h-5 w-full" />
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-          {kind === "overview" && (
-            <div className="grid gap-4 xl:grid-cols-[1.65fr_1fr]">
-              <Bone className="h-44" />
-              <Bone className="h-44" />
-            </div>
-          )}
-          <div className="surface space-y-6 p-5">
-            <Bone className="h-6 w-48" />
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="grid grid-cols-3 gap-8">
-                <Bone className="h-8" />
-                <Bone className="h-8" />
-                <Bone className="h-8" />
-              </div>
-            ))}
-          </div>
-        </>
+        <AppearanceBodySkeleton />
       )}
-    </div>
+    </LoadingFrame>
   );
 }

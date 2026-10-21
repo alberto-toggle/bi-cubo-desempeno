@@ -34,7 +34,10 @@ export function PortfolioState({
       </button>
     </div>
   ) : (
-    <ViewSkeleton kind={kind} bodyOnly />
+    <ViewSkeleton
+      kind={kind}
+      bodyOnly={kind === "overview" || kind === "directory"}
+    />
   );
 }
 export function Metrics({
