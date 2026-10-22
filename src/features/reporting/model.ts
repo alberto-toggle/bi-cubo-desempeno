@@ -9,6 +9,8 @@ export type ReportMonth = {
 };
 export type ReportProfile = {
   unitId: string;
+  staff: { manager: string; alias: string; appointed: string; officers: number; troops: number; civilians: number };
+  premises: { count: number; revenueShare: number } | null;
   months: ReportMonth[];
   targets: Record<string, number>;
   programs: { name: string; weight: number }[];
@@ -116,6 +118,10 @@ export function parseReport(value: unknown): ManagementReport {
       (p) =>
         p &&
         typeof p.unitId === "string" &&
+        p.staff && typeof p.staff.manager === "string" && typeof p.staff.alias === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(p.staff.appointed) &&
+        [p.staff.officers, p.staff.troops, p.staff.civilians].every(amount) &&
+        (p.premises === null || (p.premises && amount(p.premises.count) && amount(p.premises.revenueShare) && p.premises.revenueShare <= 100)) &&
         Array.isArray(p.months) &&
         p.months.length >= 24 &&
         new Set(p.months.map((m) => m?.period)).size === p.months.length &&

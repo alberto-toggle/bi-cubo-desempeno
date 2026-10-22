@@ -24,10 +24,20 @@ export function ReportDetailSkeleton() {
         <Bone className="h-7 w-48" />
         <Bone className="h-9 w-64" />
       </div>
+      <ReportPanel title="Responsable y personal">
+        <div className={reportLayout.cards}>
+          {[0, 1, 2, 3].map(i => (
+            <div key={i} className="space-y-2"><Bone className="h-3 w-28" /><Bone className="h-5 w-36" /></div>
+          ))}
+        </div>
+      </ReportPanel>
       <div className={reportLayout.cards}>
         {[0, 1, 2, 3].map((i) => (
           <Bone key={i} className="h-36" />
         ))}
+      </div>
+      <div className={reportLayout.cards}>
+        {[0, 1, 2, 3].map(i => <Bone key={i} className="h-28" />)}
       </div>
       <ReportPanel title="Histórico mensual">
         <ChartPlaceholder />
@@ -35,14 +45,19 @@ export function ReportDetailSkeleton() {
       <div className={reportLayout.pair}>
         <ReportPanel title="Avance contra meta anual">
           <ChartPlaceholder />
+          <Bone className="mt-5 h-20" />
         </ReportPanel>
         <ReportPanel title="Comparativo al mismo corte">
           <ChartPlaceholder />
         </ReportPanel>
       </div>
+      <Bone className="h-24" />
       <ReportPanel title="Comparativo por ejercicio">
         <ChartPlaceholder />
       </ReportPanel>
+      <div className={reportLayout.cards}>
+        {[0, 1, 2, 3].map(i => <Bone key={i} className="h-32" />)}
+      </div>
       <Bone className="h-24" />
     </div>
   );
@@ -64,6 +79,7 @@ export function ReportScreenSkeleton() {
         </ReportPanel>
         <ReportPanel title="Avance contra meta anual">
           <ChartPlaceholder />
+          <Bone className="mt-5 h-20" />
         </ReportPanel>
       </div>
       <ReportPanel title="Programas productivos">

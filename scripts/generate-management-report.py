@@ -27,6 +27,10 @@ for i, unit in enumerate(portfolio['units']):
         programs = [dict(name=n, weight=w) for n,w in [('Bovinos',40),('Avícola',25),('Porcinos',20),('Agrícola',15)]]
     elif unit['kind'] == 'Criadero':
         programs = [dict(name=n,weight=w) for n,w in [('Bovinos',35),('Productos cárnicos',25),('Huevo',20),('Agrícola',20)]]
-    profiles.append(dict(unitId=unit['id'], months=months, targets=targets, programs=programs,
+    # Personnel is entirely fictional. Rental revenue is a demo share of existing revenue, not extra profit.
+    staff = dict(manager=['Andrea Solís Vega', 'Daniel Rivas Montes', 'Lucía Torres Prado'][i % 3],
+                 alias=f'Responsable {i+1:03}', appointed=f'2025-{i%9+1:02}-01', officers=1+i%2, troops=5+i%8, civilians=4+i%6)
+    premises = dict(count=2+i%7, revenueShare=8+i%10) if unit['kind'].startswith('Tienda') else None
+    profiles.append(dict(staff=staff, premises=premises, unitId=unit['id'], months=months, targets=targets, programs=programs,
                          workingCapital=round(unit['monthly'][0]['revenue']*100*1.8), revolvingFund=(15000+i%4*5000)*100))
-(root/'public/demo/management-report.json').write_text(json.dumps(dict(source='Simulación propia inspirada en UTILIDADES SEPTIEMBRE bis.pptx.pdf y ejemplo tienda detalle.pdf. Importes en centavos MXN. Enero–junio 2026 conserva ingresos y costos del portafolio demo; gastos e históricos son simulados. Mantenimiento es un subconjunto simulado de gastos operativos; inversión es simulada y se registra por separado del resultado de gestión.', cutoff='2026-09', profiles=profiles),ensure_ascii=False,separators=(',',':'))+'\n')
+(root/'public/demo/management-report.json').write_text(json.dumps(dict(source='Simulación propia inspirada en UTILIDADES SEPTIEMBRE bis.pptx.pdf y ejemplo tienda detalle.pdf. Importes en centavos MXN. Enero–junio 2026 conserva ingresos y costos del portafolio demo; gastos e históricos son simulados. Personal y fechas son ficticios. En tiendas, las rentas son una participación simulada de los ingresos; ventas excluye rentas y no se agregan nuevamente a utilidades. Mantenimiento es un subconjunto simulado de gastos operativos; inversión es simulada y se registra por separado del resultado de gestión.', cutoff='2026-09', profiles=profiles),ensure_ascii=False,separators=(',',':'))+'\n')

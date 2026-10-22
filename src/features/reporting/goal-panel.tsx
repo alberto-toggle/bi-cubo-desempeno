@@ -91,6 +91,16 @@ export function GoalPanel({
           formatValue={reportMoney}
         />
       )}
+      <dl className="mt-5 grid grid-cols-2 gap-4 rounded-xl bg-muted/40 p-4">
+        <div>
+          <dt className="text-xs text-muted-foreground">Porcentaje por recabar</dt>
+          <dd className="mt-2 font-semibold tabular-nums">{formatPercent(advance === null ? null : Math.max(0, 100 - advance))}</dd>
+        </div>
+        <div>
+          <dt className="text-xs text-muted-foreground">Media mensual objetivo</dt>
+          <dd className="mt-2 font-semibold tabular-nums">{reportMoney(Math.round(target / 12))}</dd>
+        </div>
+      </dl>
       <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
         Diferencia contra programado:{" "}
         <strong className="text-foreground">

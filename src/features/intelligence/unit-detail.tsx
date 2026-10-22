@@ -109,7 +109,7 @@ export function UnitDetail({ id }: { id: string }) {
           financiero mensual.
         </p>
       </section>
-      <UnitReport unitId={unit.id} />
+      <UnitReport unitId={unit.id} mode={mode} />
       <section className="surface p-6">
         <h2 className="font-semibold">Centros de negocio</h2>
         <p className="mt-2 text-sm text-muted-foreground">

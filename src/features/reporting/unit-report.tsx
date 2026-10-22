@@ -1,4 +1,8 @@
 "use client";
+import { presentResponsible, type IdentityMode } from "@/features/demo/identity-policy";
+import { UnitFacts } from "./unit-facts";
+import { YearlyMeans } from "./yearly-means";
+import { unitReportSummary } from "./unit-report-summary";
 import { useState } from "react";
 import { useReport } from "./use-report";
 import { ReportDetailSkeleton } from "./report-skeleton";
@@ -15,10 +19,10 @@ import { reportLayout, ReportMetrics } from "./report-layout";
 import { ReportChart } from "./report-chart";
 import { GoalPanel } from "./goal-panel";
 import { FilterSelect } from "@/features/intelligence/filters";
-export function UnitReport({ unitId }: { unitId: string }) {
+export function UnitReport({ unitId, mode }: { unitId: string; mode: IdentityMode }) {
   const report = useReport(),
     [period, setPeriod] = useState(initialReportPeriod),
-    [window, setWindow] = useState("24");
+    [window, setWindow] = useState("36");
   if (report.error)
     return (
       <div className="surface p-6" role="alert">
@@ -49,22 +53,13 @@ export function UnitReport({ unitId }: { unitId: string }) {
       label: `Ene–${monthNames[period.month - 1]} ${y}`,
       value: total(profile, y, period.month),
     }));
-  const annual = [2023, 2024, 2025, 2026]
-    .filter((y) => y <= period.year)
-    .map((y) => ({
-      year: y,
-      label:
-        y === period.year
-          ? `${y} · a ${monthNames[period.month - 1]}`
-          : `${y} · completo`,
-      value: total(profile, y, y === period.year ? period.month : 12),
-    }));
-  const completed = annual.slice(0, -1),
-    average = completed.length
-      ? Math.round(
-          completed.reduce((s, r) => s + r.value, 0) / completed.length,
-        )
-      : undefined;
+  const summary = unitReportSummary(profile, period);
+  const responsible = presentResponsible(profile.staff, mode);
+  const annual = summary.annual.map(row => ({
+    year: row.year,
+    label: row.months === 12 ? `${row.year} · completo` : `${row.year} · a ${monthNames[period.month - 1]}`,
+    value: row.value,
+  }));
   const series = timeline(
     profile,
     `${period.year}-${String(period.month).padStart(2, "0")}`,
@@ -87,6 +82,15 @@ export function UnitReport({ unitId }: { unitId: string }) {
         </div>
         <ReportPeriodControl value={period} onChange={setPeriod} />
       </header>
+      <UnitFacts
+        data={{
+          responsible: responsible.name,
+          appointed: responsible.appointed,
+          officers: profile.staff.officers,
+          troops: profile.staff.troops,
+          civilians: profile.staff.civilians,
+        }}
+      />
       <ReportMetrics
         items={[
           {
@@ -125,6 +129,7 @@ export function UnitReport({ unitId }: { unitId: string }) {
             ]}
           />
         </div>
+        <YearlyMeans items={summary.annual.filter(row => series.some(point => point.year === row.year))} />
         <ReportChart
           id="unit-history"
           title="Histórico mensual"
@@ -147,13 +152,30 @@ export function UnitReport({ unitId }: { unitId: string }) {
           data={sameCut}
         />
       </div>
+      {summary.annualMean !== undefined && (
+        <div className="surface flex flex-wrap items-center justify-between gap-3 p-5">
+          <div>
+            <h3 className="text-sm font-semibold">Media anual {summary.completedYears[0]}–{summary.completedYears.at(-1)}</h3>
+            <p className="mt-1 text-xs text-muted-foreground">Promedio de utilidades de ejercicios completos · Excluye el ejercicio seleccionado</p>
+          </div>
+          <p className="text-2xl font-semibold tabular-nums">{reportMoney(summary.annualMean)}</p>
+        </div>
+      )}
       <ReportChart
         id="unit-annual"
         title="Comparativo por ejercicio"
         description="Ejercicios anteriores completos; el ejercicio seleccionado se muestra solo hasta el corte. La media excluye el ejercicio parcial."
         data={annual}
-        reference={average}
+        reference={summary.annualMean}
       />
+      {profile.premises && (
+        <ReportMetrics items={[
+          { label: "Ventas al corte", value: reportMoney(summary.sales), note: `Enero–${monthNames[period.month - 1]} ${period.year} · Sin rentas de locales` },
+          { label: "Locales comerciales", value: reportMoney(summary.premisesRevenue), note: "Ingresos por rentas al corte · Incluidos en ingresos totales" },
+          { label: "Locales en operación", value: String(profile.premises.count), note: "Capacidad ilustrativa de la tienda" },
+          { label: "Ingresos totales al corte", value: reportMoney(summary.sales + summary.premisesRevenue), note: "Ventas + rentas · No equivale a utilidades" },
+        ]} />
+      )}
       <div className="surface grid gap-5 p-5 sm:grid-cols-2">
         <div>
           <p className="text-xs text-muted-foreground">

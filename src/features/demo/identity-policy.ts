@@ -27,3 +27,12 @@ export function presentIdentity(
       };
   }
 }
+
+export function presentResponsible(person: { manager: string; alias: string; appointed: string }, mode: IdentityMode) {
+  return {
+    name: mode === "full" ? person.manager : mode === "alias" ? `•••• ${person.alias}` : "••••••••",
+    appointed: mode === "full"
+      ? new Intl.DateTimeFormat("es-MX", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(person.appointed + "T00:00:00Z"))
+      : "Fecha reservada",
+  };
+}

@@ -94,8 +94,8 @@ export function AnalysisPanel({ snapshot }: { snapshot: CubeSnapshot }) {
           Analizar esta vista
         </Dialog.Trigger>
         <Dialog.Portal>
-          <Dialog.Backdrop className="fixed inset-0 z-50 bg-overlay" />
-          <Dialog.Popup className="fixed inset-y-2 right-2 z-50 flex w-[calc(100%_-_1rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card text-foreground shadow-xl sm:inset-y-4 sm:right-4 sm:w-[calc(100%_-_2rem)] sm:rounded-3xl">
+          <Dialog.Backdrop className="fixed inset-0 z-50 bg-overlay transition-opacity duration-300 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 motion-reduce:transition-none" />
+          <Dialog.Popup className="transition-[translate,opacity] duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] data-[starting-style]:translate-x-8 data-[starting-style]:opacity-0 data-[ending-style]:translate-x-8 data-[ending-style]:opacity-0 motion-reduce:transition-none fixed inset-y-2 right-2 z-50 flex w-[calc(100%_-_1rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card text-foreground shadow-xl sm:inset-y-4 sm:right-4 sm:w-[calc(100%_-_2rem)] sm:rounded-3xl">
             <header className="flex items-start justify-between gap-4 border-b border-border p-5 sm:p-6">
               <div className="flex min-w-0 items-center gap-3">
                 <div>
