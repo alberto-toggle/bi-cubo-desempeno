@@ -15,7 +15,7 @@ export const catalogRecords: CatalogRecord[] = [
     code: `REG-${code}`,
     name,
     relation: "México",
-    description: "Regionalización propuesta",
+    description: "Regionalización ficticia",
     page: 3,
   })),
   ...Object.entries(taxonomy.states).map(([code, s]) => ({
@@ -23,7 +23,7 @@ export const catalogRecords: CatalogRecord[] = [
     code: `EST-${code}`,
     name: s.name,
     relation: `REG-${s.region}`,
-    description: "Cobertura documentada",
+    description: "Distribución ficticia",
     page: 3,
   })),
   ...Object.entries(taxonomy.divisions).map(([code, name]) => ({
@@ -31,8 +31,8 @@ export const catalogRecords: CatalogRecord[] = [
     code: `DIV-${code}`,
     name,
     relation: "Organización",
-    description: "Adscripción organizacional",
-    page: code === "SCO" ? 4 : 3,
+    description: "División ficticia",
+    page: 0,
   })),
   ...Object.entries(taxonomy.segments).map(([code, name]) => ({
     category: "Segmentos",

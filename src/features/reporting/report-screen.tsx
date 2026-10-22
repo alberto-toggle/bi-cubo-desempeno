@@ -1,11 +1,12 @@
 "use client";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
 import { usePortfolio } from "@/features/intelligence/use-portfolio";
 import { FilterSelect } from "@/features/intelligence/filters";
 import { useReport } from "./use-report";
 import {
-  reportMoney,
+  reportMoney as originalMoney,
   percent,
   formatPercent,
   commercialLine,
@@ -17,8 +18,10 @@ import { ReportMetrics, reportLayout } from "./report-layout";
 import { ReportChart } from "./report-chart";
 import { GoalPanel } from "./goal-panel";
 import { ReportScreenSkeleton } from "./report-skeleton";
+import { ReportTabs } from "./report-tabs";
 import { ReportUnitsTable } from "./report-units-table";
 export function ReportScreen() {
+  const reportMoney = usePrivateFormatter(originalMoney);
   const portfolio = usePortfolio(),
     report = useReport();
   const [period, setPeriod] = useState(initialReportPeriod),
@@ -93,69 +96,103 @@ export function ReportScreen() {
       </div>
       <p className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
         Cifras simuladas · Enero–{monthNames[period.month - 1]} {period.year} ·
-        MXN. Utilidades: ingresos menos costos y gastos.
-        Las metas son ilustrativas.
+        MXN. Utilidades: ingresos menos costos y gastos. Las metas son
+        ilustrativas.
       </p>
-      <ReportMetrics
+      <ReportTabs
         items={[
           {
-            label: "Utilidades acumuladas",
-            value: reportMoney(actual),
-            note: `${rows.length} unidades en esta selección`,
+            id: "charts",
+            label: "Gráficas de utilidades",
+            content: (
+              <>
+                {" "}
+                <div className={reportLayout.pair}>
+                  <ReportChart
+                    id="report-giro"
+                    title="Utilidades por giro comercial"
+                    description="Comparativo del acumulado al corte · MXN"
+                    data={categories}
+                  />
+                  <GoalPanel
+                    id="report-goal"
+                    actual={actual}
+                    target={target}
+                    month={period.month}
+                  />
+                </div>
+                {line !== "all" && (
+                  <ReportChart
+                    id="report-units"
+                    title="Utilidades por establecimiento"
+                    description="Nombres visibles según tu rol · Acumulado al corte · MXN"
+                    data={ranked.map((r) => ({
+                      label: r.label,
+                      value: r.value,
+                    }))}
+                  />
+                )}
+                {programs.length > 0 && (
+                  <ReportChart
+                    id="report-programs"
+                    title="Programas productivos"
+                    description="Distribución ilustrativa de las utilidades por programa; no se suma nuevamente al total."
+                    data={programs}
+                  />
+                )}
+              </>
+            ),
           },
           {
-            label: "Meta anual",
-            value: reportMoney(target),
-            note: `Ejercicio ${period.year} completo`,
+            id: "summary",
+            label: "Resumen",
+            content: (
+              <>
+                {" "}
+                <ReportMetrics
+                  items={[
+                    {
+                      label: "Utilidades acumuladas",
+                      value: reportMoney(actual),
+                      note: `${rows.length} unidades en esta selección`,
+                    },
+                    {
+                      label: "Meta anual",
+                      value: reportMoney(target),
+                      note: `Ejercicio ${period.year} completo`,
+                    },
+                    {
+                      label: "Avance de meta",
+                      value: formatPercent(percent(actual, target)),
+                      note: `Programado: ${formatPercent((period.month / 12) * 100)}`,
+                    },
+                    {
+                      label: "Pendiente de meta",
+                      value: reportMoney(Math.max(0, target - actual)),
+                      note:
+                        actual > target
+                          ? "Meta superada"
+                          : "Diferencia respecto a la meta anual",
+                    },
+                  ]}
+                />
+              </>
+            ),
           },
           {
-            label: "Avance de meta",
-            value: formatPercent(percent(actual, target)),
-            note: `Programado: ${formatPercent((period.month / 12) * 100)}`,
-          },
-          {
-            label: "Pendiente de meta",
-            value: reportMoney(Math.max(0, target - actual)),
-            note:
-              actual > target
-                ? "Meta superada"
-                : "Diferencia respecto a la meta anual",
+            id: "units",
+            label: "Por establecimiento",
+            content: (
+              <>
+                {" "}
+                <ReportUnitsTable
+                  key={`${line}-${period.year}-${period.month}-${portfolio.mode}`}
+                  rows={ranked}
+                />
+              </>
+            ),
           },
         ]}
-      />
-      <div className={reportLayout.pair}>
-        <ReportChart
-          id="report-giro"
-          title="Utilidades por giro comercial"
-          description="Comparativo del acumulado al corte · MXN"
-          data={categories}
-        />
-        <GoalPanel
-          id="report-goal"
-          actual={actual}
-          target={target}
-          month={period.month}
-        />
-      </div>
-      {line !== "all" && (
-        <ReportChart
-          id="report-units"
-          title="Utilidades por establecimiento"
-          description="Nombres visibles según tu rol · Acumulado al corte · MXN"
-          data={ranked.map((r) => ({ label: r.label, value: r.value }))}
-        />
-      )}
-      {programs.length > 0 && (
-        <ReportChart
-          id="report-programs"
-          title="Programas productivos"
-          description="Distribución ilustrativa de las utilidades de granjas y criadero; no se suma nuevamente al total."
-          data={programs}
-        />
-      )}
-      <ReportUnitsTable
-        key={`${line}-${period.year}-${period.month}-${portfolio.mode}`}
-        rows={ranked}
       />
     </div>
   );

@@ -1,4 +1,7 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
+import { PrivateChartNotice } from "@/features/privacy/privacy-control";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { DataTableLayout } from "@/components/layout/data-table-layout";
 import { tableLayout, unitColumns } from "@/features/intelligence/table-layout";
 
@@ -19,7 +22,7 @@ import {
   presentIdentity,
   type IdentityMode,
 } from "@/features/demo/identity-policy";
-import { aggregate, money, unitTotals, type BusinessUnit } from "./model";
+import { aggregate, money as originalMoney, unitTotals, type BusinessUnit } from "./model";
 export function PortfolioState({
   kind = "overview",
   error,
@@ -51,6 +54,7 @@ export function Metrics({
   units: BusinessUnit[];
   period?: string;
 }) {
+  const money = usePrivateFormatter(originalMoney);
   const t = aggregate(units, period);
   return (
     <div className={intelligenceLayout.metrics}>
@@ -94,6 +98,9 @@ export function TrendChart({
   units: BusinessUnit[];
   period?: string;
 }) {
+  const { hidden } = useFinancialPrivacy();
+  const money = usePrivateFormatter(originalMoney);
+  if (hidden) return <PrivateChartNotice />;
   if (!units.length)
     return (
       <section className={intelligenceLayout.chartCard}>
@@ -195,6 +202,7 @@ export function UnitsTable({
   mode: IdentityMode;
   period?: string;
 }) {
+  const money = usePrivateFormatter(originalMoney);
   return (
     <>
       <DataTableLayout columns={unitColumns} className={tableLayout.units}>

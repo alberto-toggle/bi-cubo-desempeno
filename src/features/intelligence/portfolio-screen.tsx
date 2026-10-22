@@ -1,4 +1,5 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
 import { intelligenceLayout } from "@/features/intelligence/layout";
 import { useState } from "react";
 import { Download, RefreshCw, Search } from "lucide-react";
@@ -17,12 +18,14 @@ export function PortfolioScreen({
 }: {
   directory?: boolean;
 }) {
+  const { hidden } = useFinancialPrivacy();
   const { data, status, error, reload, mode } = usePortfolio(),
     [filters, setFilters] = useState(initialFilters),
     [notice, setNotice] = useState(""),
     role = useAppSelector((s) => s.auth.session?.role);
   const units = filterUnits(data?.units ?? [], filters, mode);
   function exportCsv() {
+    if (hidden) return;
     const blob = new Blob(["\uFEFF" + buildCsv(units, mode, filters.period)], {
         type: "text/csv;charset=utf-8;",
       }),
@@ -56,7 +59,7 @@ export function PortfolioScreen({
         </div>
         <button
           className="secondary-button"
-          disabled={!data || !units.length}
+          disabled={hidden || !data || !units.length}
           onClick={exportCsv}
         >
           <Download size={15} /> Exportar CSV
@@ -92,9 +95,7 @@ export function PortfolioScreen({
         </p>
       )}
       <DemoHelp>
-        54 unidades del catálogo propuesto · Identidades documentadas;
-        resultados y asignaciones operativas simulados · Enero–junio 2026. La
-        relación de instalaciones adicional requiere conciliación.
+        Escenario genérico: establecimientos, cifras y asignaciones ficticios · Enero–junio 2026.
       </DemoHelp>
       {!data || error ? (
         <PortfolioState

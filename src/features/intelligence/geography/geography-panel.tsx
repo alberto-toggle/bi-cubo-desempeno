@@ -1,4 +1,7 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
+import { PrivateChartNotice } from "@/features/privacy/privacy-control";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { GeographyLayout } from "@/features/intelligence/geography/geography-layout";
 
 import { useState } from "react";
@@ -9,7 +12,7 @@ import {
   type MapDatum,
 } from "@/components/maps/mexico-map";
 import type { IdentityMode } from "@/features/demo/identity-policy";
-import { unitTotals, money, type BusinessUnit } from "../model";
+import { unitTotals, money as originalMoney, type BusinessUnit } from "../model";
 import { FilterSelect } from "../filters";
 export function GeographyPanel({
   units,
@@ -24,7 +27,10 @@ export function GeographyPanel({
   selected: string;
   onSelect: (state: string) => void;
 }) {
+  const { hidden } = useFinancialPrivacy();
+  const money = usePrivateFormatter(originalMoney);
   const [metric, setMetric] = useState("revenue");
+  if (hidden) return <PrivateChartNotice />;
   if (mode !== "full")
     return (
       <section className="surface flex items-center gap-4 p-5">
@@ -69,7 +75,7 @@ export function GeographyPanel({
             </h2>
             <p className="mt-1 text-xs text-muted-foreground">
               {Object.keys(data).length} entidades con registros · Universo
-              documental propuesto
+              ficticio
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

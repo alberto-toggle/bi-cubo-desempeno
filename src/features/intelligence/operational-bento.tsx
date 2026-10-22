@@ -1,4 +1,7 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
+import { PrivateChartNotice } from "@/features/privacy/privacy-control";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { intelligenceLayout } from "@/features/intelligence/layout";
 
 import Link from "next/link";
@@ -14,7 +17,7 @@ import {
   type IdentityMode,
 } from "@/features/demo/identity-policy";
 import type { DemoRole } from "@/features/auth/access";
-import { money, unitTotals, type BusinessUnit } from "./model";
+import { money as originalMoney, unitTotals, type BusinessUnit } from "./model";
 import { Metrics, TrendChart } from "./presentation";
 
 function ContributionRanking({
@@ -26,6 +29,9 @@ function ContributionRanking({
   period: string;
   mode: IdentityMode;
 }) {
+  const { hidden } = useFinancialPrivacy();
+  const money = usePrivateFormatter(originalMoney);
+  if (hidden) return <PrivateChartNotice />;
   const rows = units
     .map((unit) => ({ unit, value: unitTotals(unit, period).contribution }))
     .sort((a, b) => b.value - a.value);
@@ -88,12 +94,6 @@ function WorkspaceLinks({ role }: { role: DemoRole | undefined }) {
       title: "Establecimientos",
       note: "Consultar unidades",
       icon: Building2,
-    },
-    {
-      href: "/establishments/unit-017#trazabilidad",
-      title: "Trazabilidad",
-      note: "Caso de cafetería",
-      icon: BookOpen,
     },
     ...(role === "admin"
       ? [

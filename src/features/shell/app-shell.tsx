@@ -1,4 +1,6 @@
 "use client";
+import { PrivacyControl } from "@/features/privacy/privacy-control";
+import { PerformanceScreen } from "@/features/performance/performance-screen";
 import { PanoramaMark } from "@/components/brand/panorama-mark";
 import { RouteTransition } from "@/features/loading/route-transition";
 import Link from "next/link";
@@ -48,12 +50,12 @@ export function AppShell({
       ? [
           {
             href: "/cube",
-            label: "Cubo de desempeño",
+            label: admin ? "Cubo de desempeño" : "Indicadores",
             icon: Box,
           },
           {
             href: "/reports",
-            label: "Utilidades y metas",
+            label: admin ? "Utilidades y metas" : "Objetivos",
             icon: ChartNoAxesCombined,
           },
           {
@@ -92,9 +94,9 @@ export function AppShell({
           <Link
             href="/"
             className="flex items-center gap-3 font-semibold tracking-tight"
-            title="Panorama GTyG"
+            title="Panorama"
           >
-            <PanoramaMark title="Panorama GTyG" width={38} height={43} />
+            <PanoramaMark title="Panorama" width={38} height={43} />
             {!collapsed && (
               <span className="text-lg">
                 panorama<span className="text-sidebar-accent">.</span>
@@ -123,7 +125,8 @@ export function AppShell({
                   (item) =>
                     item.href === "/" ||
                     item.href === "/establishments" ||
-                    item.href === "/reports" || item.href === "/cube",
+                    item.href === "/reports" ||
+                    item.href === "/cube",
                 ),
               },
               ...(admin
@@ -167,9 +170,11 @@ export function AppShell({
         <div className="mt-auto pt-10">
           {!collapsed && (
             <div className="mb-5 rounded-xl border border-sidebar-border p-3">
-              <p className="text-xs font-medium">Grupo de Tiendas y Granjas</p>
+              <p className="text-xs font-medium">Espacio de demostración</p>
               <p className="mt-2 text-[11px] leading-relaxed text-sidebar-muted">
-                Consulta operativa y financiera.
+                {session?.role === "staff"
+                  ? "Seguimiento de indicadores de desempeño."
+                  : "Consulta operativa y financiera."}
               </p>
             </div>
           )}
@@ -192,7 +197,7 @@ export function AppShell({
       </aside>
       <div className="min-w-0">
         <header className="app-topbar">
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3">
             <button
               className="md:hidden"
               aria-label="Abrir navegación"
@@ -203,8 +208,8 @@ export function AppShell({
             >
               <Menu size={20} />
             </button>
-            <span className="text-sm text-muted-foreground">
-              GTyG <span className="mx-2 opacity-40">/</span>{" "}
+            <span className="truncate text-sm text-muted-foreground">
+              Panorama <span className="mx-2 opacity-40">/</span>{" "}
               <span className="text-foreground">
                 {isPlayground
                   ? "Laboratorio visual"
@@ -218,8 +223,11 @@ export function AppShell({
               </span>
             </span>
           </div>
-          <div className="flex items-center gap-4">
-            <DemoHelp>Entorno de demostración</DemoHelp>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+            <div className="hidden sm:block">
+              <DemoHelp>Entorno de demostración</DemoHelp>
+            </div>
+            {!internal && <PrivacyControl />}
             {admin && !internal && (
               <Link
                 href="/settings/appearance"
@@ -251,10 +259,20 @@ export function AppShell({
           id="contenido"
           className="mx-auto w-full max-w-[1600px] p-5 sm:p-8 xl:p-10"
         >
-          {internal ? children : <RouteTransition>{children}</RouteTransition>}
+          {internal ? (
+            children
+          ) : (
+            <RouteTransition>
+              {session?.role === "staff" ? (
+                <PerformanceScreen key={pathname} path={pathname} />
+              ) : (
+                children
+              )}
+            </RouteTransition>
+          )}
         </main>
         <footer className="flex flex-wrap justify-between gap-2 border-t border-border px-8 py-5 text-xs text-muted-foreground">
-          <span>Panorama GTyG</span>
+          <span>Panorama</span>
           {internal && (
             <Link href="/playground" className="flex items-center gap-1">
               Biblioteca de componentes <ArrowUpRight size={12} />

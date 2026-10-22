@@ -113,6 +113,6 @@ export function analysisText(result: AnalysisResult, snapshot: CubeSnapshot) {
     snapshot.period,
     "DEMO · Análisis simulado. Cifras ilustrativas, no validación contable.",
     ...result.paragraphs,
-    "Fuente: reporte de gestión simulado de Panorama GTyG. Importes en MXN. Utilidades calculadas como ingresos menos costos y gastos, sin impuestos ni otros ajustes contables.",
+    "Fuente: reporte de gestión simulado de Panorama. Importes en MXN. Utilidades calculadas como ingresos menos costos y gastos, sin impuestos ni otros ajustes contables.",
   ].join("\n\n");
 }

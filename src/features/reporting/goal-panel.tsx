@@ -1,8 +1,11 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
+import { PrivateChartNotice } from "@/features/privacy/privacy-control";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { useChartView } from "./chart-view-control";
 import { ReportPanel } from "./report-layout";
 import { MetricChart } from "@/components/charts/metric-chart";
-import { reportMoney, percent, formatPercent } from "./model";
+import { reportMoney as originalMoney, percent, formatPercent } from "./model";
 export function GoalPanel({
   id,
   actual,
@@ -14,9 +17,12 @@ export function GoalPanel({
   target: number;
   month: number;
 }) {
+  const { hidden } = useFinancialPrivacy();
+  const reportMoney = usePrivateFormatter(originalMoney);
   const { view, control } = useChartView(id, "goal"),
     planned = Math.round((target * month) / 12),
     advance = percent(actual, target);
+  if (hidden) return <ReportPanel title="Avance contra meta anual"><PrivateChartNotice /></ReportPanel>;
   return (
     <ReportPanel
       title="Avance contra meta anual"

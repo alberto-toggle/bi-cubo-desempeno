@@ -1,4 +1,5 @@
 "use client";
+import { PerformanceSkeleton } from "@/features/performance/performance-skeleton";
 import { CubeSkeleton } from "@/features/cube/cube-skeleton";
 
 import {
@@ -106,6 +107,7 @@ export function ViewSkeleton({
         </div>
       </LoadingFrame>
     );
+  if (!admin) return <PerformanceSkeleton />;
   if (kind === "cube") return <CubeSkeleton geographyAllowed={admin} />;
   if (kind === "reports") return <ReportScreenSkeleton />;
   if (kind === "charts") return <ChartSettingsSkeleton />;

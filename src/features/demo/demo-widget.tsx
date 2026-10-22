@@ -7,8 +7,8 @@ export function DemoWidget() {
     <DemoControls>
       <p className="text-xs opacity-85">
         {role === "admin"
-          ? "Perfil administrador: nombres y ubicaciones completos."
-          : "Perfil de consulta: nombres protegidos con un prefijo ofuscado y un alias. Las ubicaciones permanecen reservadas."}
+          ? "Perfil administrador: datos ficticios y control de privacidad de cifras."
+          : "Perfil staff: indicadores de desempeño sin importes financieros."}
       </p>
     </DemoControls>
   );

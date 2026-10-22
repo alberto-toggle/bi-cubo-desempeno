@@ -1,11 +1,14 @@
 "use client";
+import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
+import { PrivateChartNotice } from "@/features/privacy/privacy-control";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import {
   MetricChart,
   type MetricPoint,
 } from "@/components/charts/metric-chart";
 import { useChartView } from "./chart-view-control";
 import { ReportPanel } from "./report-layout";
-import { reportMoney } from "./model";
+import { reportMoney as originalMoney } from "./model";
 export function ReportChart({
   id,
   title,
@@ -23,9 +26,12 @@ export function ReportChart({
   reference?: number;
   valueLabel?: string;
 }) {
+  const { hidden } = useFinancialPrivacy();
+  const reportMoney = usePrivateFormatter(originalMoney);
   const { view, control } = useChartView(id, family);
   // Narrow to this renderer’s supported families after preference validation.
   if (view === "progress" || view === "target") return null;
+  if (hidden) return <ReportPanel title={title}><PrivateChartNotice /></ReportPanel>;
   return (
     <ReportPanel title={title} description={description} control={control}>
       <MetricChart

@@ -115,57 +115,5 @@ export function PortfolioBodySkeleton({
   );
 }
 export function DetailBodySkeleton() {
-  return (
-    <>
-      <div className={intelligenceLayout.detailIdentity}>
-        {[0, 1, 2].map((i) => (
-          <article key={i} className="surface p-5">
-            <Bone className="h-5 w-5" />
-            <Bone className="mt-3 h-4 w-36" />
-            <Bone className="mt-2 h-5 w-4/5" />
-          </article>
-        ))}
-      </div>
-      <Bone className="h-9 w-40" />
-      <MetricsSkeleton />
-      <section className="surface p-5">
-        <Bone className="h-5 w-56 max-w-full" />
-        <div className={intelligenceLayout.operations}>
-          {[0, 1, 2].map((i) => (
-            <div key={i}>
-              <Bone className="h-4 w-32" />
-              <Bone className="mt-2 h-8 w-24" />
-            </div>
-          ))}
-        </div>
-        <Bone className="mt-4 h-4 w-4/5" />
-      </section>
-      <ReportDetailSkeleton />
-      <section className="surface p-6">
-        <Bone className="h-6 w-40" />
-        <Bone className="mt-2 h-5 w-4/5" />
-        <div className={intelligenceLayout.centers}>
-          {[0, 1].map((i) => (
-            <div
-              key={i}
-              className="space-y-4 rounded-xl border border-border p-4"
-            >
-              <Bone className="h-5 w-36" />
-              <Bone className="h-3 w-4/5" />
-              <div className="grid grid-cols-2 gap-3">
-                <Bone className="h-12" />
-                <Bone className="h-12" />
-              </div>
-              {[0, 1, 2].map((j) => (
-                <div key={j} className="space-y-2">
-                  <Bone className="h-3 w-28" />
-                  <Bone className="h-4 w-4/5" />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
+  return <><ReportDetailSkeleton /><Bone className="h-16" /></>;
 }

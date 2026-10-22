@@ -4,8 +4,6 @@ import {
   HeadingSkeleton,
   FiltersSkeleton,
 } from "@/features/loading/skeleton-parts";
-import { DataTableLayout } from "@/components/layout/data-table-layout";
-import { reportUnitColumns, reportTableClass } from "./report-table-layout";
 import { reportLayout, ReportPanel } from "./report-layout";
 function ChartPlaceholder() {
   return (
@@ -24,41 +22,18 @@ export function ReportDetailSkeleton() {
         <Bone className="h-7 w-48" />
         <Bone className="h-9 w-64" />
       </div>
-      <ReportPanel title="Responsable y personal">
-        <div className={reportLayout.cards}>
-          {[0, 1, 2, 3].map(i => (
-            <div key={i} className="space-y-2"><Bone className="h-3 w-28" /><Bone className="h-5 w-36" /></div>
-          ))}
-        </div>
-      </ReportPanel>
-      <div className={reportLayout.cards}>
-        {[0, 1, 2, 3].map((i) => (
-          <Bone key={i} className="h-36" />
-        ))}
+      <Bone className="h-12 w-full rounded-xl" />
+      <div className="flex justify-end">
+        <Bone className="h-10 w-44" />
       </div>
       <div className={reportLayout.cards}>
-        {[0, 1, 2, 3].map(i => <Bone key={i} className="h-28" />)}
+        {[0, 1, 2, 3].map((i) => (
+          <Bone key={i} className="h-28" />
+        ))}
       </div>
       <ReportPanel title="Histórico mensual">
         <ChartPlaceholder />
       </ReportPanel>
-      <div className={reportLayout.pair}>
-        <ReportPanel title="Avance contra meta anual">
-          <ChartPlaceholder />
-          <Bone className="mt-5 h-20" />
-        </ReportPanel>
-        <ReportPanel title="Comparativo al mismo corte">
-          <ChartPlaceholder />
-        </ReportPanel>
-      </div>
-      <Bone className="h-24" />
-      <ReportPanel title="Comparativo por ejercicio">
-        <ChartPlaceholder />
-      </ReportPanel>
-      <div className={reportLayout.cards}>
-        {[0, 1, 2, 3].map(i => <Bone key={i} className="h-32" />)}
-      </div>
-      <Bone className="h-24" />
     </div>
   );
 }
@@ -68,11 +43,7 @@ export function ReportScreenSkeleton() {
       <HeadingSkeleton />
       <FiltersSkeleton count={3} />
       <Bone className="h-14" />
-      <div className={reportLayout.cards}>
-        {[0, 1, 2, 3].map((i) => (
-          <Bone key={i} className="h-36" />
-        ))}
-      </div>
+      <Bone className="h-12 rounded-xl" />
       <div className={reportLayout.pair}>
         <ReportPanel title="Utilidades por giro comercial">
           <ChartPlaceholder />
@@ -84,34 +55,6 @@ export function ReportScreenSkeleton() {
       </div>
       <ReportPanel title="Programas productivos">
         <ChartPlaceholder />
-      </ReportPanel>
-      <ReportPanel title="Resultados por establecimiento">
-        <DataTableLayout columns={reportUnitColumns} className={reportTableClass}>
-          <thead>
-            <tr>
-              {reportUnitColumns.map((column) => (
-                <th key={column.key} className="px-3 py-4">
-                  <Bone className="h-4 w-20" />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from({ length: 10 }, (_, row) => (
-              <tr key={row} className="border-t border-border">
-                {reportUnitColumns.map((column) => (
-                  <td key={column.key} className="px-3 py-4">
-                    <Bone className="h-4 w-4/5" />
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </DataTableLayout>
-        <div className="mt-4 flex justify-between border-t border-border pt-4">
-          <Bone className="h-9 w-40" />
-          <Bone className="h-9 w-44" />
-        </div>
       </ReportPanel>
     </LoadingFrame>
   );

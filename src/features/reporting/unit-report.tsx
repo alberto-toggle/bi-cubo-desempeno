@@ -1,5 +1,10 @@
 "use client";
-import { presentResponsible, type IdentityMode } from "@/features/demo/identity-policy";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
+import {
+  presentResponsible,
+  type IdentityMode,
+} from "@/features/demo/identity-policy";
+import { ReportTabs } from "./report-tabs";
 import { UnitFacts } from "./unit-facts";
 import { YearlyMeans } from "./yearly-means";
 import { unitReportSummary } from "./unit-report-summary";
@@ -11,7 +16,7 @@ import {
   formatPercent,
   growth,
   monthNames,
-  reportMoney,
+  reportMoney as originalMoney,
   timeline,
   total,
 } from "./model";
@@ -19,7 +24,14 @@ import { reportLayout, ReportMetrics } from "./report-layout";
 import { ReportChart } from "./report-chart";
 import { GoalPanel } from "./goal-panel";
 import { FilterSelect } from "@/features/intelligence/filters";
-export function UnitReport({ unitId, mode }: { unitId: string; mode: IdentityMode }) {
+export function UnitReport({
+  unitId,
+  mode,
+}: {
+  unitId: string;
+  mode: IdentityMode;
+}) {
+  const reportMoney = usePrivateFormatter(originalMoney);
   const report = useReport(),
     [period, setPeriod] = useState(initialReportPeriod),
     [window, setWindow] = useState("36");
@@ -55,9 +67,12 @@ export function UnitReport({ unitId, mode }: { unitId: string; mode: IdentityMod
     }));
   const summary = unitReportSummary(profile, period);
   const responsible = presentResponsible(profile.staff, mode);
-  const annual = summary.annual.map(row => ({
+  const annual = summary.annual.map((row) => ({
     year: row.year,
-    label: row.months === 12 ? `${row.year} · completo` : `${row.year} · a ${monthNames[period.month - 1]}`,
+    label:
+      row.months === 12
+        ? `${row.year} · completo`
+        : `${row.year} · a ${monthNames[period.month - 1]}`,
     value: row.value,
   }));
   const series = timeline(
@@ -76,128 +91,197 @@ export function UnitReport({ unitId, mode }: { unitId: string; mode: IdentityMod
             Histórico y cumplimiento de metas
           </h2>
           <p className="mt-2 text-xs text-muted-foreground">
-            Cifras simuladas · Corte independiente del resumen financiero
-            superior · MXN
+            Cifras simuladas · Consulta por ejercicio y mes de corte · MXN
           </p>
         </div>
         <ReportPeriodControl value={period} onChange={setPeriod} />
       </header>
-      <UnitFacts
-        data={{
-          responsible: responsible.name,
-          appointed: responsible.appointed,
-          officers: profile.staff.officers,
-          troops: profile.staff.troops,
-          civilians: profile.staff.civilians,
-        }}
-      />
-      <ReportMetrics
+      <ReportTabs
         items={[
           {
-            label: "Utilidades al corte",
-            value: reportMoney(amount),
-            note: `Enero–${monthNames[period.month - 1]} ${period.year}`,
+            id: "history",
+            label: "Histórico mensual",
+            content: (
+              <>
+                {" "}
+                <div className="space-y-3">
+                  <div className="flex justify-end">
+                    <FilterSelect
+                      label="Ventana del histórico"
+                      value={window}
+                      onChange={setWindow}
+                      options={[
+                        { value: "12", label: "Últimos 12 meses" },
+                        { value: "24", label: "Últimos 24 meses" },
+                        { value: "36", label: "Últimos 36 meses" },
+                        { value: "48", label: "Todo el histórico" },
+                      ]}
+                    />
+                  </div>
+                  <YearlyMeans
+                    items={summary.annual.filter((row) =>
+                      series.some((point) => point.year === row.year),
+                    )}
+                  />
+                  <ReportChart
+                    id="unit-history"
+                    title="Histórico mensual"
+                    description="Utilidades y medias móviles de 6 y 24 meses. Las tendencias utilizan el histórico previo, aunque quede fuera de la ventana visible."
+                    family="timeline"
+                    data={series}
+                  />
+                </div>
+              </>
+            ),
           },
           {
-            label: "Variación interanual",
-            value: formatPercent(growth(amount, prior)),
-            note: "Comparación de los mismos meses",
+            id: "comparison",
+            label: "Comparativos",
+            content: (
+              <>
+                {" "}
+                {summary.annualMean !== undefined && (
+                  <div className="surface flex flex-wrap items-center justify-between gap-3 p-5">
+                    <div>
+                      <h3 className="text-sm font-semibold">
+                        Media anual {summary.completedYears[0]}–
+                        {summary.completedYears.at(-1)}
+                      </h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Promedio de utilidades de ejercicios completos · Excluye
+                        el ejercicio seleccionado
+                      </p>
+                    </div>
+                    <p className="text-2xl font-semibold tabular-nums">
+                      {reportMoney(summary.annualMean)}
+                    </p>
+                  </div>
+                )}
+                <ReportChart
+                  id="unit-annual"
+                  title="Comparativo por ejercicio"
+                  description="Ejercicios anteriores completos; el ejercicio seleccionado se muestra solo hasta el corte. La media excluye el ejercicio parcial."
+                  data={annual}
+                  reference={summary.annualMean}
+                />
+                <ReportChart
+                  id="unit-same-period"
+                  title="Comparativo al mismo corte"
+                  description={`Enero–${monthNames[period.month - 1]} de cada ejercicio. Variación calculada contra el año anterior.`}
+                  data={sameCut}
+                />
+              </>
+            ),
           },
           {
-            label: "Meta anual",
-            value: reportMoney(target),
-            note: `Media mensual objetivo: ${reportMoney(Math.round(target / 12))}`,
+            id: "goals",
+            label: "Metas y resultados",
+            content: (
+              <>
+                {" "}
+                <ReportMetrics
+                  items={[
+                    {
+                      label: "Utilidades al corte",
+                      value: reportMoney(amount),
+                      note: `Enero–${monthNames[period.month - 1]} ${period.year}`,
+                    },
+                    {
+                      label: "Variación interanual",
+                      value: formatPercent(growth(amount, prior)),
+                      note: "Comparación de los mismos meses",
+                    },
+                    {
+                      label: "Meta anual",
+                      value: reportMoney(target),
+                      note: `Media mensual objetivo: ${reportMoney(Math.round(target / 12))}`,
+                    },
+                    {
+                      label: "Promedio mensual al corte",
+                      value: reportMoney(Math.round(amount / period.month)),
+                      note: "Utilidades acumuladas / meses transcurridos",
+                    },
+                  ]}
+                />
+                <GoalPanel
+                  id="unit-goal"
+                  actual={amount}
+                  target={target}
+                  month={period.month}
+                />
+              </>
+            ),
           },
           {
-            label: "Promedio mensual al corte",
-            value: reportMoney(Math.round(amount / period.month)),
-            note: "Utilidades acumuladas / meses transcurridos",
+            id: "facts",
+            label: "Ficha del establecimiento",
+            content: (
+              <>
+                {" "}
+                <UnitFacts
+                  data={{
+                    responsible: responsible.name,
+                    appointed: responsible.appointed,
+                    officers: profile.staff.officers,
+                    troops: profile.staff.troops,
+                    civilians: profile.staff.civilians,
+                  }}
+                />
+                {profile.premises && (
+                  <ReportMetrics
+                    items={[
+                      {
+                        label: "Ventas al corte",
+                        value: reportMoney(summary.sales),
+                        note: `Enero–${monthNames[period.month - 1]} ${period.year} · Sin rentas de locales`,
+                      },
+                      {
+                        label: "Locales comerciales",
+                        value: reportMoney(summary.premisesRevenue),
+                        note: "Ingresos por rentas al corte · Incluidos en ingresos totales",
+                      },
+                      {
+                        label: "Locales en operación",
+                        value: String(profile.premises.count),
+                        note: "Capacidad ilustrativa de la tienda",
+                      },
+                      {
+                        label: "Ingresos totales al corte",
+                        value: reportMoney(
+                          summary.sales + summary.premisesRevenue,
+                        ),
+                        note: "Ventas + rentas · No equivale a utilidades",
+                      },
+                    ]}
+                  />
+                )}
+                <div className="surface grid gap-5 p-5 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs text-muted-foreground">
+                      Capital de trabajo · simulado
+                    </p>
+                    <p className="mt-2 text-xl font-semibold">
+                      {reportMoney(profile.workingCapital)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">
+                      Fondo revolvente · simulado
+                    </p>
+                    <p className="mt-2 text-xl font-semibold">
+                      {reportMoney(profile.revolvingFund)}
+                    </p>
+                  </div>
+                  <p className="text-xs text-muted-foreground sm:col-span-2">
+                    Saldos de referencia de la demo; no cambian con el corte
+                    seleccionado. No se incluyen cuentas bancarias.
+                  </p>
+                </div>
+              </>
+            ),
           },
         ]}
       />
-      <div className="space-y-3">
-        <div className="flex justify-end">
-          <FilterSelect
-            label="Ventana del histórico"
-            value={window}
-            onChange={setWindow}
-            options={[
-              { value: "12", label: "Últimos 12 meses" },
-              { value: "24", label: "Últimos 24 meses" },
-              { value: "36", label: "Últimos 36 meses" },
-              { value: "48", label: "Todo el histórico" },
-            ]}
-          />
-        </div>
-        <YearlyMeans items={summary.annual.filter(row => series.some(point => point.year === row.year))} />
-        <ReportChart
-          id="unit-history"
-          title="Histórico mensual"
-          description="Utilidades y medias móviles de 6 y 24 meses. Las tendencias utilizan el histórico previo, aunque quede fuera de la ventana visible."
-          family="timeline"
-          data={series}
-        />
-      </div>
-      <div className={reportLayout.pair}>
-        <GoalPanel
-          id="unit-goal"
-          actual={amount}
-          target={target}
-          month={period.month}
-        />
-        <ReportChart
-          id="unit-same-period"
-          title="Comparativo al mismo corte"
-          description={`Enero–${monthNames[period.month - 1]} de cada ejercicio. Variación calculada contra el año anterior.`}
-          data={sameCut}
-        />
-      </div>
-      {summary.annualMean !== undefined && (
-        <div className="surface flex flex-wrap items-center justify-between gap-3 p-5">
-          <div>
-            <h3 className="text-sm font-semibold">Media anual {summary.completedYears[0]}–{summary.completedYears.at(-1)}</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Promedio de utilidades de ejercicios completos · Excluye el ejercicio seleccionado</p>
-          </div>
-          <p className="text-2xl font-semibold tabular-nums">{reportMoney(summary.annualMean)}</p>
-        </div>
-      )}
-      <ReportChart
-        id="unit-annual"
-        title="Comparativo por ejercicio"
-        description="Ejercicios anteriores completos; el ejercicio seleccionado se muestra solo hasta el corte. La media excluye el ejercicio parcial."
-        data={annual}
-        reference={summary.annualMean}
-      />
-      {profile.premises && (
-        <ReportMetrics items={[
-          { label: "Ventas al corte", value: reportMoney(summary.sales), note: `Enero–${monthNames[period.month - 1]} ${period.year} · Sin rentas de locales` },
-          { label: "Locales comerciales", value: reportMoney(summary.premisesRevenue), note: "Ingresos por rentas al corte · Incluidos en ingresos totales" },
-          { label: "Locales en operación", value: String(profile.premises.count), note: "Capacidad ilustrativa de la tienda" },
-          { label: "Ingresos totales al corte", value: reportMoney(summary.sales + summary.premisesRevenue), note: "Ventas + rentas · No equivale a utilidades" },
-        ]} />
-      )}
-      <div className="surface grid gap-5 p-5 sm:grid-cols-2">
-        <div>
-          <p className="text-xs text-muted-foreground">
-            Capital de trabajo · simulado
-          </p>
-          <p className="mt-2 text-xl font-semibold">
-            {reportMoney(profile.workingCapital)}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs text-muted-foreground">
-            Fondo revolvente · simulado
-          </p>
-          <p className="mt-2 text-xl font-semibold">
-            {reportMoney(profile.revolvingFund)}
-          </p>
-        </div>
-        <p className="text-xs text-muted-foreground sm:col-span-2">
-          Saldos de referencia de la demo; no cambian con el corte seleccionado.
-          No se incluyen cuentas bancarias.
-        </p>
-      </div>
     </section>
   );
 }

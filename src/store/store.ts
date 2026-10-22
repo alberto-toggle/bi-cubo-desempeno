@@ -1,3 +1,5 @@
+import privacy from "@/features/privacy/privacy-slice";
+import performance from "@/features/performance/performance-slice";
 import { configureStore } from "@reduxjs/toolkit";
 import appearance from "@/features/appearance/appearance-slice";
 import portfolio from "@/features/intelligence/portfolio-slice";
@@ -16,6 +18,8 @@ export const makeStore = (
 ) =>
   configureStore({
     reducer: {
+      privacy,
+      performance,
       appearance,
       overview,
       auth,

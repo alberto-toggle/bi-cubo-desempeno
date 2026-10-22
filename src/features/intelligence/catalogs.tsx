@@ -59,7 +59,7 @@ export function CatalogsScreen() {
           <p className="eyebrow">Administración / Datos maestros</p>
           <h1 className="page-title">Catálogos maestros</h1>
           <p className="page-copy">
-            Registros documentados, relaciones y propuestas de actualización.
+            Registros genéricos, relaciones y propuestas de actualización.
           </p>
         </div>
         <button
@@ -71,8 +71,7 @@ export function CatalogsScreen() {
         </button>
       </header>
       <DemoHelp>
-        Catálogo propuesto, sujeto a validación institucional. Cambios guardados
-        como propuestas locales; no se modifica el documento ni el padrón base.
+        Catálogo ficticio de demostración. Cambios guardados como propuestas locales.
       </DemoHelp>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <FilterSelect
@@ -143,7 +142,7 @@ export function CatalogsScreen() {
                 </td>
                 <td className={tableLayout.catalogCell}>{r.relation}</td>
                 <td className={`${tableLayout.catalogCell} whitespace-nowrap`}>
-                  Catálogos · p. {r.page}
+                  Demostración
                 </td>
                 <td className={tableLayout.catalogCell}>
                   <button
@@ -212,19 +211,6 @@ export function CatalogsScreen() {
           </ul>
         )}
       </section>
-      <details className="surface p-5 text-sm">
-        <summary className="cursor-pointer font-medium">
-          Conciliación de fuentes documentales
-        </summary>
-        <p className="mt-3 leading-relaxed text-muted-foreground">
-          El catálogo propone 54 unidades en 12 entidades. La relación de
-          instalaciones contiene 86 renglones, con numeración repetida y
-          anotaciones de cierre, además de tres registros financieros generales.
-          No se han sumado ni asociado automáticamente: requiere validar
-          equivalencias entre unidad, instalación y centro de negocio. No se
-          incorporaron números de cuentas bancarias.
-        </p>
-      </details>
       {dialog && (
         <ProposalDialog
           record={dialog.record}

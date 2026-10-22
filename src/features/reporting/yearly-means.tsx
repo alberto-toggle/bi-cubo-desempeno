@@ -1,8 +1,11 @@
+"use client";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { yearColor } from "@/components/charts/year-colors";
-import { reportMoney } from "./model";
+import { reportMoney as originalMoney } from "./model";
 import { reportLayout } from "./report-layout";
 
 export function YearlyMeans({ items }: { items: { year: number; months: number; mean: number }[] }) {
+  const reportMoney = usePrivateFormatter(originalMoney);
   return (
     <section aria-label="Medias mensuales por año">
       <h3 className="mb-3 text-sm font-semibold">Media mensual por ejercicio</h3>

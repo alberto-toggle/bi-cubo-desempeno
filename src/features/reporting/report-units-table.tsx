@@ -1,11 +1,12 @@
 "use client";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { DataTableLayout } from "@/components/layout/data-table-layout";
 import { ReportPanel } from "./report-layout";
 import { reportUnitColumns, reportTableClass } from "./report-table-layout";
-import { formatPercent, percent, reportMoney } from "./model";
+import { formatPercent, percent, reportMoney as originalMoney } from "./model";
 export type ReportUnitRow = {
   id: string;
   label: string;
@@ -14,6 +15,7 @@ export type ReportUnitRow = {
   target: number;
 };
 export function ReportUnitsTable({ rows }: { rows: ReportUnitRow[] }) {
+  const reportMoney = usePrivateFormatter(originalMoney);
   const [page, setPage] = useState(0),
     pages = Math.max(1, Math.ceil(rows.length / 10)),
     current = Math.min(page, pages - 1);
