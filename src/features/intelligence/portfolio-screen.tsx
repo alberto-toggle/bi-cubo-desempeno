@@ -95,7 +95,7 @@ export function PortfolioScreen({
         </p>
       )}
       <DemoHelp>
-        Escenario genérico: establecimientos, cifras y asignaciones ficticios · Enero–junio 2026.
+        Catálogos originales autorizados · Cifras simuladas · Enero–junio 2026.
       </DemoHelp>
       {!data || error ? (
         <PortfolioState

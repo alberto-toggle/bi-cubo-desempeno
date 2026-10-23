@@ -148,14 +148,14 @@ export function parsePortfolio(value: unknown): Portfolio {
             u.centers.reduce(
               (sum, c) =>
                 sum +
-                (c.monthly.find((x) => x.month === m.month)?.revenue ?? NaN),
+                Math.round((c.monthly.find((x) => x.month === m.month)?.revenue ?? NaN) * 100),
               0,
-            ) === m.revenue &&
+            ) === Math.round(m.revenue * 100) &&
             u.centers.reduce(
               (sum, c) =>
-                sum + (c.monthly.find((x) => x.month === m.month)?.cost ?? NaN),
+                sum + Math.round((c.monthly.find((x) => x.month === m.month)?.cost ?? NaN) * 100),
               0,
-            ) === m.cost,
+            ) === Math.round(m.cost * 100),
         ),
     )
   )

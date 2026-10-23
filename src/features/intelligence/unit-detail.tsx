@@ -190,7 +190,7 @@ export function UnitDetail({ id }: { id: string }) {
         </div>
       </details>
       <DemoHelp>
-        Identidades, cifras y centros ficticios de demostración. Valores
+        Catálogos originales autorizados. Valores
         ficticios · Corte enero–junio 2026 · {unit.status}
       </DemoHelp>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import { validateProposals, type CatalogProposal } from "./catalog-model";
-const key = "panorama.generic.catalog-proposals.v1",
+const key = "panorama.original-catalog.catalog-proposals.v1",
   event = "gtyg:catalog-proposals";
 let fallback = "[]";
 function snapshot() {

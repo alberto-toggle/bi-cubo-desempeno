@@ -1,23 +1,23 @@
 [
   {
     "id": "demo-01",
-    "alias": "Establecimiento 1",
-    "name": "Establecimiento 1",
-    "location": "Ubicación de ejemplo 1",
-    "activity": "Giro 1"
+    "alias": "Minisúper DEFENSA / Tienda 1/11",
+    "name": "Minisúper DEFENSA / Tienda 1/11",
+    "location": "Ciudad de México",
+    "activity": "Tienda"
   },
   {
     "id": "demo-02",
-    "alias": "Establecimiento 2",
-    "name": "Establecimiento 2",
-    "location": "Ubicación de ejemplo 2",
-    "activity": "Giro 2"
+    "alias": "Miniplaza El Vergel",
+    "name": "Miniplaza El Vergel",
+    "location": "Ciudad de México",
+    "activity": "Tienda / centro comercial"
   },
   {
     "id": "demo-03",
-    "alias": "Establecimiento 3",
-    "name": "Establecimiento 3",
-    "location": "Ubicación de ejemplo 3",
-    "activity": "Giro 3"
+    "alias": "Tienda San Jerónimo",
+    "name": "Tienda San Jerónimo",
+    "location": "Ciudad de México",
+    "activity": "Tienda"
   }
 ]

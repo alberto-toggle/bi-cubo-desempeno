@@ -59,7 +59,7 @@ export function CatalogsScreen() {
           <p className="eyebrow">Administración / Datos maestros</p>
           <h1 className="page-title">Catálogos maestros</h1>
           <p className="page-copy">
-            Registros genéricos, relaciones y propuestas de actualización.
+            Registros originales, relaciones y propuestas de actualización.
           </p>
         </div>
         <button
@@ -71,7 +71,7 @@ export function CatalogsScreen() {
         </button>
       </header>
       <DemoHelp>
-        Catálogo ficticio de demostración. Cambios guardados como propuestas locales.
+        Catálogo original autorizado para la demostración. Cambios guardados como propuestas locales.
       </DemoHelp>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <FilterSelect

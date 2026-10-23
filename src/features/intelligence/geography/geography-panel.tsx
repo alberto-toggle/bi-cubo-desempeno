@@ -74,8 +74,8 @@ export function GeographyPanel({
               Distribución nacional
             </h2>
             <p className="mt-1 text-xs text-muted-foreground">
-              {Object.keys(data).length} entidades con registros · Universo
-              ficticio
+              {Object.keys(data).length} entidades con registros · Catálogo
+              original
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

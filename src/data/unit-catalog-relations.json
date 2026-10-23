@@ -1,0 +1,997 @@
+{
+  "unit-001": {
+    "centers": [
+      {
+        "id": "unit-001-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-002": {
+    "centers": [
+      {
+        "id": "unit-002-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-003": {
+    "centers": [
+      {
+        "id": "unit-003-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-004": {
+    "centers": [
+      {
+        "id": "unit-004-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-005": {
+    "centers": [
+      {
+        "id": "unit-005-center-1",
+        "code": "CN-INS-001",
+        "name": "Servicios sociales",
+        "segment": "Servicios institucionales",
+        "costCenterCode": "CC-ADM",
+        "costCenter": "Administración y dirección",
+        "sublineCode": "SUB-INS-001",
+        "subline": "Atención social"
+      },
+      {
+        "id": "unit-005-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-006": {
+    "centers": [
+      {
+        "id": "unit-006-center-1",
+        "code": "CN-ARR-001",
+        "name": "Renta de locales",
+        "segment": "Arrendamiento inmobiliario",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-ARR-001",
+        "subline": "Renta fija"
+      },
+      {
+        "id": "unit-006-center-2",
+        "code": "CN-MOV-001",
+        "name": "Estacionamiento por rotación",
+        "segment": "Movilidad y estacionamientos",
+        "costCenterCode": "CC-EST",
+        "costCenter": "Operación de estacionamiento",
+        "sublineCode": "SUB-MOV-001",
+        "subline": "Cobro por hora"
+      }
+    ],
+    "programs": []
+  },
+  "unit-007": {
+    "centers": [
+      {
+        "id": "unit-007-center-1",
+        "code": "CN-COM-003",
+        "name": "Venta de conveniencia 24 horas",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-006",
+        "subline": "Conveniencia 24 horas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-008": {
+    "centers": [
+      {
+        "id": "unit-008-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-009": {
+    "centers": [
+      {
+        "id": "unit-009-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-010": {
+    "centers": [
+      {
+        "id": "unit-010-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-011": {
+    "centers": [
+      {
+        "id": "unit-011-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-012": {
+    "centers": [
+      {
+        "id": "unit-012-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-013": {
+    "centers": [
+      {
+        "id": "unit-013-center-1",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-014": {
+    "centers": [
+      {
+        "id": "unit-014-center-1",
+        "code": "CN-REC-001",
+        "name": "Cine y taquilla",
+        "segment": "Recreación y entretenimiento",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-REC-001",
+        "subline": "Entrada general"
+      }
+    ],
+    "programs": []
+  },
+  "unit-015": {
+    "centers": [
+      {
+        "id": "unit-015-center-1",
+        "code": "CN-REC-001",
+        "name": "Cine y taquilla",
+        "segment": "Recreación y entretenimiento",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-REC-001",
+        "subline": "Entrada general"
+      }
+    ],
+    "programs": []
+  },
+  "unit-016": {
+    "centers": [
+      {
+        "id": "unit-016-center-1",
+        "code": "CN-DEP-001",
+        "name": "Membresías y accesos",
+        "segment": "Deporte y bienestar",
+        "costCenterCode": "CC-DEP",
+        "costCenter": "Instalaciones deportivas",
+        "sublineCode": "SUB-DEP-002",
+        "subline": "Membresía familiar"
+      },
+      {
+        "id": "unit-016-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      },
+      {
+        "id": "unit-016-center-3",
+        "code": "CN-EVE-001",
+        "name": "Renta de salones y espacios",
+        "segment": "Eventos",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-EVE-002",
+        "subline": "Renta por evento"
+      }
+    ],
+    "programs": []
+  },
+  "unit-017": {
+    "centers": [
+      {
+        "id": "unit-017-center-1",
+        "code": "CN-DEP-001",
+        "name": "Membresías y accesos",
+        "segment": "Deporte y bienestar",
+        "costCenterCode": "CC-DEP",
+        "costCenter": "Instalaciones deportivas",
+        "sublineCode": "SUB-DEP-002",
+        "subline": "Membresía familiar"
+      },
+      {
+        "id": "unit-017-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      },
+      {
+        "id": "unit-017-center-3",
+        "code": "CN-EVE-001",
+        "name": "Renta de salones y espacios",
+        "segment": "Eventos",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-EVE-002",
+        "subline": "Renta por evento"
+      }
+    ],
+    "programs": []
+  },
+  "unit-018": {
+    "centers": [
+      {
+        "id": "unit-018-center-1",
+        "code": "CN-HOS-001",
+        "name": "Habitaciones",
+        "segment": "Hospedaje",
+        "costCenterCode": "CC-HAB",
+        "costCenter": "Habitaciones",
+        "sublineCode": "SUB-HOS-001",
+        "subline": "Habitación sencilla"
+      },
+      {
+        "id": "unit-018-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-019": {
+    "centers": [
+      {
+        "id": "unit-019-center-1",
+        "code": "CN-HOS-001",
+        "name": "Habitaciones",
+        "segment": "Hospedaje",
+        "costCenterCode": "CC-HAB",
+        "costCenter": "Habitaciones",
+        "sublineCode": "SUB-HOS-001",
+        "subline": "Habitación sencilla"
+      },
+      {
+        "id": "unit-019-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-020": {
+    "centers": [
+      {
+        "id": "unit-020-center-1",
+        "code": "CN-FUN-001",
+        "name": "Servicios funerarios",
+        "segment": "Servicios funerarios",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-FUN-001",
+        "subline": "Paquete funerario"
+      }
+    ],
+    "programs": []
+  },
+  "unit-021": {
+    "centers": [
+      {
+        "id": "unit-021-center-1",
+        "code": "CN-FUN-001",
+        "name": "Servicios funerarios",
+        "segment": "Servicios funerarios",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-FUN-001",
+        "subline": "Paquete funerario"
+      }
+    ],
+    "programs": []
+  },
+  "unit-022": {
+    "centers": [
+      {
+        "id": "unit-022-center-1",
+        "code": "CN-LOG-001",
+        "name": "Almacenamiento",
+        "segment": "Logística y almacenamiento",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-LOG-001",
+        "subline": "Almacenamiento y custodia"
+      }
+    ],
+    "programs": []
+  },
+  "unit-023": {
+    "centers": [
+      {
+        "id": "unit-023-center-1",
+        "code": "CN-MOV-001",
+        "name": "Estacionamiento por rotación",
+        "segment": "Movilidad y estacionamientos",
+        "costCenterCode": "CC-EST",
+        "costCenter": "Operación de estacionamiento",
+        "sublineCode": "SUB-MOV-001",
+        "subline": "Cobro por hora"
+      }
+    ],
+    "programs": []
+  },
+  "unit-024": {
+    "centers": [
+      {
+        "id": "unit-024-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-025": {
+    "centers": [
+      {
+        "id": "unit-025-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-026": {
+    "centers": [
+      {
+        "id": "unit-026-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-027": {
+    "centers": [
+      {
+        "id": "unit-027-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-028": {
+    "centers": [
+      {
+        "id": "unit-028-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-029": {
+    "centers": [
+      {
+        "id": "unit-029-center-1",
+        "code": "CN-ARR-001",
+        "name": "Renta de locales",
+        "segment": "Arrendamiento inmobiliario",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-ARR-001",
+        "subline": "Renta fija"
+      },
+      {
+        "id": "unit-029-center-2",
+        "code": "CN-MOV-001",
+        "name": "Estacionamiento por rotación",
+        "segment": "Movilidad y estacionamientos",
+        "costCenterCode": "CC-EST",
+        "costCenter": "Operación de estacionamiento",
+        "sublineCode": "SUB-MOV-001",
+        "subline": "Cobro por hora"
+      }
+    ],
+    "programs": []
+  },
+  "unit-030": {
+    "centers": [
+      {
+        "id": "unit-030-center-1",
+        "code": "CN-ARR-001",
+        "name": "Renta de locales",
+        "segment": "Arrendamiento inmobiliario",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-ARR-001",
+        "subline": "Renta fija"
+      },
+      {
+        "id": "unit-030-center-2",
+        "code": "CN-MOV-001",
+        "name": "Estacionamiento por rotación",
+        "segment": "Movilidad y estacionamientos",
+        "costCenterCode": "CC-EST",
+        "costCenter": "Operación de estacionamiento",
+        "sublineCode": "SUB-MOV-001",
+        "subline": "Cobro por hora"
+      }
+    ],
+    "programs": []
+  },
+  "unit-031": {
+    "centers": [
+      {
+        "id": "unit-031-center-1",
+        "code": "CN-COM-003",
+        "name": "Venta de conveniencia 24 horas",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-006",
+        "subline": "Conveniencia 24 horas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-032": {
+    "centers": [
+      {
+        "id": "unit-032-center-1",
+        "code": "CN-COM-003",
+        "name": "Venta de conveniencia 24 horas",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-006",
+        "subline": "Conveniencia 24 horas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-033": {
+    "centers": [
+      {
+        "id": "unit-033-center-1",
+        "code": "CN-COM-003",
+        "name": "Venta de conveniencia 24 horas",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-006",
+        "subline": "Conveniencia 24 horas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-034": {
+    "centers": [
+      {
+        "id": "unit-034-center-1",
+        "code": "CN-COM-003",
+        "name": "Venta de conveniencia 24 horas",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-006",
+        "subline": "Conveniencia 24 horas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-035": {
+    "centers": [
+      {
+        "id": "unit-035-center-1",
+        "code": "CN-REC-001",
+        "name": "Cine y taquilla",
+        "segment": "Recreación y entretenimiento",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-REC-001",
+        "subline": "Entrada general"
+      }
+    ],
+    "programs": []
+  },
+  "unit-036": {
+    "centers": [
+      {
+        "id": "unit-036-center-1",
+        "code": "CN-DEP-001",
+        "name": "Membresías y accesos",
+        "segment": "Deporte y bienestar",
+        "costCenterCode": "CC-DEP",
+        "costCenter": "Instalaciones deportivas",
+        "sublineCode": "SUB-DEP-002",
+        "subline": "Membresía familiar"
+      },
+      {
+        "id": "unit-036-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      },
+      {
+        "id": "unit-036-center-3",
+        "code": "CN-EVE-001",
+        "name": "Renta de salones y espacios",
+        "segment": "Eventos",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-EVE-002",
+        "subline": "Renta por evento"
+      }
+    ],
+    "programs": []
+  },
+  "unit-037": {
+    "centers": [
+      {
+        "id": "unit-037-center-1",
+        "code": "CN-DEP-001",
+        "name": "Membresías y accesos",
+        "segment": "Deporte y bienestar",
+        "costCenterCode": "CC-DEP",
+        "costCenter": "Instalaciones deportivas",
+        "sublineCode": "SUB-DEP-002",
+        "subline": "Membresía familiar"
+      },
+      {
+        "id": "unit-037-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      },
+      {
+        "id": "unit-037-center-3",
+        "code": "CN-EVE-001",
+        "name": "Renta de salones y espacios",
+        "segment": "Eventos",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-EVE-002",
+        "subline": "Renta por evento"
+      }
+    ],
+    "programs": []
+  },
+  "unit-038": {
+    "centers": [
+      {
+        "id": "unit-038-center-1",
+        "code": "CN-HOS-001",
+        "name": "Habitaciones",
+        "segment": "Hospedaje",
+        "costCenterCode": "CC-HAB",
+        "costCenter": "Habitaciones",
+        "sublineCode": "SUB-HOS-001",
+        "subline": "Habitación sencilla"
+      },
+      {
+        "id": "unit-038-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-039": {
+    "centers": [
+      {
+        "id": "unit-039-center-1",
+        "code": "CN-REC-002",
+        "name": "Boliche",
+        "segment": "Recreación y entretenimiento",
+        "costCenterCode": "CC-OPE",
+        "costCenter": "Operación principal",
+        "sublineCode": "SUB-REC-003",
+        "subline": "Renta de pista"
+      }
+    ],
+    "programs": []
+  },
+  "unit-040": {
+    "centers": [
+      {
+        "id": "unit-040-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-041": {
+    "centers": [
+      {
+        "id": "unit-041-center-1",
+        "code": "CN-AGR-002",
+        "name": "Producción pecuaria",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-PEC",
+        "costCenter": "Producción pecuaria",
+        "sublineCode": "SUB-AGR-003",
+        "subline": "Ganado bovino"
+      }
+    ],
+    "programs": [
+      "Bovinos",
+      "Avícola",
+      "Porcinos",
+      "Agrícola"
+    ]
+  },
+  "unit-042": {
+    "centers": [
+      {
+        "id": "unit-042-center-1",
+        "code": "CN-AGR-001",
+        "name": "Producción agrícola",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-AGR",
+        "costCenter": "Producción agrícola",
+        "sublineCode": "SUB-AGR-001",
+        "subline": "Granos y forrajes"
+      }
+    ],
+    "programs": [
+      "Bovinos",
+      "Avícola",
+      "Porcinos",
+      "Agrícola"
+    ]
+  },
+  "unit-043": {
+    "centers": [
+      {
+        "id": "unit-043-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-044": {
+    "centers": [
+      {
+        "id": "unit-044-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-045": {
+    "centers": [
+      {
+        "id": "unit-045-center-1",
+        "code": "CN-AGR-001",
+        "name": "Producción agrícola",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-AGR",
+        "costCenter": "Producción agrícola",
+        "sublineCode": "SUB-AGR-001",
+        "subline": "Granos y forrajes"
+      }
+    ],
+    "programs": [
+      "Bovinos",
+      "Avícola",
+      "Porcinos",
+      "Agrícola"
+    ]
+  },
+  "unit-046": {
+    "centers": [
+      {
+        "id": "unit-046-center-1",
+        "code": "CN-ARR-001",
+        "name": "Renta de locales",
+        "segment": "Arrendamiento inmobiliario",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-ARR-001",
+        "subline": "Renta fija"
+      },
+      {
+        "id": "unit-046-center-2",
+        "code": "CN-MOV-001",
+        "name": "Estacionamiento por rotación",
+        "segment": "Movilidad y estacionamientos",
+        "costCenterCode": "CC-EST",
+        "costCenter": "Operación de estacionamiento",
+        "sublineCode": "SUB-MOV-001",
+        "subline": "Cobro por hora"
+      }
+    ],
+    "programs": []
+  },
+  "unit-047": {
+    "centers": [
+      {
+        "id": "unit-047-center-1",
+        "code": "CN-AGR-002",
+        "name": "Producción pecuaria",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-PEC",
+        "costCenter": "Producción pecuaria",
+        "sublineCode": "SUB-AGR-003",
+        "subline": "Ganado bovino"
+      }
+    ],
+    "programs": [
+      "Bovinos",
+      "Productos cárnicos",
+      "Huevo",
+      "Agrícola"
+    ]
+  },
+  "unit-048": {
+    "centers": [
+      {
+        "id": "unit-048-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-049": {
+    "centers": [
+      {
+        "id": "unit-049-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-050": {
+    "centers": [
+      {
+        "id": "unit-050-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-051": {
+    "centers": [
+      {
+        "id": "unit-051-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-052": {
+    "centers": [
+      {
+        "id": "unit-052-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-053": {
+    "centers": [
+      {
+        "id": "unit-053-center-1",
+        "code": "CN-AGR-002",
+        "name": "Producción pecuaria",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-PEC",
+        "costCenter": "Producción pecuaria",
+        "sublineCode": "SUB-AGR-003",
+        "subline": "Ganado bovino"
+      }
+    ],
+    "programs": [
+      "Bovinos",
+      "Avícola",
+      "Porcinos",
+      "Agrícola"
+    ]
+  },
+  "unit-054": {
+    "centers": [
+      {
+        "id": "unit-054-center-1",
+        "code": "CN-COM-001",
+        "name": "Venta minorista general",
+        "segment": "Comercio",
+        "costCenterCode": "CC-ALM",
+        "costCenter": "Almacén e inventarios",
+        "sublineCode": "SUB-COM-002",
+        "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  }
+}

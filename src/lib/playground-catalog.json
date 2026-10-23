@@ -687,5 +687,23 @@
     "provider": "Kokonut UI",
     "description": "Explora alternativas de palabras y su confianza ilustrativa, cambia la respuesta y revierte las ediciones. Demostración local sin conexión a IA.",
     "sourceUrl": "https://kokonutui.com/r/ai-token-alternatives.json"
+  },
+  {
+    "title": "Analytics Bento",
+    "category": "Estadísticas",
+    "href": "/playground/21st-dev/analytics-bento-romanvasnev",
+    "provider": "21st.dev · romanvasnev",
+    "description": "Bento de analítica con ingresos, sesiones, mapa de categorías y radar de estacionalidad. Tooltips, contadores y transiciones de periodo animados; datos ficticios del autor.",
+    "sourceUrl": "https://21st.dev/r/romanvasnev/analytics-bento",
+    "demoId": 40334
+  },
+  {
+    "title": "Web3 Bento",
+    "category": "Dashboards",
+    "href": "/playground/21st-dev/web3-bento-romanvasnev",
+    "provider": "21st.dev · romanvasnev",
+    "description": "Dashboard Web3 con portafolio, tarjetas apiladas, actividad, gas, staking y liquidez. Animaciones y datos ficticios del autor; no conecta wallets ni ejecuta transacciones.",
+    "sourceUrl": "https://21st.dev/r/romanvasnev/web3-bento",
+    "demoId": 40327
   }
 ]
