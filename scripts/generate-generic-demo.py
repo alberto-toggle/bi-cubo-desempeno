@@ -10,7 +10,8 @@ units=[]; profiles=[]; performance=[]
 for i, master in enumerate(catalog['units'], start=1):
     unit=master.copy()
     history=[]
-    for year in range(2023,2027):
+    # Prehistory supports 24-month trends even at the earliest selectable calendar window.
+    for year in range(2020,2027):
         for m in range(1,10 if year==2026 else 13):
             revenue=round((900+i*37+((m*19+i*13)%180))*(1+(year-2023)*.06)*100)
             cost=round(revenue*(.46+(i%5)*.035))
@@ -34,7 +35,7 @@ for i, master in enumerate(catalog['units'], start=1):
     programs=[dict(name=name,weight=100//len(names) if j<len(names)-1 else 100-(100//len(names))*(len(names)-1)) for j,name in enumerate(names)]
     units.append(dict(**unit,alias=unit['name'],status='Por conciliar' if i%5==0 else 'Al día',monthly=monthly,centers=centers,operations=[dict(label='Disponibilidad',value=str(90+i%10),unit='%'),dict(label='Atención dentro de plazo',value=str(82+i%17),unit='%')]))
     targets={str(y):round(sum(h['revenue']-h['cost']-h['expenses'] for h in history if h['period'].startswith(str(y-1)))*(1.05+(i%6)*.035)) for y in range(2024,2027)}
-    profiles.append(dict(unitId=unit['id'],months=history,targets=targets,programs=programs,workingCapital=(300+i*11)*100,revolvingFund=(100+i*3)*100,staff=dict(manager=f'Responsable {i}',alias=f'Responsable {i}',appointed=f'2025-{i%9+1:02}-01',officers=1, troops=2+i%4,civilians=2+i%5),premises=dict(count=1+i%4,revenueShare=10)))
+    profiles.append(dict(unitId=unit['id'],months=history,targets=targets,programs=programs,workingCapital=(300+i*11)*100,revolvingFund=(100+i*3)*100,staff=dict(manager=f'Responsable {i}',alias=f'Responsable {i}',appointed=f'2025-{i%9+1:02}-01',rank='Oficial · demostración',registration=f'DEMO-{i:03}',joined='2015-01-01',operationsStarted='2023-01-01',officers=1, troops=2+i%4,civilians=2+i%5),premises=dict(count=1+i%4,revenueShare=10) if unit['kind'].startswith(('Tienda','Centro comercial')) else None))
     periods=[]
     for y in range(2024,2027):
         for m in range(1,10 if y==2026 else 13):

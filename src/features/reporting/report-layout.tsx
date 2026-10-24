@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 export const reportLayout = {
+  detail: "grid items-start gap-5 xl:grid-cols-[200px_minmax(0,1fr)]",
+  story: "grid items-start gap-5 xl:grid-cols-[220px_minmax(0,1fr)]",
   page: "space-y-7",
   pair: "grid items-start gap-5 xl:grid-cols-2",
   cards: "grid gap-4 sm:grid-cols-2 xl:grid-cols-4",
@@ -37,14 +39,17 @@ export function ReportPanel({
 export function ReportMetrics({
   items,
 }: {
-  items: { label: string; value: string; note: string }[];
+  items: { label: string; value: string; note: string; color?: string }[];
 }) {
   return (
     <div className={reportLayout.cards}>
       {items.map((i) => (
         <article key={i.label} className="surface p-5">
           <p className="text-xs text-muted-foreground">{i.label}</p>
-          <p className="mt-3 text-2xl font-semibold tracking-tight tabular-nums">
+          <p
+            className="mt-3 text-2xl font-semibold tracking-tight tabular-nums"
+            style={i.color ? { color: i.color } : undefined}
+          >
             {i.value}
           </p>
           <p className="mt-3 text-xs text-muted-foreground">{i.note}</p>

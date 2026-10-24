@@ -7,13 +7,8 @@ import { DataTableLayout } from "@/components/layout/data-table-layout";
 import { ReportPanel } from "./report-layout";
 import { reportUnitColumns, reportTableClass } from "./report-table-layout";
 import { formatPercent, percent, reportMoney as originalMoney } from "./model";
-export type ReportUnitRow = {
-  id: string;
-  label: string;
-  line: string;
-  value: number;
-  target: number;
-};
+import type { ReportUnitRow } from "./model";
+export type { ReportUnitRow } from "./model";
 export function ReportUnitsTable({ rows }: { rows: ReportUnitRow[] }) {
   const reportMoney = usePrivateFormatter(originalMoney);
   const [page, setPage] = useState(0),

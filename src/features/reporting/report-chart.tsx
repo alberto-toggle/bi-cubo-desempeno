@@ -6,6 +6,7 @@ import {
   MetricChart,
   type MetricPoint,
 } from "@/components/charts/metric-chart";
+import { reportPalette } from "./report-palette";
 import { useChartView } from "./chart-view-control";
 import { ReportPanel } from "./report-layout";
 import { reportMoney as originalMoney } from "./model";
@@ -17,6 +18,7 @@ export function ReportChart({
   family = "comparison",
   reference,
   valueLabel,
+  yearMeans,
 }: {
   id: string;
   title: string;
@@ -25,16 +27,24 @@ export function ReportChart({
   family?: "comparison" | "timeline";
   reference?: number;
   valueLabel?: string;
+  yearMeans?: { year: number; mean: number }[];
 }) {
   const { hidden } = useFinancialPrivacy();
   const reportMoney = usePrivateFormatter(originalMoney);
   const { view, control } = useChartView(id, family);
   // Narrow to this renderer’s supported families after preference validation.
   if (view === "progress" || view === "target") return null;
-  if (hidden) return <ReportPanel title={title}><PrivateChartNotice /></ReportPanel>;
+  if (hidden)
+    return (
+      <ReportPanel title={title}>
+        <PrivateChartNotice />
+      </ReportPanel>
+    );
   return (
     <ReportPanel title={title} description={description} control={control}>
       <MetricChart
+        palette={reportPalette}
+        yearMeans={yearMeans}
         valueLabel={valueLabel}
         data={data}
         view={view}

@@ -1,35 +1,36 @@
 "use client";
-import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { useState } from "react";
-import { RefreshCw } from "lucide-react";
+import { ArrowLeft, ArrowRight, RefreshCw } from "lucide-react";
 import { usePortfolio } from "@/features/intelligence/use-portfolio";
-import { FilterSelect } from "@/features/intelligence/filters";
 import { useReport } from "./use-report";
-import {
-  reportMoney as originalMoney,
-  percent,
-  formatPercent,
-  commercialLine,
-  monthNames,
-} from "./model";
-import { groupResults, reportingRows } from "./queries";
+import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
+import { monthNames, reportMoney } from "./model";
+import { reportingRows, groupResults } from "./queries";
 import { initialReportPeriod, ReportPeriodControl } from "./period-control";
-import { ReportMetrics, reportLayout } from "./report-layout";
+import { reportLayout } from "./report-layout";
 import { ReportChart } from "./report-chart";
 import { GoalPanel } from "./goal-panel";
 import { ReportScreenSkeleton } from "./report-skeleton";
-import { ReportTabs } from "./report-tabs";
-import { ReportUnitsTable } from "./report-units-table";
+import {
+  reportChapters,
+  documentColors,
+  unitDocumentColors,
+  programColor,
+  unitDocumentOrder,
+  programDocumentColors,
+  programDocumentOrder,
+} from "./report-palette";
+import { ChapterDetails } from "./chapter-details";
 export function ReportScreen() {
-  const reportMoney = usePrivateFormatter(originalMoney);
+  const money = usePrivateFormatter(reportMoney);
   const portfolio = usePortfolio(),
     report = useReport();
   const [period, setPeriod] = useState(initialReportPeriod),
-    [line, setLine] = useState("all");
+    [chapter, setChapter] = useState("all");
   if (portfolio.error || report.error)
     return (
       <div className="surface p-6" role="alert">
-        <p>{portfolio.error || report.error}</p>
+        {portfolio.error || report.error}
         <button
           className="secondary-button mt-4"
           onClick={() => {
@@ -43,157 +44,182 @@ export function ReportScreen() {
     );
   if (!portfolio.data || !report.data) return <ReportScreenSkeleton />;
   const all = reportingRows(
-      report.data,
-      portfolio.data.units,
-      period,
-      portfolio.mode,
-    ),
-    rows = all.filter((r) => line === "all" || r.line === line);
+    report.data,
+    portfolio.data.units,
+    period,
+    portfolio.mode,
+  );
+  const chapters = [
+    { id: "all", label: "Utilidades por giro" },
+    ...reportChapters
+      .filter((c) => all.some((r) => r.line === c.line))
+      .map((c) => ({ id: c.line, label: c.line })),
+    { id: "goals", label: "Cumplimiento de metas" },
+  ];
+  const index = Math.max(
+    0,
+    chapters.findIndex((c) => c.id === chapter),
+  );
+  const rows = all.filter(
+    (r) => chapter === "all" || chapter === "goals" || r.line === chapter,
+  );
+  const order = unitDocumentOrder[chapter] ?? [];
+  const rank = (id: string) =>
+    order.includes(id) ? order.indexOf(id) : order.length;
+  rows.sort((a, b) => rank(a.id) - rank(b.id));
   const actual = rows.reduce((s, r) => s + r.value, 0),
     target = rows.reduce((s, r) => s + r.target, 0);
-  const categories = groupResults(
-      rows.map((r) => ({ label: r.line, value: r.value })),
-    ),
-    programs = groupResults(rows.flatMap((r) => r.programs));
-  const ranked = [...rows].sort((a, b) => b.value - a.value);
+  const grouped = groupResults(
+    all.map((r) => ({ label: r.line, value: r.value })),
+  );
+  const categories = reportChapters.flatMap((c) => {
+    const row = grouped.find((r) => r.label === c.line);
+    return row ? [{ ...row, color: c.color }] : [];
+  });
+  const programs = groupResults(rows.flatMap((r) => r.programs));
+  const programOrder = programDocumentOrder[chapter] ?? [];
+  programs.sort((a, b) => {
+    const rank = (label: string) =>
+      programOrder.includes(label)
+        ? programOrder.indexOf(label)
+        : programOrder.length;
+    return rank(a.label) - rank(b.label);
+  });
+  const isOverview = chapter === "all",
+    isGoals = chapter === "goals";
   return (
     <div className={reportLayout.page}>
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Consulta / Reporte de gestión</p>
-          <h1 className="page-title">Utilidades y metas</h1>
+          <p className="eyebrow">Reporte de gestión</p>
+          <h1 className="page-title">Resultados por giro comercial</h1>
           <p className="page-copy">
-            Resultados por giro, establecimiento y programa productivo.
+            Enero–{monthNames[period.month - 1]} {period.year} · Cifras
+            simuladas · MXN
           </p>
         </div>
-        <button
-          className="secondary-button"
-          aria-label="Actualizar reporte"
-          disabled={
-            report.status === "loading" || portfolio.status === "loading"
-          }
-          onClick={() => {
-            void report.reload();
-            void portfolio.reload();
-          }}
-        >
-          <RefreshCw size={16} />
-        </button>
+        <div className="flex items-center gap-3">
+          <ReportPeriodControl value={period} onChange={setPeriod} />
+          <button
+            className="secondary-button"
+            aria-label="Actualizar reporte"
+            onClick={() => {
+              void portfolio.reload();
+              void report.reload();
+            }}
+          >
+            <RefreshCw size={16} />
+          </button>
+        </div>
       </header>
-      <div className="flex flex-wrap gap-3">
-        <ReportPeriodControl value={period} onChange={setPeriod} />
-        <FilterSelect
-          label="Giro comercial"
-          value={line}
-          onChange={setLine}
-          options={[
-            { value: "all", label: "Todos los giros" },
-            ...[...new Set(portfolio.data.units.map(commercialLine))]
-              .sort()
-              .map((v) => ({ value: v, label: v })),
-          ]}
-        />
-      </div>
-      <p className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
-        Cifras simuladas · Enero–{monthNames[period.month - 1]} {period.year} ·
-        MXN. Utilidades: ingresos menos costos y gastos. Las metas son
-        ilustrativas.
-      </p>
-      <ReportTabs
-        items={[
-          {
-            id: "charts",
-            label: "Gráficas de utilidades",
-            content: (
-              <>
-                {" "}
-                <div className={reportLayout.pair}>
-                  <ReportChart
-                    id="report-giro"
-                    title="Utilidades por giro comercial"
-                    description="Comparativo del acumulado al corte · MXN"
-                    data={categories}
-                  />
-                  <GoalPanel
-                    id="report-goal"
-                    actual={actual}
-                    target={target}
+      <div className={reportLayout.story}>
+        <nav
+          aria-label="Índice de resultados"
+          className="surface max-h-[70vh] overflow-auto p-2 xl:sticky xl:top-5"
+        >
+          <ol className="flex gap-1 xl:block">
+            {chapters.map((c, i) => (
+              <li key={c.id}>
+                <button
+                  onClick={() => setChapter(c.id)}
+                  aria-current={chapter === c.id ? "step" : undefined}
+                  className={`flex w-full shrink-0 items-center gap-3 whitespace-nowrap rounded-lg px-3 py-3 text-left text-sm xl:whitespace-normal ${chapter === c.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}
+                >
+                  <span className="text-[10px] tabular-nums opacity-70">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {c.label}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div className="min-w-0 space-y-5">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-xs text-muted-foreground" aria-live="polite">
+              {index + 1} / {chapters.length} · {chapters[index].label}
+            </p>
+            <div className="flex gap-2">
+              <button
+                className="secondary-button"
+                disabled={index === 0}
+                onClick={() => setChapter(chapters[index - 1].id)}
+              >
+                <ArrowLeft size={14} />
+                <span className="hidden sm:inline">Anterior</span>
+              </button>
+              <button
+                className="secondary-button"
+                disabled={index === chapters.length - 1}
+                onClick={() => setChapter(chapters[index + 1].id)}
+              >
+                <span className="hidden sm:inline">Siguiente</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+          {isGoals ? (
+            <GoalPanel
+              id="report-goal"
+              actual={actual}
+              target={target}
+              month={period.month}
+            />
+          ) : (
+            <>
+              <ReportChart
+                id={isOverview ? "report-giro" : "report-units"}
+                title={
+                  isOverview
+                    ? "Utilidades por giro comercial"
+                    : `Utilidades · ${chapter}`
+                }
+                description={`Utilidades acumuladas: ${money(actual)} · Enero–${monthNames[period.month - 1]} ${period.year}`}
+                data={
+                  isOverview
+                    ? categories
+                    : rows.map((r, i) => ({
+                        label: r.label,
+                        value: r.value,
+                        color:
+                          unitDocumentColors[r.id] ??
+                          documentColors[i % documentColors.length],
+                      }))
+                }
+              />
+              {!isOverview && (
+                <>
+                  {programs.length > 0 && (
+                    <ReportChart
+                      id="report-programs"
+                      title="Utilidades generadas por programa"
+                      description="Distribución simulada del resultado; no se suma nuevamente al total."
+                      data={programs.map((r, i) => ({
+                        ...r,
+                        color:
+                          chapter === "Criadero" && r.label === "Bovinos"
+                            ? programDocumentColors["BOVINOS_CRIADERO"]
+                            : programColor(r.label, i),
+                      }))}
+                    />
+                  )}
+                  <ChapterDetails
+                    line={chapter}
+                    year={period.year}
                     month={period.month}
-                  />
-                </div>
-                {line !== "all" && (
-                  <ReportChart
-                    id="report-units"
-                    title="Utilidades por establecimiento"
-                    description="Nombres visibles según tu rol · Acumulado al corte · MXN"
-                    data={ranked.map((r) => ({
-                      label: r.label,
-                      value: r.value,
+                    rows={rows.map((r, i) => ({
+                      ...r,
+                      color:
+                        unitDocumentColors[r.id] ??
+                        documentColors[i % documentColors.length],
                     }))}
                   />
-                )}
-                {programs.length > 0 && (
-                  <ReportChart
-                    id="report-programs"
-                    title="Programas productivos"
-                    description="Distribución ilustrativa de las utilidades por programa; no se suma nuevamente al total."
-                    data={programs}
-                  />
-                )}
-              </>
-            ),
-          },
-          {
-            id: "summary",
-            label: "Resumen",
-            content: (
-              <>
-                {" "}
-                <ReportMetrics
-                  items={[
-                    {
-                      label: "Utilidades acumuladas",
-                      value: reportMoney(actual),
-                      note: `${rows.length} unidades en esta selección`,
-                    },
-                    {
-                      label: "Meta anual",
-                      value: reportMoney(target),
-                      note: `Ejercicio ${period.year} completo`,
-                    },
-                    {
-                      label: "Avance de meta",
-                      value: formatPercent(percent(actual, target)),
-                      note: `Programado: ${formatPercent((period.month / 12) * 100)}`,
-                    },
-                    {
-                      label: "Pendiente de meta",
-                      value: reportMoney(Math.max(0, target - actual)),
-                      note:
-                        actual > target
-                          ? "Meta superada"
-                          : "Diferencia respecto a la meta anual",
-                    },
-                  ]}
-                />
-              </>
-            ),
-          },
-          {
-            id: "units",
-            label: "Por establecimiento",
-            content: (
-              <>
-                {" "}
-                <ReportUnitsTable
-                  key={`${line}-${period.year}-${period.month}-${portfolio.mode}`}
-                  rows={ranked}
-                />
-              </>
-            ),
-          },
-        ]}
-      />
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

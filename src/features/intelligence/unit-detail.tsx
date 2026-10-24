@@ -51,7 +51,7 @@ export function UnitDetail({ id }: { id: string }) {
           {identity.location}
         </p>
       </header>
-      <UnitReport unitId={unit.id} mode={mode} />
+      <UnitReport unitId={unit.id} mode={mode} kind={unit.kind} />
       <details className="surface p-5">
         <summary className="cursor-pointer font-semibold">
           Información operativa complementaria
@@ -190,8 +190,8 @@ export function UnitDetail({ id }: { id: string }) {
         </div>
       </details>
       <DemoHelp>
-        Catálogos originales autorizados. Valores
-        ficticios · Corte enero–junio 2026 · {unit.status}
+        Catálogos originales autorizados. Valores ficticios · Corte enero–junio
+        2026 · {unit.status}
       </DemoHelp>
     </div>
   );

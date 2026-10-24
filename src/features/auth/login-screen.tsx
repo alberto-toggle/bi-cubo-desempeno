@@ -31,7 +31,8 @@ export function LoginScreen() {
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
-    if (auth.ready && auth.session) router.replace("/");
+    if (auth.ready && auth.session)
+      router.replace(auth.session.role === "admin" ? "/reports" : "/");
   }, [auth, router]);
   const loading =
     !initialReady || !auth.ready || !ready || Boolean(auth.session);

@@ -10,9 +10,17 @@ import {
 export function useChartView(key: string, family: ChartFamily) {
   const prefs = useAppSelector((s) => s.chartPreferences),
     dispatch = useAppDispatch();
-  const view = validView(family, prefs.overrides[key])
+  const verticalComparison =
+    key === "unit-annual" || key === "unit-same-period";
+  const preferred = validView(family, prefs.overrides[key])
     ? prefs.overrides[key]
-    : prefs.defaults[family];
+    : key === "unit-annual" ||
+        key === "unit-same-period" ||
+        key === "report-goal"
+      ? "columns"
+      : prefs.defaults[family];
+  const view =
+    verticalComparison && preferred === "bars" ? "columns" : preferred;
   return {
     view,
     control: (
@@ -23,7 +31,9 @@ export function useChartView(key: string, family: ChartFamily) {
           if (validView(family, v))
             dispatch(setChartView({ key, family, view: v }));
         }}
-        options={[...chartOptions[family]]}
+        options={chartOptions[family].filter(
+          (option) => !verticalComparison || option.value !== "bars",
+        )}
       />
     ),
   };

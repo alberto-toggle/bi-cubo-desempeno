@@ -1,4 +1,5 @@
 "use client";
+import { goalColors } from "./report-palette";
 import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
 import { PrivateChartNotice } from "@/features/privacy/privacy-control";
 import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
@@ -22,7 +23,12 @@ export function GoalPanel({
   const { view, control } = useChartView(id, "goal"),
     planned = Math.round((target * month) / 12),
     advance = percent(actual, target);
-  if (hidden) return <ReportPanel title="Avance contra meta anual"><PrivateChartNotice /></ReportPanel>;
+  if (hidden)
+    return (
+      <ReportPanel title="Avance contra meta anual">
+        <PrivateChartNotice />
+      </ReportPanel>
+    );
   return (
     <ReportPanel
       title="Avance contra meta anual"
@@ -49,8 +55,11 @@ export function GoalPanel({
             aria-valuetext={formatPercent(advance)}
           >
             <div
-              className="h-full rounded-full bg-chart-1"
-              style={{ width: `${Math.max(0, Math.min(100, advance ?? 0))}%` }}
+              className="h-full rounded-full"
+              style={{
+                background: goalColors.actual,
+                width: `${Math.max(0, Math.min(100, advance ?? 0))}%`,
+              }}
             />
             <span
               className="absolute -top-2 h-9 w-px bg-foreground"
@@ -85,11 +94,29 @@ export function GoalPanel({
         <MetricChart
           data={
             view === "target"
-              ? [{ label: "Utilidades", value: actual }]
+              ? [
+                  {
+                    label: "Utilidades",
+                    value: actual,
+                    color: goalColors.actual,
+                  },
+                ]
               : [
-                  { label: "Meta anual", value: target },
-                  { label: "Programado", value: planned },
-                  { label: "Utilidades", value: actual },
+                  {
+                    label: "Meta anual",
+                    value: target,
+                    color: goalColors.target,
+                  },
+                  {
+                    label: "Programado",
+                    value: planned,
+                    color: goalColors.planned,
+                  },
+                  {
+                    label: "Utilidades",
+                    value: actual,
+                    color: goalColors.actual,
+                  },
                 ]
           }
           view={view === "target" ? "bars" : "columns"}
@@ -99,12 +126,22 @@ export function GoalPanel({
       )}
       <dl className="mt-5 grid grid-cols-2 gap-4 rounded-xl bg-muted/40 p-4">
         <div>
-          <dt className="text-xs text-muted-foreground">Porcentaje por recabar</dt>
-          <dd className="mt-2 font-semibold tabular-nums">{formatPercent(advance === null ? null : Math.max(0, 100 - advance))}</dd>
+          <dt className="text-xs text-muted-foreground">
+            Porcentaje por recabar
+          </dt>
+          <dd className="mt-2 font-semibold tabular-nums">
+            {formatPercent(
+              advance === null ? null : Math.max(0, 100 - advance),
+            )}
+          </dd>
         </div>
         <div>
-          <dt className="text-xs text-muted-foreground">Media mensual objetivo</dt>
-          <dd className="mt-2 font-semibold tabular-nums">{reportMoney(Math.round(target / 12))}</dd>
+          <dt className="text-xs text-muted-foreground">
+            Media mensual objetivo
+          </dt>
+          <dd className="mt-2 font-semibold tabular-nums">
+            {reportMoney(Math.round(target / 12))}
+          </dd>
         </div>
       </dl>
       <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">

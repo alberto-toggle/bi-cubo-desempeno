@@ -318,6 +318,10 @@
     {
       "area": "performanceCube",
       "decision": "Cuatro capas: ingresos, costos, gastos y utilidades. Utilidades derivadas de ingresos menos costos y gastos, compartiendo fórmula con reportes; mantenimiento e inversión conservados únicamente en datos."
+    },
+    {
+      "area": "documentaryReports",
+      "decision": "Reportes organizados por capítulos de la presentación; colores documentales independientes del tema, tres años calendario con medias anuales sobre barras, fichas por tipo de unidad y cifras/personas sintéticas."
     }
   ],
   "evidence": [

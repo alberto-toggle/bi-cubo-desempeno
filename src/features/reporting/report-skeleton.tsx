@@ -18,22 +18,26 @@ function ChartPlaceholder() {
 export function ReportDetailSkeleton() {
   return (
     <div className={reportLayout.page}>
-      <div className="flex flex-wrap justify-between gap-3">
-        <Bone className="h-7 w-48" />
-        <Bone className="h-9 w-64" />
+      <HeadingSkeleton />
+      <div className={reportLayout.detail}>
+        <Bone className="h-[480px]" />
+        <div className="space-y-5">
+          <Bone className="h-12" />
+          <div className="grid grid-cols-3 gap-3">
+            {[0, 1, 2].map((i) => (
+              <Bone key={i} className="h-20" />
+            ))}
+          </div>
+          <ReportPanel title="Utilidades mensuales">
+            <ChartPlaceholder />
+          </ReportPanel>
+          <div className={reportLayout.pair}>
+            {[0, 1].map((i) => (
+              <Bone key={i} className="h-80" />
+            ))}
+          </div>
+        </div>
       </div>
-      <Bone className="h-12 w-full rounded-xl" />
-      <div className="flex justify-end">
-        <Bone className="h-10 w-44" />
-      </div>
-      <div className={reportLayout.cards}>
-        {[0, 1, 2, 3].map((i) => (
-          <Bone key={i} className="h-28" />
-        ))}
-      </div>
-      <ReportPanel title="Histórico mensual">
-        <ChartPlaceholder />
-      </ReportPanel>
     </div>
   );
 }
@@ -41,21 +45,16 @@ export function ReportScreenSkeleton() {
   return (
     <LoadingFrame>
       <HeadingSkeleton />
-      <FiltersSkeleton count={3} />
-      <Bone className="h-14" />
-      <Bone className="h-12 rounded-xl" />
-      <div className={reportLayout.pair}>
-        <ReportPanel title="Utilidades por giro comercial">
-          <ChartPlaceholder />
-        </ReportPanel>
-        <ReportPanel title="Avance contra meta anual">
-          <ChartPlaceholder />
-          <Bone className="mt-5 h-20" />
-        </ReportPanel>
+      <FiltersSkeleton count={2} />
+      <div className={reportLayout.story}>
+        <Bone className="h-[620px]" />
+        <div className="space-y-5">
+          <Bone className="h-10" />
+          <ReportPanel title="Utilidades por giro comercial">
+            <Bone className="h-[650px]" />
+          </ReportPanel>
+        </div>
       </div>
-      <ReportPanel title="Programas productivos">
-        <ChartPlaceholder />
-      </ReportPanel>
     </LoadingFrame>
   );
 }

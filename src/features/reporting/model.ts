@@ -9,7 +9,18 @@ export type ReportMonth = {
 };
 export type ReportProfile = {
   unitId: string;
-  staff: { manager: string; alias: string; appointed: string; officers: number; troops: number; civilians: number };
+  staff: {
+    manager: string;
+    alias: string;
+    appointed: string;
+    rank: string;
+    registration: string;
+    joined: string;
+    operationsStarted: string;
+    officers: number;
+    troops: number;
+    civilians: number;
+  };
   premises: { count: number; revenueShare: number } | null;
   months: ReportMonth[];
   targets: Record<string, number>;
@@ -118,19 +129,27 @@ export function parseReport(value: unknown): ManagementReport {
       (p) =>
         p &&
         typeof p.unitId === "string" &&
-        p.staff && typeof p.staff.manager === "string" && typeof p.staff.alias === "string" &&
+        p.staff &&
+        typeof p.staff.manager === "string" &&
+        typeof p.staff.alias === "string" &&
         /^\d{4}-\d{2}-\d{2}$/.test(p.staff.appointed) &&
         [p.staff.officers, p.staff.troops, p.staff.civilians].every(amount) &&
-        (p.premises === null || (p.premises && amount(p.premises.count) && amount(p.premises.revenueShare) && p.premises.revenueShare <= 100)) &&
+        (p.premises === null ||
+          (p.premises &&
+            amount(p.premises.count) &&
+            amount(p.premises.revenueShare) &&
+            p.premises.revenueShare <= 100)) &&
         Array.isArray(p.months) &&
         p.months.length >= 24 &&
         new Set(p.months.map((m) => m?.period)).size === p.months.length &&
         p.months.every(
           (m) =>
             m &&
-            /^202[3-6]-(0[1-9]|1[0-2])$/.test(m.period) &&
+            /^202[0-6]-(0[1-9]|1[0-2])$/.test(m.period) &&
             m.period <= r.cutoff &&
-            [m.revenue, m.cost, m.expenses, m.maintenance, m.investment].every(amount) &&
+            [m.revenue, m.cost, m.expenses, m.maintenance, m.investment].every(
+              amount,
+            ) &&
             m.maintenance <= m.expenses,
         ) &&
         p.targets &&
@@ -148,3 +167,37 @@ export function parseReport(value: unknown): ManagementReport {
     throw new Error("No fue posible interpretar el reporte de demostración.");
   return r;
 }
+
+/** Calendar blocks retain future slots without inventing zero-valued observations. */
+export function calendarTimeline(
+  profile: ReportProfile,
+  period: { year: number; month: number },
+  months: number,
+) {
+  const full = timeline(
+    profile,
+    `${period.year}-${String(period.month).padStart(2, "0")}`,
+  );
+  const firstYear = period.year - months / 12 + 1;
+  return Array.from({ length: months }, (_, i) => {
+    const year = firstYear + Math.floor(i / 12),
+      label = `${monthNames[i % 12]} ${year}`;
+    return (
+      full.find((point) => point.label === label) ?? {
+        label,
+        year,
+        value: null,
+        short: null,
+        long: null,
+      }
+    );
+  });
+}
+
+export type ReportUnitRow = {
+  id: string;
+  label: string;
+  line: string;
+  value: number;
+  target: number;
+};

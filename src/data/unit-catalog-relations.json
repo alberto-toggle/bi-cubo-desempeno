@@ -763,10 +763,15 @@
       }
     ],
     "programs": [
-      "Bovinos",
+      "Carne de pollo",
       "Avícola",
+      "Carne de res",
+      "Bovinos",
+      "Carne de cerdo",
       "Porcinos",
-      "Agrícola"
+      "Alfalfa",
+      "Miel, huevo de godorniz",
+      "Maíz predio Sarabia"
     ]
   },
   "unit-042": {
@@ -878,10 +883,16 @@
       }
     ],
     "programs": [
-      "Bovinos",
       "Productos cárnicos",
-      "Huevo",
-      "Agrícola"
+      "Huevo rojo",
+      "Huevo blanco",
+      "Agrícola",
+      "Bovinos",
+      "Orégano",
+      "Ciervo rojo",
+      "Ovinos",
+      "Bisonte americano",
+      "Nogales"
     ]
   },
   "unit-048": {
@@ -973,10 +984,7 @@
       }
     ],
     "programs": [
-      "Bovinos",
-      "Avícola",
-      "Porcinos",
-      "Agrícola"
+      "Bovinos"
     ]
   },
   "unit-054": {
@@ -990,6 +998,121 @@
         "costCenter": "Almacén e inventarios",
         "sublineCode": "SUB-COM-002",
         "subline": "Abarrotes y bebidas"
+      }
+    ],
+    "programs": []
+  },
+  "unit-055": {
+    "centers": [
+      {
+        "id": "unit-055-center-1",
+        "code": "CN-HOS-001",
+        "name": "Habitaciones",
+        "segment": "Hospedaje",
+        "costCenterCode": "CC-HAB",
+        "costCenter": "Habitaciones",
+        "sublineCode": "SUB-HOS-001",
+        "subline": "Habitación sencilla"
+      },
+      {
+        "id": "unit-055-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-056": {
+    "centers": [
+      {
+        "id": "unit-056-center-1",
+        "code": "CN-INS-001",
+        "name": "Servicios sociales",
+        "segment": "Servicios institucionales",
+        "costCenterCode": "CC-ADM",
+        "costCenter": "Administración y dirección",
+        "sublineCode": "SUB-INS-001",
+        "subline": "Atención social"
+      },
+      {
+        "id": "unit-056-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      }
+    ],
+    "programs": []
+  },
+  "unit-057": {
+    "centers": [
+      {
+        "id": "unit-057-center-1",
+        "code": "CN-AYB-001",
+        "name": "Restaurante",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-001",
+        "subline": "Servicio a la carta"
+      }
+    ],
+    "programs": []
+  },
+  "unit-058": {
+    "centers": [
+      {
+        "id": "unit-058-center-1",
+        "code": "CN-AGR-001",
+        "name": "Producción agrícola",
+        "segment": "Producción agropecuaria",
+        "costCenterCode": "CC-AGR",
+        "costCenter": "Producción agrícola",
+        "sublineCode": "SUB-AGR-001",
+        "subline": "Granos y forrajes"
+      }
+    ],
+    "programs": []
+  },
+  "unit-059": {
+    "centers": [
+      {
+        "id": "unit-059-center-1",
+        "code": "CN-DEP-001",
+        "name": "Membresías y accesos",
+        "segment": "Deporte y bienestar",
+        "costCenterCode": "CC-DEP",
+        "costCenter": "Instalaciones deportivas",
+        "sublineCode": "SUB-DEP-002",
+        "subline": "Membresía familiar"
+      },
+      {
+        "id": "unit-059-center-2",
+        "code": "CN-AYB-002",
+        "name": "Cafetería",
+        "segment": "Alimentos y bebidas",
+        "costCenterCode": "CC-COC",
+        "costCenter": "Cocina y preparación",
+        "sublineCode": "SUB-AYB-006",
+        "subline": "Alimentos rápidos y repostería"
+      },
+      {
+        "id": "unit-059-center-3",
+        "code": "CN-EVE-001",
+        "name": "Renta de salones y espacios",
+        "segment": "Eventos",
+        "costCenterCode": "CC-ARE",
+        "costCenter": "Áreas comunes",
+        "sublineCode": "SUB-EVE-002",
+        "subline": "Renta por evento"
       }
     ],
     "programs": []

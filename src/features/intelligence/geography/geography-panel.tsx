@@ -12,7 +12,11 @@ import {
   type MapDatum,
 } from "@/components/maps/mexico-map";
 import type { IdentityMode } from "@/features/demo/identity-policy";
-import { unitTotals, money as originalMoney, type BusinessUnit } from "../model";
+import {
+  unitTotals,
+  money as originalMoney,
+  type BusinessUnit,
+} from "../model";
 import { FilterSelect } from "../filters";
 export function GeographyPanel({
   units,
@@ -47,7 +51,11 @@ export function GeographyPanel({
       </section>
     );
   const data: Record<string, MapDatum> = {};
+  const pending = units.filter(
+    (u) => !mexicanStates.some((s) => s.id === u.stateCode),
+  ).length;
   for (const u of units) {
+    if (!mexicanStates.some((s) => s.id === u.stateCode)) continue;
     const t = unitTotals(u, period);
     const item = data[u.stateCode] ?? { count: 0, value: 0 };
     item.count++;
@@ -76,6 +84,7 @@ export function GeographyPanel({
             <p className="mt-1 text-xs text-muted-foreground">
               {Object.keys(data).length} entidades con registros · Catálogo
               original
+              {pending > 0 && ` · ${pending} unidades sin ubicación confirmada`}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

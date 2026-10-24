@@ -1,5 +1,5 @@
 {
-  "source": "Catálogos maestros GTyG Defensa (SEDENA).pdf",
+  "source": "Catálogos maestros GTyG Defensa (SEDENA).pdf; ampliación nominal contrastada con UTILIDADES SEPTIEMBRE bis.pptx.pdf y RELACIÓN DE INSTALACIONES.pdf",
   "status": "Propuesta pendiente de validación institucional",
   "units": [
     {
@@ -703,6 +703,76 @@
       "segmentCode": "COM",
       "kind": "Tienda",
       "sourcePage": 6
+    },
+    {
+      "id": "unit-055",
+      "code": "UN-DEMO-055",
+      "name": "Hotel Bicentenario de la Independencia",
+      "location": "Ubicación por confirmar",
+      "stateCode": "PENDING",
+      "region": "Por confirmar",
+      "division": "Hospedaje y turismo",
+      "segment": "Hospedaje",
+      "segmentCode": "HOS",
+      "kind": "Hotel",
+      "sourcePage": 6,
+      "sourceDocument": "UTILIDADES SEPTIEMBRE bis.pptx.pdf"
+    },
+    {
+      "id": "unit-056",
+      "code": "UN-DEMO-056",
+      "name": "Centro de Promoción Social Defensa",
+      "location": "Ubicación por confirmar",
+      "stateCode": "PENDING",
+      "region": "Por confirmar",
+      "division": "Servicios complementarios",
+      "segment": "Servicios institucionales",
+      "segmentCode": "INS",
+      "kind": "Centro de promoción social",
+      "sourcePage": 1,
+      "sourceDocument": "UTILIDADES SEPTIEMBRE bis.pptx.pdf"
+    },
+    {
+      "id": "unit-057",
+      "code": "UN-DEMO-057",
+      "name": "Corredor Gastronómico",
+      "location": "Ubicación por confirmar",
+      "stateCode": "PENDING",
+      "region": "Por confirmar",
+      "division": "Alimentos y bebidas",
+      "segment": "Alimentos y bebidas",
+      "segmentCode": "AYB",
+      "kind": "Corredor gastronómico",
+      "sourcePage": 1,
+      "sourceDocument": "UTILIDADES SEPTIEMBRE bis.pptx.pdf"
+    },
+    {
+      "id": "unit-058",
+      "code": "UN-DEMO-058",
+      "name": "Predio Agrícola Xocolatl",
+      "location": "Ubicación por confirmar",
+      "stateCode": "PENDING",
+      "region": "Por confirmar",
+      "division": "Granjas",
+      "segment": "Producción agropecuaria",
+      "segmentCode": "AGR",
+      "kind": "Predio agrícola",
+      "sourcePage": 1,
+      "sourceDocument": "UTILIDADES SEPTIEMBRE bis.pptx.pdf"
+    },
+    {
+      "id": "unit-059",
+      "code": "UN-DEMO-059",
+      "name": "Centro Ecuestre Defensa",
+      "location": "Ubicación por confirmar",
+      "stateCode": "PENDING",
+      "region": "Por confirmar",
+      "division": "Servicios deportivos y recreativos",
+      "segment": "Deporte y bienestar",
+      "segmentCode": "DEP",
+      "kind": "Centro ecuestre",
+      "sourcePage": 1,
+      "sourceDocument": "UTILIDADES SEPTIEMBRE bis.pptx.pdf"
     }
   ]
 }

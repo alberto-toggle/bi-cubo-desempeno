@@ -33,7 +33,7 @@ export function useLoginFlow() {
     setChallenge(null);
     setNotice("");
     dispatch(setSession({ role, expiresAt: Date.now() + 8 * 60 * 60 * 1000 }));
-    router.replace("/");
+    router.replace(role === "admin" ? "/reports" : "/");
   }
   async function credentials(
     email: string,
