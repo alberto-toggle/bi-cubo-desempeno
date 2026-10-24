@@ -13,6 +13,7 @@ import { GoalPanel } from "./goal-panel";
 import { ReportScreenSkeleton } from "./report-skeleton";
 import {
   reportChapters,
+  chapterTitles,
   documentColors,
   unitDocumentColors,
   programColor,
@@ -85,6 +86,14 @@ export function ReportScreen() {
         : programOrder.length;
     return rank(a.label) - rank(b.label);
   });
+  const isProductive = chapter === "Granjas" || chapter === "Criadero";
+  const programData = programs.map((r, i) => ({
+    ...r,
+    color:
+      chapter === "Criadero" && r.label === "Bovinos"
+        ? programDocumentColors.BOVINOS_CRIADERO
+        : programColor(r.label, i),
+  }));
   const isOverview = chapter === "all",
     isGoals = chapter === "goals";
   return (
@@ -164,32 +173,35 @@ export function ReportScreen() {
               actual={actual}
               target={target}
               month={period.month}
+              year={period.year}
             />
           ) : (
             <>
               <ReportChart
-                id={isOverview ? "report-giro" : "report-units"}
+                id={isOverview ? "report-giro" : `report-units-${chapter}`}
                 title={
                   isOverview
                     ? "Utilidades por giro comercial"
-                    : `Utilidades · ${chapter}`
+                    : (chapterTitles[chapter] ?? `Utilidades · ${chapter}`)
                 }
                 description={`Utilidades acumuladas: ${money(actual)} · Enero–${monthNames[period.month - 1]} ${period.year}`}
                 data={
                   isOverview
                     ? categories
-                    : rows.map((r, i) => ({
-                        label: r.label,
-                        value: r.value,
-                        color:
-                          unitDocumentColors[r.id] ??
-                          documentColors[i % documentColors.length],
-                      }))
+                    : isProductive
+                      ? programData
+                      : rows.map((r, i) => ({
+                          label: r.label,
+                          value: r.value,
+                          color:
+                            unitDocumentColors[r.id] ??
+                            documentColors[i % documentColors.length],
+                        }))
                 }
               />
               {!isOverview && (
                 <>
-                  {programs.length > 0 && (
+                  {!isProductive && programs.length > 0 && (
                     <ReportChart
                       id="report-programs"
                       title="Utilidades generadas por programa"

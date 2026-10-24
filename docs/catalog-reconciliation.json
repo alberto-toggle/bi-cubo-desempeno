@@ -1,0 +1,202 @@
+{
+  "source": "RELACIÓN DE  INSTALACIONES.pdf",
+  "installationCount": 86,
+  "supplementary": [
+    "Predio Agrícola Xocolatl"
+  ],
+  "notes": [
+    "Se excluyen las tres cuentas administrativas del padrón.",
+    "No se utiliza la numeración impresa como identificador: el documento repite números.",
+    "Se normaliza la errata DEFFENSA a Defensa y los acentos.",
+    "No hay equivalencias confirmadas para los restaurantes y cines numerados.",
+    "Los registros exclusivos del catálogo maestro se retiran de esta versión; se conservan aquí para conciliación.",
+    "Las relaciones de centros de las altas se simulan a partir de plantillas del mismo giro; no son relaciones documentales."
+  ],
+  "retired": [
+    {
+      "id": "unit-001",
+      "name": "Minisúper DEFENSA / Tienda 1/11"
+    },
+    {
+      "id": "unit-002",
+      "name": "Miniplaza El Vergel"
+    },
+    {
+      "id": "unit-004",
+      "name": "Tienda del Estacionamiento Centenario"
+    },
+    {
+      "id": "unit-005",
+      "name": "Centro de Atención Social para Militares Retirados"
+    },
+    {
+      "id": "unit-007",
+      "name": "Minicentinela del Hotel del Ejército y Fuerza Aérea"
+    },
+    {
+      "id": "unit-008",
+      "name": "Restaurante No. 1"
+    },
+    {
+      "id": "unit-009",
+      "name": "Restaurante No. 2"
+    },
+    {
+      "id": "unit-010",
+      "name": "Restaurante No. 3"
+    },
+    {
+      "id": "unit-012",
+      "name": "Área de Comida Rápida del Centro de Atención Social"
+    },
+    {
+      "id": "unit-013",
+      "name": "Módulo de Servicio de Cafetería"
+    },
+    {
+      "id": "unit-014",
+      "name": "Cine No. 1"
+    },
+    {
+      "id": "unit-015",
+      "name": "Cine No. 3"
+    },
+    {
+      "id": "unit-017",
+      "name": "Centro Deportivo U.H.M. Chihuahua"
+    },
+    {
+      "id": "unit-020",
+      "name": "Servicio Funerario Militar No. 1"
+    },
+    {
+      "id": "unit-021",
+      "name": "Servicio Funerario Militar No. 2"
+    },
+    {
+      "id": "unit-022",
+      "name": "Almacén de Productos Avícolas"
+    },
+    {
+      "id": "unit-023",
+      "name": "Estacionamiento Centenario del Ejército Mexicano"
+    },
+    {
+      "id": "unit-027",
+      "name": "Tienda San Miguel de los Jagüeyes"
+    },
+    {
+      "id": "unit-028",
+      "name": "Tienda Santa María Rayón"
+    },
+    {
+      "id": "unit-029",
+      "name": "Centro Comercial Campo Militar No. 1-A"
+    },
+    {
+      "id": "unit-032",
+      "name": "Centinela Campo Militar No. 1-A"
+    },
+    {
+      "id": "unit-033",
+      "name": "Centinela Héroes de la Revolución"
+    },
+    {
+      "id": "unit-035",
+      "name": "Cine No. 2"
+    },
+    {
+      "id": "unit-040",
+      "name": "Restaurante Bicentenario del Heroico Colegio Militar"
+    },
+    {
+      "id": "unit-041",
+      "name": "Granja No. 1"
+    },
+    {
+      "id": "unit-042",
+      "name": "Granja No. 4"
+    },
+    {
+      "id": "unit-043",
+      "name": "Tienda Irapuato"
+    },
+    {
+      "id": "unit-045",
+      "name": "Granja No. 3"
+    },
+    {
+      "id": "unit-048",
+      "name": "Tienda San Quintín"
+    },
+    {
+      "id": "unit-049",
+      "name": "Tienda 3/01 La Paz"
+    },
+    {
+      "id": "unit-053",
+      "name": "Granja No. 2"
+    }
+  ],
+  "added": [
+    "Tienda Naucalpan",
+    "Tienda Predio Reforma",
+    "Tienda Lomas de Sotelo",
+    "Tienda C.A.S.M.R.",
+    "Tienda El Sauz",
+    "Tienda Mier",
+    "Tienda Tecalitlán",
+    "Tienda Chicomuselo",
+    "Tienda Pie de la Cuesta",
+    "Tienda Altamirano",
+    "Tienda Isla Mujeres",
+    "Tienda San Pedro",
+    "Tienda Bicentenario H.C.M.",
+    "Centinela Naucalpan",
+    "Centinela Hospital Central Militar",
+    "Centinela El Huizachal",
+    "Centinela Mazatlán",
+    "Centinela Monterrey",
+    "Centinela Mérida",
+    "Centinela Piedras Negras",
+    "Centinela del Hotel Bicentenario de la Independencia",
+    "Restaurante Lomas de Sotelo",
+    "Restaurante Hospital Central Militar",
+    "Restaurante Unidad de Especialidades Médicas",
+    "Restaurante Hotel del Ejército y Fuerza Aérea",
+    "Restaurante Hotel Centenario del Ejército Mexicano",
+    "Restaurante Guadalajara",
+    "Restaurante Puebla",
+    "Restaurante Mérida",
+    "Restaurante del Hotel Santa Lucía",
+    "Restaurante del Centro Comercial Santa Lucía",
+    "Restaurante Hotel Bicentenario",
+    "Cafetería Naucalpan",
+    "Cafetería Lomas de Sotelo",
+    "Cafetería El Huizachal",
+    "Cafetería Santa Lucía",
+    "Cafetería Apodaca",
+    "Cafetería Bicentenario H.C.M.",
+    "Centro Deportivo Apodaca",
+    "Centro Deportivo Bicentenario H.C.M.",
+    "Cine Lomas de Sotelo",
+    "Cine Naucalpan",
+    "Cine Santa Lucía",
+    "Estacionamiento Lomas de Sotelo",
+    "Estacionamiento C.A.S.M.R.",
+    "Estacionamiento Naucalpan",
+    "Estacionamiento Deportivo Lomas",
+    "Estacionamiento Santa Lucía",
+    "Estacionamiento Bicentenario H.C.M.",
+    "Centro Comercial Naucalpan",
+    "Centro Comercial C.A.S.M.R.",
+    "Centro Comercial Iztapalapa",
+    "Centro Comercial Santa María",
+    "Centro Comercial San Miguel",
+    "Centro Comercial Irapuato",
+    "Centro Comercial Apodaca",
+    "Centro Comercial Bicentenario H.C.M.",
+    "Granja Defensa No. 1",
+    "Granja Defensa No. 2"
+  ]
+}

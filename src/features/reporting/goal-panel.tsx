@@ -6,17 +6,24 @@ import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { useChartView } from "./chart-view-control";
 import { ReportPanel } from "./report-layout";
 import { MetricChart } from "@/components/charts/metric-chart";
-import { reportMoney as originalMoney, percent, formatPercent } from "./model";
+import {
+  reportMoney as originalMoney,
+  percent,
+  formatPercent,
+  monthNames,
+} from "./model";
 export function GoalPanel({
   id,
   actual,
   target,
   month,
+  year,
 }: {
   id: string;
   actual: number;
   target: number;
   month: number;
+  year?: number;
 }) {
   const { hidden } = useFinancialPrivacy();
   const reportMoney = usePrivateFormatter(originalMoney);
@@ -25,16 +32,36 @@ export function GoalPanel({
     advance = percent(actual, target);
   if (hidden)
     return (
-      <ReportPanel title="Avance contra meta anual">
+      <ReportPanel
+        title={year ? `Avance en la meta ${year}` : "Avance contra meta anual"}
+      >
         <PrivateChartNotice />
       </ReportPanel>
     );
   return (
     <ReportPanel
-      title="Avance contra meta anual"
+      title={year ? `Avance en la meta ${year}` : "Avance contra meta anual"}
       description="Programación lineal para esta simulación. El avance real se calcula sobre la meta completa."
       control={control}
     >
+      <dl className="mb-6 grid gap-4 sm:grid-cols-2">
+        <div>
+          <dt className="text-sm text-muted-foreground">
+            Proyección {year ?? "anual"}
+          </dt>
+          <dd className="mt-2 text-2xl font-semibold tabular-nums">
+            {reportMoney(target)}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-sm text-muted-foreground">
+            Utilidades {year ?? "acumuladas"}
+          </dt>
+          <dd className="mt-2 text-2xl font-semibold tabular-nums">
+            {reportMoney(actual)}
+          </dd>
+        </div>
+      </dl>
       {view === "progress" ? (
         <div className="flex min-h-80 flex-col justify-center gap-6">
           <div className="flex items-end justify-between gap-3">
@@ -103,23 +130,23 @@ export function GoalPanel({
                 ]
               : [
                   {
-                    label: "Meta anual",
+                    label: year ? `Meta ${year}` : "Meta anual",
                     value: target,
                     color: goalColors.target,
                   },
                   {
-                    label: "Programado",
+                    label: "Avance programado",
                     value: planned,
                     color: goalColors.planned,
                   },
                   {
-                    label: "Utilidades",
+                    label: `Utilidades Ene–${monthNames[month - 1]}`,
                     value: actual,
                     color: goalColors.actual,
                   },
                 ]
           }
-          view={view === "target" ? "bars" : "columns"}
+          view={view === "target" || view === "bars" ? "bars" : "columns"}
           reference={view === "target" ? target : undefined}
           formatValue={reportMoney}
         />
@@ -137,13 +164,21 @@ export function GoalPanel({
         </div>
         <div>
           <dt className="text-xs text-muted-foreground">
-            Media mensual objetivo
+            Proyección de utilidad mensual
           </dt>
           <dd className="mt-2 font-semibold tabular-nums">
             {reportMoney(Math.round(target / 12))}
           </dd>
         </div>
       </dl>
+      <p className="mt-4 text-sm leading-relaxed">
+        Al corte de {monthNames[month - 1]} {year}, las utilidades acumuladas
+        son {reportMoney(actual)} ({formatPercent(advance)} de la meta). El
+        resultado está {reportMoney(Math.abs(actual - planned))}{" "}
+        {actual >= planned ? "por arriba" : "por debajo"} de lo programado (
+        {formatPercent(percent(Math.abs(actual - planned), target))} de la meta
+        anual).
+      </p>
       <p className="mt-4 border-t border-border pt-4 text-xs text-muted-foreground">
         Diferencia contra programado:{" "}
         <strong className="text-foreground">

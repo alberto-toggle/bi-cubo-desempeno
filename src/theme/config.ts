@@ -58,8 +58,8 @@ export type Appearance = {
   finish: (typeof finishes)[number]["id"];
 };
 export const defaults: Appearance = {
-  theme: "ocean",
-  font: "inter",
+  theme: "institutional",
+  font: "patria",
   finish: "original",
 };
 export const storageKey = "gtyg.appearance.v1";

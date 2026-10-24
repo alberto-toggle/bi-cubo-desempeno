@@ -7,7 +7,9 @@ def save(path, data):
 catalog=json.loads((root/'src/data/master-units.json').read_text())
 relations=json.loads((root/'src/data/unit-catalog-relations.json').read_text())
 units=[]; profiles=[]; performance=[]
-for i, master in enumerate(catalog['units'], start=1):
+for master in catalog['units']:
+    # Stable seed preserves a unit's fictitious figures when the roster is reordered.
+    i = int(master['id'].split('-')[-1])
     unit=master.copy()
     history=[]
     # Prehistory supports 24-month trends even at the earliest selectable calendar window.

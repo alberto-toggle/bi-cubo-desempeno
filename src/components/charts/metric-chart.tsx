@@ -36,6 +36,8 @@ export function MetricChart({
   yearMeans,
   baseColor = "var(--chart-1)",
   numericDivisor = 100,
+  curve = "linear",
+  showPoints = false,
 }: {
   data: MetricPoint[];
   view: MetricChartView;
@@ -45,6 +47,8 @@ export function MetricChart({
   palette?: { year: (year: number) => string; short: string; long: string };
   baseColor?: string;
   numericDivisor?: number;
+  curve?: "linear" | "monotone";
+  showPoints?: boolean;
   yearMeans?: { year: number; mean: number }[];
 }) {
   const colorForYear = palette?.year ?? yearColor;
@@ -254,6 +258,13 @@ export function MetricChart({
             )}
             {view === "area" ? (
               <Area
+                type={curve}
+                strokeWidth={2}
+                dot={
+                  showPoints
+                    ? { r: 4, fill: "var(--card)", strokeWidth: 1.5 }
+                    : false
+                }
                 name={valueLabel}
                 dataKey="value"
                 stroke={seriesColor}
@@ -263,11 +274,16 @@ export function MetricChart({
               />
             ) : view === "line" ? (
               <Line
+                type={curve}
                 name={valueLabel}
                 dataKey="value"
                 stroke={seriesColor}
                 strokeWidth={2}
-                dot={false}
+                dot={
+                  showPoints
+                    ? { r: 4, fill: "var(--card)", strokeWidth: 1.5 }
+                    : false
+                }
                 isAnimationActive={!reduced}
               />
             ) : (

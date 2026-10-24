@@ -4,7 +4,16 @@ import { MetricChart } from "@/components/charts/metric-chart";
 import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { demoUnitOperations } from "@/services/demo-unit-operations";
 import { ReportMetrics, ReportPanel, reportLayout } from "./report-layout";
-import { reportMoney, type ReportProfile } from "./model";
+import { monthNames, type ReportProfile } from "./model";
+import { demoSportsIncome } from "@/services/demo-sports-income";
+import { IncomeBreakdownCard } from "./income-breakdown-card";
+const incomeMoney = (cents: number) =>
+  new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(cents / 100);
 const count = (n: number) => n.toLocaleString("es-MX");
 export function SportsDetail({
   profile,
@@ -15,7 +24,7 @@ export function SportsDetail({
   year: number;
   month: number;
 }) {
-  const money = usePrivateFormatter(reportMoney);
+  const money = usePrivateFormatter(incomeMoney);
   const data = demoUnitOperations(
     profile.unitId,
     "Centro deportivo",
@@ -26,7 +35,7 @@ export function SportsDetail({
     profile.months.find(
       (m) => m.period === `${year}-${String(month).padStart(2, "0")}`,
     )?.revenue ?? 0;
-  const subscriptions = Math.round(revenue * 0.88);
+  const income = demoSportsIncome(revenue);
   return (
     <div className={reportLayout.page}>
       <ReportMetrics
@@ -47,7 +56,7 @@ export function SportsDetail({
             value: count(data.accesses),
             note: "Mes seleccionado",
           },
-        ]}
+        ].map((item) => ({ ...item, color: sportsColors.positive }))}
       />
       <div className="grid gap-4 md:grid-cols-3">
         {[
@@ -56,28 +65,35 @@ export function SportsDetail({
             value: data.joins,
             note: "Altas del mes",
             color: sportsColors.positive,
+            background: sportsColors.positiveSurface,
           },
           {
             label: "Bajas",
             value: data.manualLeaves + data.automaticLeaves,
             note: `Manual ${data.manualLeaves} · Automático ${data.automaticLeaves}`,
             color: sportsColors.negative,
+            background: sportsColors.negativeSurface,
           },
           {
             label: "Reactivaciones",
             value: data.reactivations,
             note: `AC ${data.reactivations} · RC 0 · ST 0`,
             color: sportsColors.registration,
+            background: sportsColors.registrationSurface,
           },
         ].map((m) => (
           <article
             key={m.label}
-            className="surface border-t-4 p-5"
-            style={{ borderTopColor: m.color }}
+            className="surface p-5"
+            style={{
+              background: m.background,
+              color: m.color,
+              borderColor: m.background,
+            }}
           >
             <p className="text-sm">{m.label}</p>
             <p className="my-2 text-3xl font-semibold">{m.value}</p>
-            <p className="text-xs text-muted-foreground">{m.note}</p>
+            <p className="text-xs">{m.note}</p>
           </article>
         ))}
       </div>
@@ -85,23 +101,29 @@ export function SportsDetail({
         {[
           {
             label: "Ingresos mensualidades",
-            value: subscriptions,
-            color: sportsColors.positive,
+            title: "Desglose de Mensualidades",
+            data: income.monthly,
+            background: sportsColors.incomeBackground,
           },
           {
             label: "Inscripciones",
-            value: revenue - subscriptions,
-            color: sportsColors.registration,
+            title: "Ingresos por Inscripciones",
+            data: income.registrations,
+            background: sportsColors.registrationBackground,
           },
-        ].map((m) => (
-          <article
-            key={m.label}
-            className="rounded-xl p-6 text-white"
-            style={{ background: m.color }}
-          >
-            <h3>{m.label}</h3>
-            <p className="mt-3 text-3xl font-semibold">{money(m.value)}</p>
-          </article>
+        ].map((card) => (
+          <IncomeBreakdownCard
+            key={card.label}
+            label={card.label}
+            title={card.title}
+            total={money(card.data.total)}
+            background={card.background}
+            period={`${monthNames[month - 1]} ${year}`}
+            items={card.data.items.map((item) => ({
+              label: item.label,
+              value: money(item.value),
+            }))}
+          />
         ))}
       </div>
       {[
@@ -116,6 +138,8 @@ export function SportsDetail({
           <MetricChart
             data={chart.points}
             view="area"
+            curve="monotone"
+            showPoints
             formatValue={count}
             valueLabel="Accesos"
             baseColor={sportsColors.positive}

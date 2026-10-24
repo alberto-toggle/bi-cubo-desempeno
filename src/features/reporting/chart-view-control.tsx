@@ -12,18 +12,23 @@ export function useChartView(key: string, family: ChartFamily) {
     dispatch = useAppDispatch();
   const verticalComparison =
     key === "unit-annual" || key === "unit-same-period";
+  const horizontalGoal = key === "report-goal";
   const preferred = validView(family, prefs.overrides[key])
     ? prefs.overrides[key]
-    : key === "unit-annual" ||
-        key === "unit-same-period" ||
-        key === "report-goal"
+    : key === "unit-annual" || key === "unit-same-period"
       ? "columns"
-      : prefs.defaults[family];
+      : horizontalGoal
+        ? "bars"
+        : prefs.defaults[family];
   const view =
-    verticalComparison && preferred === "bars" ? "columns" : preferred;
+    verticalComparison && preferred === "bars"
+      ? "columns"
+      : horizontalGoal
+        ? "bars"
+        : preferred;
   return {
     view,
-    control: (
+    control: horizontalGoal ? null : (
       <FilterSelect
         label={`Visualización: ${key}`}
         value={view}
@@ -32,7 +37,9 @@ export function useChartView(key: string, family: ChartFamily) {
             dispatch(setChartView({ key, family, view: v }));
         }}
         options={chartOptions[family].filter(
-          (option) => !verticalComparison || option.value !== "bars",
+          (option) =>
+            (!verticalComparison || option.value !== "bars") &&
+            (!horizontalGoal || option.value !== "columns"),
         )}
       />
     ),

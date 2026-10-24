@@ -12,6 +12,7 @@ export const chartOptions = {
     { value: "table", label: "Tabla" },
   ],
   goal: [
+    { value: "bars", label: "Barras horizontales" },
     { value: "progress", label: "Progreso" },
     { value: "target", label: "Barra con objetivo" },
     { value: "columns", label: "Columnas" },

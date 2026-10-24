@@ -4,13 +4,13 @@ Rama de trabajo: `demo/generic-performance`. La rama `main` conserva la versión
 
 ## Datos
 
-`python3 scripts/generate-generic-demo.py` genera portafolio, histórico financiero e indicadores a partir de los catálogos originales autorizados. Se recuperan los 54 establecimientos, ubicaciones, regiones, divisiones, segmentos, giros y catálogos relacionados de `main`. Las relaciones de centros y nombres de programas se conservan en `src/data/unit-catalog-relations.json`, sin importes ni pesos originales.
+`python3 scripts/generate-generic-demo.py` genera portafolio, histórico financiero e indicadores a partir de `src/data/master-units.json` y `src/data/unit-catalog-relations.json`.
 
-El generador lee esos catálogos pero no los sobrescribe. Todos los importes, metas, ponderaciones de programas, personal e indicadores siguen siendo simulados; no se recuperan cifras del cliente. Las cifras de los primeros 36 identificadores conservan la fórmula de la variante genérica; los 18 adicionales usan la misma simulación. Los centros reciben partes iguales de cada importe simulado, conservando el total en centavos.
+El padrón activo toma como fuente nominal **RELACIÓN DE INSTALACIONES.pdf**: 86 instalaciones. Se excluyen las tres cuentas administrativas y cualquier dato bancario. Se conserva como complemento de la presentación el Predio Agrícola Xocolatl: 87 referencias activas en total. Los identificadores existentes se conservan solo cuando la correspondencia es clara; las altas tienen identificadores nuevos y ubicaciones pendientes de confirmar, sin inventar coordenadas ni regiones.
 
-El catálogo incorpora cinco referencias nominales de la presentación: Hotel Bicentenario de la Independencia (distinto de Hotel Centenario), Centro de Promoción Social Defensa, Corredor Gastronómico, Predio Agrícola Xocolatl y Centro Ecuestre Defensa. Sus códigos `UN-DEMO-*` son provisionales; su ubicación permanece por confirmar y se excluyen del mapa hasta conciliarla. No se renombran los restaurantes/cines numerados sin una correspondencia documental. Total: 59 referencias; no representa un padrón definitivo.
+La conciliación está registrada en `docs/catalog-reconciliation.json`. Los restaurantes y cines numerados del catálogo maestro no se asignan arbitrariamente a instalaciones con nombre: se retiran de esta versión y se incorporan los nombres de la relación. Se conservan por separado Hotel Centenario y Hotel Bicentenario. Se corrige la errata «DEFFENSA» y se normalizan acentos; no se usa la numeración repetida del PDF como clave técnica.
 
-Los importes históricos están expresados en centavos; el portafolio utiliza pesos. Ventas y rentas son componentes del mismo ingreso, sin duplicar utilidades. La fórmula de utilidades sigue siendo ingresos menos costos y gastos. Las medias móviles son una simulación, no una fórmula confirmada por el cliente. El desglose financiero distribuye el gasto simulado sin duplicarlo; otros ingresos/gastos tiene signo e incorpora rentas cuando corresponda. Los datos operativos se generan en `demo-unit-operations.ts`.
+Todos los importes, metas, personal y métricas operativas siguen siendo ficticios. El generador utiliza una semilla estable por identificador para conservar las cifras de las unidades existentes al reordenar el padrón. Los centros de nuevas unidades utilizan una plantilla simulada del mismo giro; no representan relaciones oficiales. Las unidades anteriores que no figuran en la relación quedan documentadas para conciliación posterior, no se mezclan con el padrón activo.
 
 ## Roles y privacidad
 

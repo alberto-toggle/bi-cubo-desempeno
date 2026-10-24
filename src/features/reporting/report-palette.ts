@@ -44,18 +44,33 @@ export const documentColors = [
 ];
 /** Correspondencias verificadas en las diapositivas; no renombra unidades ambiguas. */
 export const unitDocumentColors: Record<string, string> = {
+  "unit-079": "#5B9BD5",
+  "unit-078": "#FFC000",
+  "unit-076": "#FF9999",
+  "unit-031": "#C55A11",
+  "unit-077": "#00B050",
+  "unit-080": "#00B0F0",
+  "unit-073": "#CC00FF",
+  "unit-034": "#FFE499",
+  "unit-074": "#51EF24",
+  "unit-095": "#92D050",
+  "unit-094": "#9CC2E5",
+  "unit-096": "#CC00FF",
+  "unit-097": "#AEABAB",
+  "unit-093": "#00FFFF",
+  "unit-092": "#FFC000",
+  "unit-100": "#CCCCFF",
+  "unit-101": "#AEABAB",
+  "unit-102": "#92D050",
   "unit-003": "#C4E0B2",
   "unit-006": "#FFFF00",
   "unit-011": "#00B050",
   "unit-016": "#F4B081",
-  "unit-017": "#51FDE9",
   "unit-018": "#9CC2E5",
   "unit-019": "#92D050",
   "unit-024": "#BFBFBF",
   "unit-025": "#00B050",
   "unit-026": "#00FFFF",
-  "unit-031": "#C55A11",
-  "unit-034": "#FFE499",
   "unit-036": "#FFD865",
   "unit-037": "#00B050",
   "unit-038": "#FFD865",
@@ -96,19 +111,46 @@ export function programColor(name: string, index: number) {
 }
 
 export const goalColors = {
-  target: "#00B050",
-  planned: "#FF0000",
-  actual: "#00B0F0",
+  target: "#92D050",
+  planned: "#D64A4A",
+  actual: "#00FFFF",
 };
 export const sportsColors = {
+  breakdownSurface: "#F0F8F5",
+  breakdownLabel: "#616161",
+  positiveSurface: "#C8E6C9",
+  negativeSurface: "#FFCDD2",
+  registrationSurface: "#BBDEFB",
+  incomeBackground: "linear-gradient(110deg, #1B5E20, #43A047)",
+  registrationBackground: "linear-gradient(110deg, #1565C0, #42A5F5)",
   positive: "#2E7D32",
   negative: "#C62828",
   registration: "#1976D2",
 };
 
 export const unitDocumentOrder: Record<string, readonly string[]> = {
+  Centinelas: [
+    "unit-074",
+    "unit-034",
+    "unit-073",
+    "unit-080",
+    "unit-077",
+    "unit-031",
+    "unit-076",
+    "unit-078",
+    "unit-079",
+  ],
+  "Cafeter\u00eda": [
+    "unit-092",
+    "unit-093",
+    "unit-097",
+    "unit-096",
+    "unit-094",
+    "unit-095",
+  ],
+  Cine: ["unit-102", "unit-101", "unit-100"],
   Hotel: ["unit-055", "unit-038", "unit-018", "unit-019"],
-  "Centro deportivo": ["unit-016", "unit-017", "unit-036", "unit-037"],
+  "Centro deportivo": ["unit-016", "unit-036", "unit-037"],
   Tiendas: ["unit-024", "unit-026", "unit-003", "unit-025", "unit-054"],
 };
 export const programDocumentOrder: Record<string, readonly string[]> = {
@@ -142,4 +184,19 @@ export const documentTableColors = {
   headerText: "#FFFFFF",
   text: "#111111",
   occupancy: "#FEF2CC",
+};
+
+/** Titulares de las diapositivas para reconocer cada sección del reporte. */
+export const chapterTitles: Record<string, string> = {
+  Granjas: "Utilidades generadas por programa productivo de las granjas",
+  Criadero: "Utilidades generadas por programa productivo del C.M.G.",
+  Restaurante: "Utilidades generadas por los restaurantes",
+  Hotel: "Utilidades generadas por los hoteles",
+  "Centro deportivo": "Utilidades generadas por los deportivos",
+  Tiendas: "Utilidades generadas por las tiendas",
+  "Centros comerciales": "Utilidades generadas por los centros comerciales",
+  Estacionamiento: "Utilidades generadas por los estacionamientos",
+  Centinelas: "Utilidades generadas por los centinelas",
+  Cafetería: "Utilidades generadas por las cafeterías",
+  Cine: "Utilidades generadas por los cines",
 };
