@@ -12,12 +12,12 @@ export function PrivacyControl() {
       type="button"
       className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-2 text-xs"
       aria-pressed={hidden}
-      aria-label={hidden ? "Mostrar cifras" : "Ocultar cifras"}
+      aria-label={hidden ? "Mostrar cifras" : "Ofuscar cifras"}
       onClick={() => dispatch(toggleAmounts())}
     >
       {hidden ? <EyeOff size={16} /> : <Eye size={16} />}
       <span className="hidden sm:inline">
-        {hidden ? "Mostrar cifras" : "Ocultar cifras"}
+        {hidden ? "Mostrar cifras" : "Ofuscar cifras"}
       </span>
     </button>
   );

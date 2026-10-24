@@ -184,7 +184,10 @@ export function CubeScreen() {
                     id="cube-giro"
                     title={`${snapshot.metric} por giro`}
                     description="Importe acumulado de la selección · Los giros de menor importe se agrupan en Otros."
-                    data={chartGroups}
+                    data={chartGroups.map((point) => ({
+                      ...point,
+                      year: filters.year,
+                    }))}
                     valueLabel={snapshot.metric}
                   />
                 </div>
@@ -256,7 +259,10 @@ export function CubeScreen() {
                     id="cube-monthly"
                     title="Evolución mensual"
                     description={`${snapshot.metric} · ${filters.year} · Cada punto corresponde a un mes, no al acumulado.`}
-                    data={snapshot.timeline}
+                    data={snapshot.timeline.map((point) => ({
+                      ...point,
+                      year: filters.year,
+                    }))}
                     valueLabel={snapshot.metric}
                     family="timeline"
                   />
