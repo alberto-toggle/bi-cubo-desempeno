@@ -20,7 +20,20 @@ export function ReportDetailSkeleton() {
     <div className={reportLayout.page}>
       <HeadingSkeleton />
       <div className={reportLayout.detail}>
-        <Bone className="h-[480px]" />
+        <aside className="surface self-start p-5">
+          <Bone className="mb-2 size-28 rounded-xl" />
+          <Bone className="mb-5 h-3 w-28" />
+          <Bone className="h-3 w-36" />
+          <Bone className="mt-2 h-5 w-40" />
+          <div className="mt-5 space-y-4">
+            {Array.from({ length: 7 }, (_, i) => (
+              <div key={i}>
+                <Bone className="h-3 w-24" />
+                <Bone className="mt-2 h-4 w-32" />
+              </div>
+            ))}
+          </div>
+        </aside>
         <div className="space-y-5">
           <Bone className="h-12" />
           <div className="grid grid-cols-3 gap-3">

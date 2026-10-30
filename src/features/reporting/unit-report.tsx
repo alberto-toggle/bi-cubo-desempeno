@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { EstablishmentPhoto } from "./establishment-photo";
+import { demoResponsiblePhoto, demoUnitPhoto } from "@/features/demo/unit-photos";
 import { ResponsibleCard } from "./responsible-card";
 import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import {
@@ -182,6 +184,7 @@ export function UnitReport({
       </header>
       <div className={reportLayout.detail}>
         <ResponsibleCard
+          photo={demoResponsiblePhoto(unitId)}
           name={responsible.name}
           appointed={responsible.appointed}
           staff={profile.staff}
@@ -213,12 +216,15 @@ export function UnitReport({
                 id: "financial",
                 label: "Información financiera",
                 content: (
-                  <FinancialDetail
-                    profile={profile}
-                    kind={kind}
-                    year={period.year}
-                    month={period.month}
-                  />
+                  <div className="space-y-5">
+                    <FinancialDetail
+                      profile={profile}
+                      kind={kind}
+                      year={period.year}
+                      month={period.month}
+                    />
+                    <EstablishmentPhoto src={demoUnitPhoto(kind)} kind={kind} />
+                  </div>
                 ),
               },
             ]}

@@ -44,12 +44,14 @@ export function UnitDetail({ id }: { id: string }) {
         <ArrowLeft size={16} /> Establecimientos
       </Link>
       <header>
-        <p className="eyebrow">{unit.kind} · Detalle de unidad</p>
-        <h1 className="page-title">{identity.name}</h1>
-        <p className="page-copy flex items-center gap-2">
-          <MapPin size={14} />
-          {identity.location}
-        </p>
+        <div className="min-w-0">
+          <p className="eyebrow">{unit.kind} · Detalle de unidad</p>
+          <h1 className="page-title">{identity.name}</h1>
+          <p className="page-copy flex items-center gap-2">
+            <MapPin size={14} />
+            {identity.location}
+          </p>
+        </div>
       </header>
       <UnitReport unitId={unit.id} mode={mode} kind={unit.kind} />
       <details className="surface p-5">
