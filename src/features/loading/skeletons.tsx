@@ -1,4 +1,5 @@
 "use client";
+import { KpiSkeleton } from "@/features/kpis/kpi-skeleton";
 import { PerformanceSkeleton } from "@/features/performance/performance-skeleton";
 import { CubeSkeleton } from "@/features/cube/cube-skeleton";
 
@@ -53,6 +54,7 @@ export function LoginSkeleton() {
   );
 }
 export type ViewKind =
+  | "kpis"
   | "overview"
   | "directory"
   | "detail"
@@ -62,6 +64,7 @@ export type ViewKind =
   | "reports"
   | "charts";
 export function viewKind(path: string): ViewKind {
+  if (path === "/kpis") return "kpis";
   if (path === "/cube") return "cube";
   if (path === "/reports") return "reports";
   if (path === "/settings/charts") return "charts";
@@ -107,6 +110,7 @@ export function ViewSkeleton({
         </div>
       </LoadingFrame>
     );
+  if (kind === "kpis") return <KpiSkeleton />;
   if (!admin) return <PerformanceSkeleton />;
   if (kind === "cube") return <CubeSkeleton geographyAllowed={admin} />;
   if (kind === "reports") return <ReportScreenSkeleton />;

@@ -13,6 +13,7 @@ import { DemoHelp } from "@/features/demo/demo-controls";
 import {
   ArrowUpRight,
   Compass,
+  Gauge,
   Box,
   ChartNoAxesCombined,
   Layers3,
@@ -48,6 +49,7 @@ export function AppShell({
       : []),
     ...(!internal
       ? [
+          { href: "/kpis", label: "KPIs de rendimiento", icon: Gauge },
           {
             href: "/cube",
             label: admin ? "Cubo de desempeño" : "Indicadores",
@@ -126,6 +128,7 @@ export function AppShell({
                     item.href === "/" ||
                     item.href === "/establishments" ||
                     item.href === "/reports" ||
+                    item.href === "/kpis" ||
                     item.href === "/cube",
                 ),
               },
@@ -219,7 +222,9 @@ export function AppShell({
                       ? "Establecimientos"
                       : pathname.includes("catalogs")
                         ? "Catálogos"
-                        : "Panorama"}
+                        : pathname === "/kpis"
+                          ? "KPIs de rendimiento"
+                          : "Panorama"}
               </span>
             </span>
           </div>
@@ -263,7 +268,7 @@ export function AppShell({
             children
           ) : (
             <RouteTransition>
-              {session?.role === "staff" ? (
+              {session?.role === "staff" && pathname !== "/kpis" ? (
                 <PerformanceScreen key={pathname} path={pathname} />
               ) : (
                 children
