@@ -8,6 +8,7 @@ import { demoDailyUtility } from "@/services/demo-kpi-daily";
 import {
   kpiGroups,
   bounds,
+  type KpiGrouping,
   type KpiPeriod,
   type KpiRow,
   type KpiView,
@@ -25,7 +26,7 @@ export function KpiDashboard({
 }) {
   const [period, setPeriod] = useState(initial),
     [view, setView] = useState<KpiView>("bottom"),
-    [grouping, setGrouping] = useState<"line" | "segment">("line"),
+    [grouping, setGrouping] = useState<KpiGrouping>("all"),
     [line, setLine] = useState("all"),
     [segment, setSegment] = useState("all"),
     [query, setQuery] = useState(""),
@@ -56,17 +57,18 @@ export function KpiDashboard({
   const bestRevenue = financial
     ? [...rows].sort((a, b) => b.financial!.revenue - a.financial!.revenue)[0]
     : undefined;
+  const rankingScope = grouping === "all" ? "" : grouping === "line" ? " por giro" : " por segmento";
   const choices: { id: KpiView; label: string }[] = [
     { id: "target", label: "Debajo de meta" },
     ...(financial
       ? [{ id: "average" as const, label: "Debajo del promedio" }]
       : []),
-    { id: "bottom", label: "Peores 15 por rubro" },
-    { id: "top", label: "Top 15 por rubro" },
+    { id: "bottom", label: `15 con menor avance${rankingScope}` },
+    { id: "top", label: `Top 15${rankingScope}` },
     ...(financial
       ? [
-          { id: "sales" as const, label: "Más ventas por rubro" },
-          { id: "utility" as const, label: "Mayor utilidad por rubro" },
+          { id: "sales" as const, label: `Más ventas${rankingScope}` },
+          { id: "utility" as const, label: `Mayor utilidad${rankingScope}` },
           { id: "daily" as const, label: "Utilidades diarias" },
         ]
       : []),
@@ -166,6 +168,18 @@ export function KpiDashboard({
             ]}
           />
         </div>
+        <div className="mt-3">
+          <Filter
+            label="Agrupar rankings por"
+            value={grouping}
+            onChange={(v) => setGrouping(v as KpiGrouping)}
+            options={[
+              { value: "all", label: "Sin agrupar · Todos los establecimientos" },
+              { value: "line", label: "Giro comercial" },
+              { value: "segment", label: "Rubro / segmento" },
+            ]}
+          />
+        </div>
         <p className="mt-3 text-xs text-muted-foreground">
           {label} ·{" "}
           {period.window === "month"
@@ -251,17 +265,6 @@ export function KpiDashboard({
             </button>
           ))}
         </div>
-        {grouped && (
-          <Filter
-            label="Agrupar rankings por"
-            value={grouping}
-            onChange={(v) => setGrouping(v as "line" | "segment")}
-            options={[
-              { value: "line", label: "Giro comercial" },
-              { value: "segment", label: "Rubro / segmento" },
-            ]}
-          />
-        )}
         <label className="flex min-h-12 items-center gap-3 rounded-xl border border-border bg-card px-4 focus-within:ring-2 focus-within:ring-ring">
           <Search size={18} className="shrink-0 text-muted-foreground" />
           <input
@@ -281,6 +284,7 @@ export function KpiDashboard({
           </h2>
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
             {ranked.length} establecimientos ·{" "}
+            {grouped && (grouping === "all" ? "Ranking general según los filtros · " : "Ranking independiente por grupo · ")}
             {view === "average"
               ? "Comparación de la utilidad mensual media del periodo con los 12 meses anteriores."
               : view === "daily"
@@ -413,7 +417,7 @@ export function KpiDashboard({
       </section>
       <p className="text-xs leading-relaxed text-muted-foreground">
         {financial
-          ? "Importes ficticios en MXN. Meta anual distribuida proporcionalmente entre los meses del periodo. Top y peores comparan cumplimiento de la meta de utilidad. Ventas y utilidad ordenan por importe dentro de cada grupo; hasta 15 registros disponibles. El desglose diario es ilustrativo y concilia con el total mensual."
+          ? "Importes ficticios en MXN. Meta anual distribuida proporcionalmente entre los meses del periodo. Top y peores comparan cumplimiento de la meta de utilidad. Ventas y utilidad ordenan por importe. Rankings generales por defecto, con agrupación opcional por giro o segmento; hasta 15 registros por ranking. El desglose diario es ilustrativo y concilia con el total mensual."
           : "Indicadores de demostración. Acceso sin importes financieros."}
       </p>
     </div>

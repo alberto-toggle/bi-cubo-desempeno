@@ -143,13 +143,16 @@ export function rankKpis(rows: KpiRow[], view: KpiView) {
   return view === "top" ? ranked.reverse().slice(0, 15) : ranked.slice(0, 15);
 }
 
+export type KpiGrouping = "all" | "line" | "segment";
+
 export function kpiGroups(
   rows: KpiRow[],
   view: KpiView,
-  grouping: "line" | "segment",
+  grouping: KpiGrouping,
 ) {
   const grouped = ["top", "bottom", "sales", "utility"].includes(view);
-  if (!grouped) return [{ label: "", rows: rankKpis(rows, view) }];
+  if (!grouped || grouping === "all")
+    return [{ label: "", rows: rankKpis(rows, view) }];
   return [...new Set(rows.map((r) => r[grouping]))].sort().map((label) => ({
     label,
     rows: rankKpis(
