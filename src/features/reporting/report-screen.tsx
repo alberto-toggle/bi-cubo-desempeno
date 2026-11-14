@@ -180,11 +180,6 @@ export function ReportScreen() {
             />
           ) : (
             <>
-              {isOverview && (
-                <FundSummary
-                  data={demoFundAllocation(actual, target, period.month)}
-                />
-              )}
               {!isProductive ? (
                 <TargetComparison
                   title={
@@ -236,6 +231,11 @@ export function ReportScreen() {
                               documentColors[i % documentColors.length],
                           }))
                   }
+                />
+              )}
+              {isOverview && (
+                <FundSummary
+                  data={demoFundAllocation(actual, target, period.month)}
                 />
               )}
               {!isOverview && (
