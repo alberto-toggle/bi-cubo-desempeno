@@ -32,7 +32,7 @@ export function LoginScreen() {
   }, []);
   useEffect(() => {
     if (auth.ready && auth.session)
-      router.replace(auth.session.role === "admin" ? "/reports" : "/");
+      router.replace(auth.session.role === "admin" ? "/kpis" : "/");
   }, [auth, router]);
   const loading =
     !initialReady || !auth.ready || !ready || Boolean(auth.session);

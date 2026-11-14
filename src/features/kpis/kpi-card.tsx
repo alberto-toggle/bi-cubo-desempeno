@@ -8,6 +8,7 @@ export type KpiCardData = {
   position: number;
   achievement: number | null;
   comparison: string;
+  featured?: { label: string; value: string };
   amounts?: { label: string; value: string }[];
   days?: { day: number; value: string }[];
   dailyLabel?: string;
@@ -31,6 +32,14 @@ export function KpiCard({ data }: { data: KpiCardData }) {
           <p className="text-xs text-muted-foreground">{data.subtitle}</p>
         </div>
       </div>
+      {data.featured && (
+        <p className="mt-4 text-sm text-muted-foreground">
+          {data.featured.label}
+          <strong className="mt-1 block text-xl text-foreground tabular-nums">
+            {data.featured.value}
+          </strong>
+        </p>
+      )}
       <div className="mt-5 flex items-end justify-between gap-3">
         <span
           className={

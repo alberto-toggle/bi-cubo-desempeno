@@ -1,0 +1,611 @@
+[
+  {
+    "unitId": "unit-060",
+    "unitName": "Tienda Naucalpan",
+    "previousUnitId": "unit-025",
+    "previousUnitName": "Tienda Puerta 8",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-025",
+    "unitName": "Tienda Puerta 8",
+    "previousUnitId": "unit-061",
+    "previousUnitName": "Tienda Predio Reforma",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-061",
+    "unitName": "Tienda Predio Reforma",
+    "previousUnitId": "unit-062",
+    "previousUnitName": "Tienda Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-062",
+    "unitName": "Tienda Lomas de Sotelo",
+    "previousUnitId": "unit-063",
+    "previousUnitName": "Tienda C.A.S.M.R.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-063",
+    "unitName": "Tienda C.A.S.M.R.",
+    "previousUnitId": "unit-024",
+    "previousUnitName": "Tienda El Huizachal",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-024",
+    "unitName": "Tienda El Huizachal",
+    "previousUnitId": "unit-003",
+    "previousUnitName": "Tienda San Jerónimo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-003",
+    "unitName": "Tienda San Jerónimo",
+    "previousUnitId": "unit-026",
+    "previousUnitName": "Tienda Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-026",
+    "unitName": "Tienda Santa Lucía",
+    "previousUnitId": "unit-050",
+    "previousUnitName": "Tienda Guerrero Negro",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-050",
+    "unitName": "Tienda Guerrero Negro",
+    "previousUnitId": "unit-064",
+    "previousUnitName": "Tienda El Sauz",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-064",
+    "unitName": "Tienda El Sauz",
+    "previousUnitId": "unit-065",
+    "previousUnitName": "Tienda Mier",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-065",
+    "unitName": "Tienda Mier",
+    "previousUnitId": "unit-066",
+    "previousUnitName": "Tienda Tecalitlán",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-066",
+    "unitName": "Tienda Tecalitlán",
+    "previousUnitId": "unit-051",
+    "previousUnitName": "Tienda Rancho Nuevo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-051",
+    "unitName": "Tienda Rancho Nuevo",
+    "previousUnitId": "unit-052",
+    "previousUnitName": "Tienda Chicoasén",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-052",
+    "unitName": "Tienda Chicoasén",
+    "previousUnitId": "unit-067",
+    "previousUnitName": "Tienda Chicomuselo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-067",
+    "unitName": "Tienda Chicomuselo",
+    "previousUnitId": "unit-068",
+    "previousUnitName": "Tienda Pie de la Cuesta",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-068",
+    "unitName": "Tienda Pie de la Cuesta",
+    "previousUnitId": "unit-069",
+    "previousUnitName": "Tienda Altamirano",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-069",
+    "unitName": "Tienda Altamirano",
+    "previousUnitId": "unit-054",
+    "previousUnitName": "Tienda Cozumel",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-054",
+    "unitName": "Tienda Cozumel",
+    "previousUnitId": "unit-070",
+    "previousUnitName": "Tienda Isla Mujeres",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-070",
+    "unitName": "Tienda Isla Mujeres",
+    "previousUnitId": "unit-071",
+    "previousUnitName": "Tienda San Pedro",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-071",
+    "unitName": "Tienda San Pedro",
+    "previousUnitId": "unit-044",
+    "previousUnitName": "Tienda Sarabia",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-044",
+    "unitName": "Tienda Sarabia",
+    "previousUnitId": "unit-072",
+    "previousUnitName": "Tienda Bicentenario H.C.M.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-072",
+    "unitName": "Tienda Bicentenario H.C.M.",
+    "previousUnitId": "unit-060",
+    "previousUnitName": "Tienda Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-073",
+    "unitName": "Centinela Naucalpan",
+    "previousUnitId": "unit-074",
+    "previousUnitName": "Centinela Hospital Central Militar",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-074",
+    "unitName": "Centinela Hospital Central Militar",
+    "previousUnitId": "unit-075",
+    "previousUnitName": "Centinela El Huizachal",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-075",
+    "unitName": "Centinela El Huizachal",
+    "previousUnitId": "unit-031",
+    "previousUnitName": "Centinela Temamatla",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-031",
+    "unitName": "Centinela Temamatla",
+    "previousUnitId": "unit-034",
+    "previousUnitName": "Centinela Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-034",
+    "unitName": "Centinela Santa Lucía",
+    "previousUnitId": "unit-076",
+    "previousUnitName": "Centinela Mazatlán",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-076",
+    "unitName": "Centinela Mazatlán",
+    "previousUnitId": "unit-077",
+    "previousUnitName": "Centinela Monterrey",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-077",
+    "unitName": "Centinela Monterrey",
+    "previousUnitId": "unit-078",
+    "previousUnitName": "Centinela Mérida",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-078",
+    "unitName": "Centinela Mérida",
+    "previousUnitId": "unit-079",
+    "previousUnitName": "Centinela Piedras Negras",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-079",
+    "unitName": "Centinela Piedras Negras",
+    "previousUnitId": "unit-080",
+    "previousUnitName": "Centinela del Hotel Bicentenario de la Independencia",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-080",
+    "unitName": "Centinela del Hotel Bicentenario de la Independencia",
+    "previousUnitId": "unit-073",
+    "previousUnitName": "Centinela Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-081",
+    "unitName": "Restaurante Lomas de Sotelo",
+    "previousUnitId": "unit-082",
+    "previousUnitName": "Restaurante Hospital Central Militar",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-082",
+    "unitName": "Restaurante Hospital Central Militar",
+    "previousUnitId": "unit-083",
+    "previousUnitName": "Restaurante Unidad de Especialidades Médicas",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-083",
+    "unitName": "Restaurante Unidad de Especialidades Médicas",
+    "previousUnitId": "unit-011",
+    "previousUnitName": "Restaurante C.A.S.M.R.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-011",
+    "unitName": "Restaurante C.A.S.M.R.",
+    "previousUnitId": "unit-084",
+    "previousUnitName": "Restaurante Hotel del Ejército y Fuerza Aérea",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-084",
+    "unitName": "Restaurante Hotel del Ejército y Fuerza Aérea",
+    "previousUnitId": "unit-085",
+    "previousUnitName": "Restaurante Hotel Centenario del Ejército Mexicano",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-085",
+    "unitName": "Restaurante Hotel Centenario del Ejército Mexicano",
+    "previousUnitId": "unit-086",
+    "previousUnitName": "Restaurante Guadalajara",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-086",
+    "unitName": "Restaurante Guadalajara",
+    "previousUnitId": "unit-087",
+    "previousUnitName": "Restaurante Puebla",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-087",
+    "unitName": "Restaurante Puebla",
+    "previousUnitId": "unit-088",
+    "previousUnitName": "Restaurante Mérida",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-088",
+    "unitName": "Restaurante Mérida",
+    "previousUnitId": "unit-089",
+    "previousUnitName": "Restaurante del Hotel Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-089",
+    "unitName": "Restaurante del Hotel Santa Lucía",
+    "previousUnitId": "unit-090",
+    "previousUnitName": "Restaurante del Centro Comercial Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-090",
+    "unitName": "Restaurante del Centro Comercial Santa Lucía",
+    "previousUnitId": "unit-091",
+    "previousUnitName": "Restaurante Hotel Bicentenario",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-091",
+    "unitName": "Restaurante Hotel Bicentenario",
+    "previousUnitId": "unit-081",
+    "previousUnitName": "Restaurante Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-092",
+    "unitName": "Cafetería Naucalpan",
+    "previousUnitId": "unit-093",
+    "previousUnitName": "Cafetería Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-093",
+    "unitName": "Cafetería Lomas de Sotelo",
+    "previousUnitId": "unit-094",
+    "previousUnitName": "Cafetería El Huizachal",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-094",
+    "unitName": "Cafetería El Huizachal",
+    "previousUnitId": "unit-095",
+    "previousUnitName": "Cafetería Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-095",
+    "unitName": "Cafetería Santa Lucía",
+    "previousUnitId": "unit-096",
+    "previousUnitName": "Cafetería Apodaca",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-096",
+    "unitName": "Cafetería Apodaca",
+    "previousUnitId": "unit-097",
+    "previousUnitName": "Cafetería Bicentenario H.C.M.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-097",
+    "unitName": "Cafetería Bicentenario H.C.M.",
+    "previousUnitId": "unit-092",
+    "previousUnitName": "Cafetería Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-057",
+    "unitName": "Corredor Gastronómico C.A.S.M.R.",
+    "previousUnitId": "unit-057",
+    "previousUnitName": "Corredor Gastronómico C.A.S.M.R.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-016",
+    "unitName": "Centro Deportivo Lomas de Sotelo",
+    "previousUnitId": "unit-036",
+    "previousUnitName": "Centro Deportivo Huizachal",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-036",
+    "unitName": "Centro Deportivo Huizachal",
+    "previousUnitId": "unit-037",
+    "previousUnitName": "Centro Deportivo Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-037",
+    "unitName": "Centro Deportivo Santa Lucía",
+    "previousUnitId": "unit-098",
+    "previousUnitName": "Centro Deportivo Apodaca",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-098",
+    "unitName": "Centro Deportivo Apodaca",
+    "previousUnitId": "unit-099",
+    "previousUnitName": "Centro Deportivo Bicentenario H.C.M.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-099",
+    "unitName": "Centro Deportivo Bicentenario H.C.M.",
+    "previousUnitId": "unit-016",
+    "previousUnitName": "Centro Deportivo Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-039",
+    "unitName": "Boliche Santa Lucía",
+    "previousUnitId": "unit-039",
+    "previousUnitName": "Boliche Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-100",
+    "unitName": "Cine Lomas de Sotelo",
+    "previousUnitId": "unit-101",
+    "previousUnitName": "Cine Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-101",
+    "unitName": "Cine Naucalpan",
+    "previousUnitId": "unit-102",
+    "previousUnitName": "Cine Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-102",
+    "unitName": "Cine Santa Lucía",
+    "previousUnitId": "unit-100",
+    "previousUnitName": "Cine Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-018",
+    "unitName": "Hotel del Ejército y Fuerza Aérea",
+    "previousUnitId": "unit-019",
+    "previousUnitName": "Hotel Centenario del Ejército Mexicano",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-019",
+    "unitName": "Hotel Centenario del Ejército Mexicano",
+    "previousUnitId": "unit-055",
+    "previousUnitName": "Hotel Bicentenario de la Independencia",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-055",
+    "unitName": "Hotel Bicentenario de la Independencia",
+    "previousUnitId": "unit-038",
+    "previousUnitName": "Hotel Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-038",
+    "unitName": "Hotel Santa Lucía",
+    "previousUnitId": "unit-018",
+    "previousUnitName": "Hotel del Ejército y Fuerza Aérea",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-103",
+    "unitName": "Estacionamiento Lomas de Sotelo",
+    "previousUnitId": "unit-104",
+    "previousUnitName": "Estacionamiento C.A.S.M.R.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-104",
+    "unitName": "Estacionamiento C.A.S.M.R.",
+    "previousUnitId": "unit-105",
+    "previousUnitName": "Estacionamiento Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-105",
+    "unitName": "Estacionamiento Naucalpan",
+    "previousUnitId": "unit-106",
+    "previousUnitName": "Estacionamiento Deportivo Lomas",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-106",
+    "unitName": "Estacionamiento Deportivo Lomas",
+    "previousUnitId": "unit-107",
+    "previousUnitName": "Estacionamiento Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-107",
+    "unitName": "Estacionamiento Santa Lucía",
+    "previousUnitId": "unit-108",
+    "previousUnitName": "Estacionamiento Bicentenario H.C.M.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-108",
+    "unitName": "Estacionamiento Bicentenario H.C.M.",
+    "previousUnitId": "unit-103",
+    "previousUnitName": "Estacionamiento Lomas de Sotelo",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-109",
+    "unitName": "Centro Comercial Naucalpan",
+    "previousUnitId": "unit-110",
+    "previousUnitName": "Centro Comercial C.A.S.M.R.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-110",
+    "unitName": "Centro Comercial C.A.S.M.R.",
+    "previousUnitId": "unit-111",
+    "previousUnitName": "Centro Comercial Iztapalapa",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-111",
+    "unitName": "Centro Comercial Iztapalapa",
+    "previousUnitId": "unit-006",
+    "previousUnitName": "Centro Comercial Tlalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-006",
+    "unitName": "Centro Comercial Tlalpan",
+    "previousUnitId": "unit-030",
+    "previousUnitName": "Centro Comercial Santa Lucía",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-030",
+    "unitName": "Centro Comercial Santa Lucía",
+    "previousUnitId": "unit-112",
+    "previousUnitName": "Centro Comercial Santa María",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-112",
+    "unitName": "Centro Comercial Santa María",
+    "previousUnitId": "unit-113",
+    "previousUnitName": "Centro Comercial San Miguel",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-113",
+    "unitName": "Centro Comercial San Miguel",
+    "previousUnitId": "unit-114",
+    "previousUnitName": "Centro Comercial Irapuato",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-114",
+    "unitName": "Centro Comercial Irapuato",
+    "previousUnitId": "unit-046",
+    "previousUnitName": "Centro Comercial Santa Gertrudis",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-046",
+    "unitName": "Centro Comercial Santa Gertrudis",
+    "previousUnitId": "unit-115",
+    "previousUnitName": "Centro Comercial Apodaca",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-115",
+    "unitName": "Centro Comercial Apodaca",
+    "previousUnitId": "unit-116",
+    "previousUnitName": "Centro Comercial Bicentenario H.C.M.",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-116",
+    "unitName": "Centro Comercial Bicentenario H.C.M.",
+    "previousUnitId": "unit-109",
+    "previousUnitName": "Centro Comercial Naucalpan",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-117",
+    "unitName": "Granja Defensa No. 1",
+    "previousUnitId": "unit-118",
+    "previousUnitName": "Granja Defensa No. 2",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-118",
+    "unitName": "Granja Defensa No. 2",
+    "previousUnitId": "unit-117",
+    "previousUnitName": "Granja Defensa No. 1",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-059",
+    "unitName": "Centro Ecuestre",
+    "previousUnitId": "unit-059",
+    "previousUnitName": "Centro Ecuestre",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-056",
+    "unitName": "Centro de Promoción Social",
+    "previousUnitId": "unit-056",
+    "previousUnitName": "Centro de Promoción Social",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-047",
+    "unitName": "Criadero Militar de Ganado",
+    "previousUnitId": "unit-047",
+    "previousUnitName": "Criadero Militar de Ganado",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  },
+  {
+    "unitId": "unit-058",
+    "unitName": "Predio Agrícola Xocolatl",
+    "previousUnitId": "unit-058",
+    "previousUnitName": "Predio Agrícola Xocolatl",
+    "source": "Trayectoria ficticia del responsable; no representa movimientos de personas reales."
+  }
+]

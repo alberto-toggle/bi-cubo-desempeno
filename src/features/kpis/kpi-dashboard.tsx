@@ -6,7 +6,7 @@ import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import { reportMoney, monthNames } from "@/features/reporting/model";
 import { demoDailyUtility } from "@/services/demo-kpi-daily";
 import {
-  rankKpis,
+  kpiGroups,
   bounds,
   type KpiPeriod,
   type KpiRow,
@@ -24,7 +24,8 @@ export function KpiDashboard({
   financial: boolean;
 }) {
   const [period, setPeriod] = useState(initial),
-    [view, setView] = useState<KpiView>("target"),
+    [view, setView] = useState<KpiView>("bottom"),
+    [grouping, setGrouping] = useState<"line" | "segment">("line"),
     [line, setLine] = useState("all"),
     [segment, setSegment] = useState("all"),
     [query, setQuery] = useState(""),
@@ -40,7 +41,9 @@ export function KpiDashboard({
           .toLocaleLowerCase("es")
           .includes(query.trim().toLocaleLowerCase("es")),
     );
-  const ranked = rankKpis(rows, view),
+  const groups = kpiGroups(rows, view, grouping);
+  const grouped = ["top", "bottom", "sales", "utility"].includes(view);
+  const ranked = groups.flatMap((g) => g.rows),
     below = rows.filter(
       (r) => r.achievement !== null && r.achievement < 100,
     ).length,
@@ -58,10 +61,14 @@ export function KpiDashboard({
     ...(financial
       ? [{ id: "average" as const, label: "Debajo del promedio" }]
       : []),
-    { id: "bottom", label: "15 con menor avance" },
-    { id: "top", label: "15 mejores" },
+    { id: "bottom", label: "Peores 15 por rubro" },
+    { id: "top", label: "Top 15 por rubro" },
     ...(financial
-      ? [{ id: "daily" as const, label: "Utilidades diarias" }]
+      ? [
+          { id: "sales" as const, label: "Más ventas por rubro" },
+          { id: "utility" as const, label: "Mayor utilidad por rubro" },
+          { id: "daily" as const, label: "Utilidades diarias" },
+        ]
       : []),
   ];
   const { start, count } = bounds(period);
@@ -244,6 +251,17 @@ export function KpiDashboard({
             </button>
           ))}
         </div>
+        {grouped && (
+          <Filter
+            label="Agrupar rankings por"
+            value={grouping}
+            onChange={(v) => setGrouping(v as "line" | "segment")}
+            options={[
+              { value: "line", label: "Giro comercial" },
+              { value: "segment", label: "Rubro / segmento" },
+            ]}
+          />
+        )}
         <label className="flex min-h-12 items-center gap-3 rounded-xl border border-border bg-card px-4 focus-within:ring-2 focus-within:ring-ring">
           <Search size={18} className="shrink-0 text-muted-foreground" />
           <input
@@ -267,75 +285,105 @@ export function KpiDashboard({
               ? "Comparación de la utilidad mensual media del periodo con los 12 meses anteriores."
               : view === "daily"
                 ? `Desglose de ${monthNames[period.month - 1]} ${period.year}. Abre cada tarjeta para consultar los días.`
-                : "Ordenados por cumplimiento de la meta programada del periodo."}
+                : view === "sales"
+                  ? "Ordenados por ventas; se muestra también cumplimiento de la meta de utilidad."
+                  : view === "utility"
+                    ? "Ordenados por utilidad del periodo, con su cumplimiento de meta."
+                    : "Ordenados por cumplimiento de la meta de utilidad programada del periodo."}
           </p>
         </div>
-        <div className={layout.list}>
-          {ranked.slice(0, limit).map((r, index) => (
-            <KpiCard
-              key={r.id}
-              data={{
-                id: r.id,
-                name: r.name,
-                subtitle: `${r.line} · ${r.segment}`,
-                position: index + 1,
-                achievement: r.achievement,
-                comparison:
-                  view === "average"
-                    ? `${Math.abs(r.averageChange ?? 0).toFixed(1)}% por debajo de su promedio mensual.`
-                    : r.achievement === null
-                      ? "No hay una meta comparable para este periodo."
-                      : r.achievement < 100
-                        ? `Faltan ${(100 - r.achievement).toFixed(1)} puntos porcentuales para alcanzar la meta.`
-                        : "Meta programada alcanzada.",
-                amounts: r.financial
-                  ? [
-                      {
-                        label: "Utilidad del periodo",
-                        value: money(r.financial.utility),
-                      },
-                      {
-                        label: "Meta programada",
-                        value: money(r.financial.target),
-                      },
-                      {
-                        label: "Ventas del periodo",
-                        value: money(r.financial.revenue),
-                      },
-                      {
-                        label: "Promedio mensual previo (12 meses)",
-                        value:
-                          r.financial.average === null
-                            ? "Sin histórico suficiente"
-                            : money(r.financial.average),
-                      },
-                      ...(view === "daily"
-                        ? [
-                            {
-                              label: "Utilidad del mes de corte",
-                              value: money(r.financial.monthUtility),
-                            },
-                          ]
-                        : []),
-                    ]
-                  : undefined,
-                days:
-                  view === "daily" && r.financial
-                    ? demoDailyUtility(
-                        r.id,
-                        period.year,
-                        period.month,
-                        r.financial.monthUtility,
-                      ).map((d) => ({
-                        day: d.day,
-                        value: hidden ? "••••" : reportMoney(d.value),
-                      }))
-                    : undefined,
-                dailyLabel: `${monthNames[period.month - 1]} ${period.year}`,
-              }}
-            />
-          ))}
-        </div>
+        {groups.map((group) => (
+          <section key={group.label || "results"} className="space-y-3">
+            {group.label && (
+              <h3 className="pt-4 text-lg font-semibold">
+                {group.label}{" "}
+                <span className="text-xs font-normal text-muted-foreground">
+                  · {group.rows.length} establecimientos
+                </span>
+              </h3>
+            )}
+            <div className={layout.list}>
+              {group.rows.slice(0, grouped ? 15 : limit).map((r, index) => (
+                <KpiCard
+                  key={r.id}
+                  data={{
+                    id: r.id,
+                    name: r.name,
+                    subtitle: `${r.line} · ${r.segment}`,
+                    position: index + 1,
+                    achievement: r.achievement,
+                    featured:
+                      r.financial && (view === "sales" || view === "utility")
+                        ? {
+                            label:
+                              view === "sales"
+                                ? "Ventas del periodo"
+                                : "Utilidad del periodo",
+                            value: money(
+                              view === "sales"
+                                ? r.financial.revenue
+                                : r.financial.utility,
+                            ),
+                          }
+                        : undefined,
+                    comparison:
+                      view === "average"
+                        ? `${Math.abs(r.averageChange ?? 0).toFixed(1)}% por debajo de su promedio mensual.`
+                        : r.achievement === null
+                          ? "No hay una meta comparable para este periodo."
+                          : r.achievement < 100
+                            ? `Faltan ${(100 - r.achievement).toFixed(1)} puntos porcentuales para alcanzar la meta.`
+                            : "Meta programada alcanzada.",
+                    amounts: r.financial
+                      ? [
+                          {
+                            label: "Utilidad del periodo",
+                            value: money(r.financial.utility),
+                          },
+                          {
+                            label: "Meta programada",
+                            value: money(r.financial.target),
+                          },
+                          {
+                            label: "Ventas del periodo",
+                            value: money(r.financial.revenue),
+                          },
+                          {
+                            label: "Promedio mensual previo (12 meses)",
+                            value:
+                              r.financial.average === null
+                                ? "Sin histórico suficiente"
+                                : money(r.financial.average),
+                          },
+                          ...(view === "daily"
+                            ? [
+                                {
+                                  label: "Utilidad del mes de corte",
+                                  value: money(r.financial.monthUtility),
+                                },
+                              ]
+                            : []),
+                        ]
+                      : undefined,
+                    days:
+                      view === "daily" && r.financial
+                        ? demoDailyUtility(
+                            r.id,
+                            period.year,
+                            period.month,
+                            r.financial.monthUtility,
+                          ).map((d) => ({
+                            day: d.day,
+                            value: hidden ? "••••" : reportMoney(d.value),
+                          }))
+                        : undefined,
+                    dailyLabel: `${monthNames[period.month - 1]} ${period.year}`,
+                  }}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
         {!ranked.length && (
           <div className="surface p-8 text-center">
             <p className="font-medium">Sin establecimientos en esta consulta</p>
@@ -354,7 +402,7 @@ export function KpiDashboard({
             </button>
           </div>
         )}
-        {ranked.length > limit && (
+        {!grouped && ranked.length > limit && (
           <button
             className="secondary-button min-h-12 w-full"
             onClick={() => setLimit((v) => v + 15)}
@@ -365,7 +413,7 @@ export function KpiDashboard({
       </section>
       <p className="text-xs leading-relaxed text-muted-foreground">
         {financial
-          ? "Importes ficticios en MXN. Meta anual distribuida proporcionalmente entre los meses del periodo. Los rankings comparan cumplimiento, no tamaño del establecimiento. El desglose diario es ilustrativo y concilia con el total mensual."
+          ? "Importes ficticios en MXN. Meta anual distribuida proporcionalmente entre los meses del periodo. Top y peores comparan cumplimiento de la meta de utilidad. Ventas y utilidad ordenan por importe dentro de cada grupo; hasta 15 registros disponibles. El desglose diario es ilustrativo y concilia con el total mensual."
           : "Indicadores de demostración. Acceso sin importes financieros."}
       </p>
     </div>

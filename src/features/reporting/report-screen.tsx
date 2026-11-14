@@ -8,6 +8,9 @@ import { monthNames, reportMoney } from "./model";
 import { reportingRows, groupResults } from "./queries";
 import { initialReportPeriod, ReportPeriodControl } from "./period-control";
 import { reportLayout } from "./report-layout";
+import { FundSummary } from "@/features/funds/fund-summary";
+import { demoFundAllocation } from "@/services/demo-fund-allocation";
+import { TargetComparison } from "./target-comparison";
 import { ReportChart } from "./report-chart";
 import { GoalPanel } from "./goal-panel";
 import { ReportScreenSkeleton } from "./report-skeleton";
@@ -177,28 +180,64 @@ export function ReportScreen() {
             />
           ) : (
             <>
-              <ReportChart
-                id={isOverview ? "report-giro" : `report-units-${chapter}`}
-                title={
-                  isOverview
-                    ? "Utilidades por giro comercial"
-                    : (chapterTitles[chapter] ?? `Utilidades · ${chapter}`)
-                }
-                description={`Utilidades acumuladas: ${money(actual)} · Enero–${monthNames[period.month - 1]} ${period.year}`}
-                data={
-                  isOverview
-                    ? categories
-                    : isProductive
-                      ? programData
+              {isOverview && (
+                <FundSummary
+                  data={demoFundAllocation(actual, target, period.month)}
+                />
+              )}
+              {!isProductive ? (
+                <TargetComparison
+                  title={
+                    isOverview
+                      ? "Utilidades por giro comercial"
+                      : (chapterTitles[chapter] ?? `Utilidades · ${chapter}`)
+                  }
+                  description={`Enero–${monthNames[period.month - 1]} ${period.year} · Meta anual prorrateada al corte. Cifras simuladas en MXN.`}
+                  rows={
+                    isOverview
+                      ? categories.map((c) => ({
+                          ...c,
+                          target: Math.round(
+                            (all
+                              .filter((r) => r.line === c.label)
+                              .reduce((sum, r) => sum + r.target, 0) *
+                              period.month) /
+                              12,
+                          ),
+                        }))
                       : rows.map((r, i) => ({
-                          label: r.label,
-                          value: r.value,
+                          ...r,
+                          target: Math.round((r.target * period.month) / 12),
                           color:
                             unitDocumentColors[r.id] ??
                             documentColors[i % documentColors.length],
                         }))
-                }
-              />
+                  }
+                />
+              ) : (
+                <ReportChart
+                  id={isOverview ? "report-giro" : `report-units-${chapter}`}
+                  title={
+                    isOverview
+                      ? "Utilidades por giro comercial"
+                      : (chapterTitles[chapter] ?? `Utilidades · ${chapter}`)
+                  }
+                  description={`Utilidades acumuladas: ${money(actual)} · Enero–${monthNames[period.month - 1]} ${period.year}`}
+                  data={
+                    isOverview
+                      ? categories
+                      : isProductive
+                        ? programData
+                        : rows.map((r, i) => ({
+                            label: r.label,
+                            value: r.value,
+                            color:
+                              unitDocumentColors[r.id] ??
+                              documentColors[i % documentColors.length],
+                          }))
+                  }
+                />
+              )}
               {!isOverview && (
                 <>
                   {!isProductive && programs.length > 0 && (

@@ -115,12 +115,22 @@ export function indicatorKpis(
     ];
   });
 }
-export type KpiView = "target" | "average" | "bottom" | "top" | "daily";
+export type KpiView =
+  "target" | "average" | "bottom" | "top" | "daily" | "sales" | "utility";
 export function rankKpis(rows: KpiRow[], view: KpiView) {
   if (view === "average")
     return rows
       .filter((r) => r.averageChange !== null && r.averageChange < 0)
       .sort((a, b) => a.averageChange! - b.averageChange!);
+  if (view === "sales" || view === "utility")
+    return rows
+      .filter((r) => r.financial)
+      .sort((a, b) =>
+        view === "sales"
+          ? b.financial!.revenue - a.financial!.revenue
+          : b.financial!.utility - a.financial!.utility,
+      )
+      .slice(0, 15);
   if (view === "daily")
     return [...rows].sort(
       (a, b) =>
@@ -131,4 +141,20 @@ export function rankKpis(rows: KpiRow[], view: KpiView) {
     .sort((a, b) => a.achievement! - b.achievement!);
   if (view === "target") return ranked.filter((r) => r.achievement! < 100);
   return view === "top" ? ranked.reverse().slice(0, 15) : ranked.slice(0, 15);
+}
+
+export function kpiGroups(
+  rows: KpiRow[],
+  view: KpiView,
+  grouping: "line" | "segment",
+) {
+  const grouped = ["top", "bottom", "sales", "utility"].includes(view);
+  if (!grouped) return [{ label: "", rows: rankKpis(rows, view) }];
+  return [...new Set(rows.map((r) => r[grouping]))].sort().map((label) => ({
+    label,
+    rows: rankKpis(
+      rows.filter((r) => r[grouping] === label),
+      view,
+    ),
+  }));
 }

@@ -63,6 +63,17 @@ export function ReportScreenSkeleton() {
         <Bone className="h-[620px]" />
         <div className="space-y-5">
           <Bone className="h-10" />
+          <ReportPanel title="Utilidades del grupo">
+            <Bone className="mb-5 h-10 w-48" />
+            <div className="grid items-center gap-5 md:grid-cols-[240px_1fr]">
+              <Bone className="mx-auto size-48 rounded-full" />
+              <div className="space-y-3">
+                {[0, 1, 2].map((i) => (
+                  <Bone key={i} className="h-20" />
+                ))}
+              </div>
+            </div>
+          </ReportPanel>
           <ReportPanel title="Utilidades por giro comercial">
             <Bone className="h-[650px]" />
           </ReportPanel>

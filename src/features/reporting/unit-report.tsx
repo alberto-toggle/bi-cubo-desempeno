@@ -1,7 +1,12 @@
 "use client";
+import { demoResponsiblePerformance } from "@/services/demo-responsible-performance";
+import { ResponsiblePerformance } from "./responsible-performance";
 import { useState } from "react";
 import { EstablishmentPhoto } from "./establishment-photo";
-import { demoResponsiblePhoto, demoUnitPhoto } from "@/features/demo/unit-photos";
+import {
+  demoResponsiblePhoto,
+  demoUnitPhoto,
+} from "@/features/demo/unit-photos";
 import { ResponsibleCard } from "./responsible-card";
 import { usePrivateFormatter } from "@/features/privacy/use-private-formatter";
 import {
@@ -211,6 +216,19 @@ export function UnitReport({
                 id: "history",
                 label: "Resultados y comparativos",
                 content: history,
+              },
+              {
+                id: "responsible",
+                label: "Desempeño del responsable",
+                content: (
+                  <ResponsiblePerformance
+                    data={demoResponsiblePerformance(
+                      report.data,
+                      profile,
+                      period,
+                    )}
+                  />
+                ),
               },
               {
                 id: "financial",
