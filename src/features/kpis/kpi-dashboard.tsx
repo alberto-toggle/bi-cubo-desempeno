@@ -1,4 +1,5 @@
 "use client";
+import { OccupancySummary } from "@/features/occupancy/occupancy-summary";
 import { useState } from "react";
 import { AlertTriangle, TrendingDown, Trophy, Search } from "lucide-react";
 import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
@@ -57,7 +58,12 @@ export function KpiDashboard({
   const bestRevenue = financial
     ? [...rows].sort((a, b) => b.financial!.revenue - a.financial!.revenue)[0]
     : undefined;
-  const rankingScope = grouping === "all" ? "" : grouping === "line" ? " por giro" : " por segmento";
+  const rankingScope =
+    grouping === "all"
+      ? ""
+      : grouping === "line"
+        ? " por giro"
+        : " por segmento";
   const choices: { id: KpiView; label: string }[] = [
     { id: "target", label: "Debajo de meta" },
     ...(financial
@@ -174,7 +180,10 @@ export function KpiDashboard({
             value={grouping}
             onChange={(v) => setGrouping(v as KpiGrouping)}
             options={[
-              { value: "all", label: "Sin agrupar · Todos los establecimientos" },
+              {
+                value: "all",
+                label: "Sin agrupar · Todos los establecimientos",
+              },
               { value: "line", label: "Giro comercial" },
               { value: "segment", label: "Rubro / segmento" },
             ]}
@@ -244,6 +253,7 @@ export function KpiDashboard({
             </div>
           ))}
       </div>
+      <OccupancySummary unitIds={rows.map((row) => row.id)} period={period} />
       <section aria-label="Consulta de indicadores" className="space-y-4">
         <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {choices.map((c) => (
@@ -284,7 +294,10 @@ export function KpiDashboard({
           </h2>
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
             {ranked.length} establecimientos ·{" "}
-            {grouped && (grouping === "all" ? "Ranking general según los filtros · " : "Ranking independiente por grupo · ")}
+            {grouped &&
+              (grouping === "all"
+                ? "Ranking general según los filtros · "
+                : "Ranking independiente por grupo · ")}
             {view === "average"
               ? "Comparación de la utilidad mensual media del periodo con los 12 meses anteriores."
               : view === "daily"

@@ -1,4 +1,7 @@
 "use client";
+import { SalonsScreen } from "@/features/occupancy/salons-screen";
+import { StaysScreen } from "@/features/occupancy/stays-screen";
+import { ReportTabs } from "./report-tabs";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, RefreshCw } from "lucide-react";
 import { usePortfolio } from "@/features/intelligence/use-portfolio";
@@ -25,12 +28,16 @@ import {
   programDocumentOrder,
 } from "./report-palette";
 import { ChapterDetails } from "./chapter-details";
-export function ReportScreen() {
+export function ReportScreen({
+  initialChapter = "all",
+}: {
+  initialChapter?: string;
+}) {
   const money = usePrivateFormatter(reportMoney);
   const portfolio = usePortfolio(),
     report = useReport();
   const [period, setPeriod] = useState(initialReportPeriod),
-    [chapter, setChapter] = useState("all");
+    [chapter, setChapter] = useState(initialChapter);
   if (portfolio.error || report.error)
     return (
       <div className="surface p-6" role="alert">
@@ -59,6 +66,7 @@ export function ReportScreen() {
       .filter((c) => all.some((r) => r.line === c.line))
       .map((c) => ({ id: c.line, label: c.line })),
     { id: "goals", label: "Cumplimiento de metas" },
+    { id: "salons", label: "Salones y ocupación" },
   ];
   const index = Math.max(
     0,
@@ -106,8 +114,9 @@ export function ReportScreen() {
           <p className="eyebrow">Reporte de gestión</p>
           <h1 className="page-title">Resultados por giro comercial</h1>
           <p className="page-copy">
-            Enero–{monthNames[period.month - 1]} {period.year} · Cifras
-            simuladas · MXN
+            {chapter === "salons"
+              ? "Salones y estancias · Reservas y personas ficticias"
+              : `Enero–${monthNames[period.month - 1]} ${period.year} · Cifras simuladas · MXN`}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -170,7 +179,27 @@ export function ReportScreen() {
               </button>
             </div>
           </div>
-          {isGoals ? (
+          {chapter === "salons" ? (
+            <ReportTabs
+              items={[
+                {
+                  id: "salons",
+                  label: "Salones y reservas",
+                  content: (
+                    <SalonsScreen
+                      key={`${period.year}-${period.month}`}
+                      initialPeriod={period}
+                    />
+                  ),
+                },
+                {
+                  id: "stays",
+                  label: "Estancias en hoteles",
+                  content: <StaysScreen period={period} />,
+                },
+              ]}
+            />
+          ) : isGoals ? (
             <GoalPanel
               id="report-goal"
               actual={actual}

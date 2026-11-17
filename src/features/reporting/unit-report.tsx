@@ -1,4 +1,7 @@
 "use client";
+import { eventVenues } from "@/features/demo/event-spaces";
+import { SalonsScreen } from "@/features/occupancy/salons-screen";
+import { StaysScreen } from "@/features/occupancy/stays-screen";
 import { demoResponsiblePerformance } from "@/services/demo-responsible-performance";
 import { ResponsiblePerformance } from "./responsible-performance";
 import { useState } from "react";
@@ -245,6 +248,30 @@ export function UnitReport({
                   </div>
                 ),
               },
+              ...(eventVenues.some((v) => v.unitId === unitId)
+                ? [
+                    {
+                      id: "salons",
+                      label: "Salones y reservas",
+                      content: (
+                        <SalonsScreen
+                          key={`${period.year}-${period.month}`}
+                          unitId={unitId}
+                          initialPeriod={period}
+                        />
+                      ),
+                    },
+                  ]
+                : []),
+              ...(eventVenues.some((v) => v.unitId === unitId && v.hotel)
+                ? [
+                    {
+                      id: "stays",
+                      label: "Estancias",
+                      content: <StaysScreen unitId={unitId} period={period} />,
+                    },
+                  ]
+                : []),
             ]}
           />
         </div>
