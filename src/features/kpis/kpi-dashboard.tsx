@@ -1,5 +1,6 @@
 "use client";
-import { OccupancySummary } from "@/features/occupancy/occupancy-summary";
+import { SalonsScreen } from "@/features/occupancy/salons-screen";
+import { ReportTabs } from "@/features/reporting/report-tabs";
 import { useState } from "react";
 import { AlertTriangle, TrendingDown, Trophy, Search } from "lucide-react";
 import { useFinancialPrivacy } from "@/features/privacy/use-financial-privacy";
@@ -18,7 +19,33 @@ import { KpiCard } from "./kpi-card";
 import { kpiLayout as layout } from "./layout";
 
 const initial: KpiPeriod = { year: 2026, month: 9, window: "month" };
-export function KpiDashboard({
+type KpiDashboardProps = {
+  rowsFor: (period: KpiPeriod) => KpiRow[];
+  financial: boolean;
+};
+
+export function KpiDashboard(props: KpiDashboardProps) {
+  return (
+    <div className={layout.page}>
+      <header>
+        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+          Seguimiento de establecimientos
+        </p>
+        <h1 className="page-title">KPIs de rendimiento</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Identifica dónde intervenir y consulta el avance de cada
+          establecimiento.
+        </p>
+      </header>
+      <ReportTabs keepMounted items={[
+        { id: "performance", label: "Rendimiento", content: <PerformanceDashboard {...props} /> },
+        { id: "reservations", label: "Salones y reservas", content: <SalonsScreen /> },
+      ]} />
+    </div>
+  );
+}
+
+function PerformanceDashboard({
   rowsFor,
   financial,
 }: {
@@ -87,16 +114,6 @@ export function KpiDashboard({
   }
   return (
     <div className={layout.page}>
-      <header>
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-          Seguimiento de establecimientos
-        </p>
-        <h1 className="page-title">KPIs de rendimiento</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Identifica dónde intervenir y consulta el avance de cada
-          establecimiento.
-        </p>
-      </header>
       <section className="surface p-4" aria-label="Filtros de rendimiento">
         <div className="mb-4 grid grid-cols-3 gap-2">
           {(
@@ -253,7 +270,6 @@ export function KpiDashboard({
             </div>
           ))}
       </div>
-      <OccupancySummary unitIds={rows.map((row) => row.id)} period={period} />
       <section aria-label="Consulta de indicadores" className="space-y-4">
         <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {choices.map((c) => (

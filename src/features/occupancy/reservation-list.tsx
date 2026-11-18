@@ -8,7 +8,9 @@ export function ReservationList({
   rows,
   label,
   money,
+  showDates = false,
 }: {
+  showDates?: boolean;
   rows: ReservationRow[];
   label: string;
   money: (cents: number) => string;
@@ -21,7 +23,7 @@ export function ReservationList({
       </div>
       {!rows.length ? (
         <p className="rounded-xl bg-muted p-5 text-sm text-muted-foreground">
-          Sin reservas registradas para este día y los filtros seleccionados.
+          Sin reservas registradas para la selección de fechas y los filtros seleccionados.
         </p>
       ) : (
         <ul className="max-h-[36rem] space-y-3 overflow-y-auto pr-1">
@@ -41,7 +43,7 @@ export function ReservationList({
               <p className="mt-3 text-sm">{r.event}</p>
               <p className="mt-2 flex items-center gap-2 text-xs">
                 <Clock3 size={14} />
-                {r.start}–{r.end}
+                {showDates && `${r.date.split("-").reverse().join("/")} · `}{r.start}–{r.end}
               </p>
               <p className="mt-2 flex items-center gap-2 text-xs">
                 <UserRound size={14} />

@@ -322,6 +322,10 @@
     {
       "area": "documentaryReports",
       "decision": "Reportes organizados por capítulos de la presentación; colores documentales independientes del tema, tres años calendario con medias anuales sobre barras, fichas por tipo de unidad y cifras/personas sintéticas."
+    },
+    {
+      "area": "kpis",
+      "decision": "Rendimiento como pestaña inicial y Salones y reservas en pestaña independiente, con filtros propios y componentes de ocupación compartidos con reportes y detalle."
     }
   ],
   "evidence": [

@@ -19,6 +19,7 @@ export function SalonsScreen({
 }) {
   const [period, setPeriod] = useState(initialPeriod),
     [day, setDay] = useState(15),
+    [agendaDays, setAgendaDays] = useState(1),
     [venueId, setVenue] = useState(unitId ?? "all"),
     [spaceId, setSpace] = useState("all");
   const access = useOccupancyAccess();
@@ -43,8 +44,20 @@ export function SalonsScreen({
     .forEach((b) => {
       counts[b.date] = (counts[b.date] ?? 0) + 1;
     });
-  const rows = reservations
-    .filter((b) => b.date === date)
+  const endDate = new Date(Date.UTC(period.year, period.month - 1, day + agendaDays - 1));
+  const endPeriod = { year: endDate.getUTCFullYear(), month: endDate.getUTCMonth() + 1 };
+  const end = dateKey(endPeriod, endDate.getUTCDate());
+  const agendaReservations = endPeriod.month !== period.month || endPeriod.year !== period.year
+    ? [...reservations, ...demoReservations(endPeriod).filter((b) => spaces.some((s) => s.id === b.spaceId))]
+    : reservations;
+  function showUpcoming(days: number) {
+    const today = new Date();
+    setPeriod({ year: today.getFullYear(), month: today.getMonth() + 1 });
+    setDay(today.getDate());
+    setAgendaDays(days);
+  }
+  const rows = agendaReservations
+    .filter((b) => b.date >= date && b.date <= end)
     .map((b) => {
       const space = spaces.find((s) => s.id === b.spaceId)!;
       return {
@@ -54,7 +67,7 @@ export function SalonsScreen({
         venueName: venues.find((v) => v.id === space.venueId)!.name,
       };
     })
-    .sort((a, b) => a.start.localeCompare(b.start));
+    .sort((a, b) => a.date.localeCompare(b.date) || a.start.localeCompare(b.start));
   return (
     <div className="space-y-5">
       <header>
@@ -66,7 +79,7 @@ export function SalonsScreen({
         </p>
       </header>
       <div className="surface flex flex-wrap items-end gap-3 p-4">
-        <PeriodPicker value={period} onChange={(next) => { setPeriod(next); setDay(15); }} />
+        <PeriodPicker value={period} onChange={(next) => { setPeriod(next); setDay(15); setAgendaDays(1); }} />
         {!unitId && (
           <FilterSelect
             label="Instalación con salones"
@@ -90,6 +103,11 @@ export function SalonsScreen({
             ...venueSpaces.map((s) => ({ value: s.id, label: s.name })),
           ]}
         />
+      </div>
+      <div className="flex flex-wrap gap-2" aria-label="Accesos rápidos de agenda">
+        <button type="button" className="secondary-button min-h-11" onClick={() => showUpcoming(1)}>Hoy</button>
+        <button type="button" className="secondary-button min-h-11" onClick={() => showUpcoming(7)}>Próximos 7 días</button>
+        <p className="w-full text-xs text-muted-foreground">Los accesos rápidos usan la fecha actual. Reservas y pagos de demostración.</p>
       </div>
       <ReportMetrics
         items={[
@@ -120,12 +138,13 @@ export function SalonsScreen({
           period={period}
           day={day}
           counts={counts}
-          onSelect={setDay}
+          onSelect={(next) => { setDay(next); setAgendaDays(1); }}
         />
         <ReservationList
           money={access.money}
           rows={rows}
-          label={`${day}/${period.month}/${period.year}`}
+          showDates={agendaDays > 1}
+          label={agendaDays > 1 ? `${date.split("-").reverse().join("/")} – ${end.split("-").reverse().join("/")}` : `${day}/${period.month}/${period.year}`}
         />
       </div>
       <section className="space-y-3">

@@ -3,7 +3,9 @@ import type { ReactNode } from "react";
 import { Tabs } from "@base-ui/react/tabs";
 export function ReportTabs({
   items,
+  keepMounted = false,
 }: {
+  keepMounted?: boolean;
   items: { id: string; label: string; content: ReactNode }[];
 }) {
   return (
@@ -26,7 +28,8 @@ export function ReportTabs({
         <Tabs.Panel
           key={item.id}
           value={item.id}
-          className="space-y-6 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          keepMounted={keepMounted}
+          className="data-[hidden]:hidden space-y-6 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
           {item.content}
         </Tabs.Panel>
